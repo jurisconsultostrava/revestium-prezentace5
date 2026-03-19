@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Swiss Gold Deposit – Institutional"
+version = "1.0.0"
+id = "artifacts/sgd-institutional"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22806
+
+[services.development]
+run = "pnpm --filter @workspace/sgd-institutional run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/sgd-institutional", "run", "build" ]
+publicDir = "artifacts/sgd-institutional/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22806"
+BASE_PATH = "/"

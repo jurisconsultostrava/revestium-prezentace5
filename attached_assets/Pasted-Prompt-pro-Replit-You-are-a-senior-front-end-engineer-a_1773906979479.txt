@@ -1,0 +1,182 @@
+Prompt pro Replit:
+
+You are a senior front‑end engineer and designer specialized in Swiss private banking and institutional fintech websites.
+I will give you an existing HTML export of the site swissgolddeposit.ch called swissgolddeposit-12.html.
+Your task is to create a NEW institutional landing page for banks and funds in German, which:
+
+vizually and structurally follows the existing Swiss Gold Deposit design (same header, footer, typography, color palette, spacing, general look & feel),
+
+is modern, clean and non‑template‑like (Swiss design style: much whitespace, precise grid, conservative, no outdated gradients or heavy effects),
+
+is fully responsive (desktop, tablet, mobile),
+
+is implemented as a single standalone file index.html with embedded CSS (you may use minimal utility classes but NO external frameworks like Bootstrap or Tailwind).
+
+1. INPUT – Existing HTML (design reference)
+Use the file swissgolddeposit-12.html as a design reference only:
+
+Reuse: header, logo placement, navigation style, fonts, basic color scheme, footer layout.
+
+Do NOT copy the existing long storytelling content.
+
+Instead, build a new <main> layout with new German content as specified below.
+
+Assume the design style of swissgolddeposit.ch must be preserved: it should look like a natural subpage of the same site, not like a different product.
+
+2. NEW PAGE PURPOSE
+The new page is an institutional landing page for Swiss and EU banks and investment funds, visited by business development and product teams.
+It must clearly communicate:
+
+Gold Bank (digitale Einlagen & Zahlungen in Gold)
+
+Gold Hypo (gold‑besicherte Langfristkredite)
+
+Gold as Collateral / PGI‑basierte Sicherheiten‑Infrastruktur
+
+Tone: Swiss private banking / institutional, conservative, factual, zero hype.
+
+3. CONTENT STRUCTURE (IN GERMAN)
+Implement the following sections inside <main> in this order. Use semantic HTML: <section>, <header>, <h1>–<h3>, <p>, <ul>, etc.
+
+Section 1: Hero
+Big main headline (H1):
+Gold‑Infrastruktur für beide Seiten Ihrer Bilanz.
+
+Subheadline (short paragraph):
+Gold Bank, Gold Hypo und institutsfähige Collateral‑Strukturen verbinden physischen Edelmetall‑Bestand mit digitalen Konten, Kreditprogrammen und Treasury‑Steuerung – für Banken und Fonds im EU‑ und Schweizer Markt.
+
+Below, three concise bullet points:
+
+Gold Bank: Digitale Einlagen‑ und Zahlungslösung auf physisch hinterlegtem LBMA‑Gold.
+
+Gold Hypo: Gold‑besicherte Langfristkredite – operative Umsetzung in Tagen statt Wochen.
+
+Gold als Sicherheiten‑Infrastruktur: PGI‑fähige Strukturen für Lombard‑, Repo‑ und Kreditlinien.
+
+Two buttons:
+
+Primary: Use Cases für Banken & Fonds (scrolls to Use‑Cases section)
+
+Secondary (ghost button): Regulatorischer Überblick (scrolls to Struktur & Regulierung)
+
+Layout: center alignment on desktop with generous whitespace, but still aligned to the same grid as the existing site. On mobile, stack vertically.
+
+Section 2: Use Cases für Business Development & Produkt
+Heading (H2):
+Use Cases für Ihre Produkt‑ und Business‑Teams
+
+Create a three‑column layout on desktop (stacked on mobile), each column as a card with light border / subtle background.
+
+Block 1 – Gold Bank:
+
+Short subheading: Gold Bank – Einlagen & Zahlungen
+
+Bullets:
+
+Goldkonten in CZK/EUR mit automatischem Sparprogramm in physischem Gold.
+
+Gold Card: Zahlungen weltweit direkt vom Goldguthaben – Gold als tägliches Zahlungsmittel statt gebundene Anlage.
+
+White‑Label‑ oder Co‑Branding‑Modelle für Banken und Nichtbank‑Institute.
+
+Block 2 – Gold Hypo:
+
+Subheading: Gold Hypo – Langfristige Kredite gegen Gold
+
+Bullets:
+
+Bankkredit, vollständig durch physisches, segregiertes Gold besichert – ohne operatives Gold‑Risiko in Ihrer Bilanz.
+
+Wir übernehmen Verwahrung, tägliche Bewertung (LBMA PM Fix), Warrant‑Ausstellung und Ausfallmanagement (T+2).
+
+Onboarding neuer Programme in 2–5 Tagen statt 3–6 Wochen, ohne Änderung Ihrer Kreditprozesse.
+
+Block 3 – Gold als Sicherheiten‑Infrastruktur (PGI / Collateral):
+
+Subheading: Gold als Sicherheiten‑Infrastruktur
+
+Bullets:
+
+Strukturierte Nutzung von physischem Gold als Sicherheitenbasis für Lombard‑, Repo‑, Kredit‑ und Intraday‑Linien.
+
+Anlehnung an das World Gold Council / Linklaters‑Modell für Pooled Gold Interests (PGI, 2025).
+
+Integration in bestehende Treasury‑ und Margining‑Prozesse, kompatibel mit EMIR‑Rahmen.
+
+Section 3: Warum wir anders sind
+Heading (H2):
+Warum diese Gold‑Infrastruktur anders ist
+
+Three concise bullet points:
+
+Kombination aus physischem Handel, Verwahrung, Kreditprodukten und Compliance auf einer Plattform – keine Insellösungen.
+
+Juristische und forensische Strukturierung: RTO‑Erfahrung an der London Stock Exchange, EU‑MiFID‑Struktur, Schweizer Tokenisierungs‑Holding.
+
+Dun & Bradstreet Rating H1 für die operative Einheit in Prag – niedriges Gesamtrisiko, stabiler Viability Score.
+
+Layout: simple two‑column layout on desktop (short intro text on left, bullets on right), stacked on mobile.
+
+Section 4: Struktur & Regulierung
+Heading (H2):
+Struktur & Regulierung
+
+Paragraph summarizing the group:
+
+REVESTIUM AG (Zug) bündelt Holding‑, Tokenisierungs‑ und Governance‑Funktionen. JURISCONSULT LTD (London/Prag) stellt die kapitalmarkt‑ und rechtliche Struktur mit MiFID‑fähigen Instrumenten und D&B‑Rating H1. SWISS GOLD DEPOSIT Ltd (Dublin) ist auf den Vertrieb von Produkten innerhalb der EU gemäß MiFID II vorbereitet, SWISS ARROWS s.r.o. (Prag) betreibt Technologie‑, Entwicklungs‑ und Back‑Office‑Kapazitäten.
+
+Small line below:
+
+Voll konform mit FATF‑Empfehlungen, EU‑AMLD, LBMA Responsible Sourcing und Datenschutzanforderungen.
+
+You may visually arrange this as a simple grid with jurisdiction cards (Zug / London / Dublin / Prag), but keep it minimalist.
+
+Section 5: Kontakt
+Heading (H2):
+Kontakt für Banken & Fonds
+
+Text:
+
+Mag. iur. Augustina F. Schiller, MSc., LLM. President & CEO · Founder · Chief Legal Officer
+
+Short sentence:
+
+Gerne erläutern wir Ihnen konkrete Strukturen für Gold Bank, Gold Hypo oder goldbasierte Sicherheitenprogramme in einem vertraulichen Gespräch.
+
+Below: simple contact form (Name, Institution, E‑Mail, Nachricht) + submit button Anfrage senden.
+
+4. DESIGN & IMPLEMENTATION REQUIREMENTS
+Use the existing design language from swissgolddeposit-12.html:
+
+same or very similar font stack,
+
+similar spacing system,
+
+same primary colors (deep navy / dark, gold accent, white background).
+
+Code must be modern and clean:
+
+semantic HTML5,
+
+organized CSS (use CSS variables for primary colors and spacing),
+
+responsive layout via flexbox / CSS grid,
+
+no inline styles except for very small overrides if necessary.
+
+No external CSS/JS files (no CDN frameworks). Everything should be in one index.html file so I can upload it directly to my hosting.
+
+Do NOT include placeholder lorem ipsum – use exactly the German copy I provided.
+
+5. OUTPUT FORMAT
+Return ONLY the complete index.html file with:
+
+<!DOCTYPE html>
+
+<html lang="de">
+
+<head> including responsive meta tags, title, and internal <style> block
+
+<body> including existing‑style header and footer derived from swissgolddeposit-12.html, and the new <main> with all sections above.
+
+If there is anything unclear in the old HTML, make reasonable assumptions but keep the look & feel consistent with a Swiss private banking / institutional fintech site.
