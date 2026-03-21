@@ -634,7 +634,7 @@ canvas#matrixRain{position:absolute;inset:0;width:100%;height:100%;z-index:1;poi
           <div className="prod-grid reveal">
             <div className="prod-card featured">
               <div className="prod-card-accent" />
-              <span className="pc-badge unique">Institutional</span><span className="pc-badge live">Roadmap 2026</span>
+              <span className="pc-badge unique">Institutional</span>
               <p className="pc-tag">Gold Margining · OTC Counterparties</p>
               <p className="pc-name">Gold OTC<br />Margining</p>
               <p className="pc-desc">Gold-Margining für ausgewählte bilaterale Gegenparteien: physisches LBMA-Gold als Sicherheit für OTC-Derivate-Positionen ohne physische Segregation oder Tresortransfer. Kompatibel mit EU/UK EMIR Uncleared Margin Rules. Basis: PGI-Struktur als „Thing in Action" — elektronisch übertragbar, insolvenzfern vom Verwahrer.</p>
@@ -651,7 +651,7 @@ canvas#matrixRain{position:absolute;inset:0;width:100%;height:100%;z-index:1;poi
           <div className="prod-grid reveal">
             <div className="prod-card featured">
               <div className="prod-card-accent" />
-              <span className="pc-badge unique">Kein Tresortransfer</span><span className="pc-badge live">Roadmap 2027</span>
+              <span className="pc-badge unique">Kein Tresortransfer</span>
               <p className="pc-tag">Triparty Custody · CCP &amp; FMI</p>
               <p className="pc-name">Triparty Gold<br />Custody</p>
               <p className="pc-desc">Custody-Bedingungen, die ein Sicherheiteninteresse an physischem Gold ohne physische Bewegung der Barren ermöglichen. Das Gold bleibt im Tresor — das Sicherheiteninteresse wird über ein Warrant-Instrument oder PGI-Struktur übertragen. Kompatibel mit CCP-Clearing (Initial Margin, Default Fund) und FMI-Anforderungen.</p>
@@ -668,7 +668,7 @@ canvas#matrixRain{position:absolute;inset:0;width:100%;height:100%;z-index:1;poi
           <div className="prod-grid reveal">
             <div className="prod-card featured">
               <div className="prod-card-accent" />
-              <span className="pc-badge unique">Intraday Liquidity</span><span className="pc-badge live">Roadmap 2026–27</span>
+              <span className="pc-badge unique">Intraday Liquidity</span>
               <p className="pc-tag">Lombard · Credit Lines</p>
               <p className="pc-name">Gold Credit<br />Lines</p>
               <p className="pc-desc">Lombard- und Kreditlinien gegen transparent evidiertes physisches Gold: digitale Evidenz im eigenen Register oder via CDCP, tägliche Bewertung, automatisches Margin Management. Zielgruppe: Institutionelle Goldhalter, die kurzfristige Liquidität ohne Verkauf benötigen.</p>
@@ -863,10 +863,8 @@ canvas#matrixRain{position:absolute;inset:0;width:100%;height:100%;z-index:1;poi
               {/* Legend */}
               <line x1="440" y1="878" x2="472" y2="878" stroke="#c4954a" strokeWidth="1.2" opacity=".7" />
               <text x="478" y="882" fontSize="9" fill="#8a8278">Live / Ready to launch</text>
-              <line x1="636" y1="878" x2="668" y2="878" stroke="#c4954a" strokeWidth="1.2" strokeDasharray="4,3" opacity=".5" />
-              <text x="674" y="882" fontSize="9" fill="#8a8278">Roadmap 2026–2027</text>
-              <line x1="830" y1="878" x2="852" y2="878" stroke="#c4954a" strokeWidth="1.5" markerEnd="url(#ec-arr)" opacity=".6" />
-              <text x="858" y="882" fontSize="9" fill="#8a8278">Datenfluss / Integration</text>
+              <line x1="636" y1="878" x2="668" y2="878" stroke="#c4954a" strokeWidth="1.5" markerEnd="url(#ec-arr)" opacity=".6" />
+              <text x="674" y="882" fontSize="9" fill="#8a8278">Datenfluss / Integration</text>
             </svg>
           </div>
 
