@@ -346,14 +346,6 @@ canvas#matrixRain{position:absolute;inset:0;width:100%;height:100%;z-index:1;poi
               <div className="story-vizitka reveal d1">
                 <img src="https://goldspot.cz/osobnivizitka.png" alt="REVESTIUM vizitka" />
               </div>
-              <div className="timeline" style={{ marginTop: "2.5rem", maxWidth: "640px", margin: "2.5rem auto 0" }}>
-                <div className="tl-item reveal d1"><div className="tl-year">2020</div><div className="tl-dot" /><div><p className="tl-h">Gründung der Rechtsstruktur</p><p className="tl-p">Gründung der Firma JURISCONSULT LTD (London) und Beginn des Aufbaus einer Marke für den Einzelhandel mit Edelmetallen.</p></div></div>
-                <div className="tl-item reveal d2"><div className="tl-year">2021</div><div className="tl-dot" /><div><p className="tl-h">Gründung der Holding</p><p className="tl-p">Moje Zlato und Moje zlatnictví werden in die Unternehmensgruppe aufgenommen. Das Czech Assay Office vergibt das Hersteller- und Haftungszeichen.</p></div></div>
-                <div className="tl-item reveal d3"><div className="tl-year">2023</div><div className="tl-dot" /><div><p className="tl-h">LBMA-Clearing &amp; Marktzugang</p><p className="tl-p">Zulassung als professionelle Gegenpartei für das Clearing-Mitglied LPMCL und Zugang zur Handelsstruktur der LBMA.</p></div></div>
-                <div className="tl-item reveal d4"><div className="tl-year">2024</div><div className="tl-dot" /><div><p className="tl-h">Tschechische Nationalbank &amp; AUROM live</p><p className="tl-p">Vertragsabschluss mit der Tschechischen Nationalbank über den Verkauf und Vertrieb von Edelmetallen. Start des Treasury-Managementsystems AUROM und Dealer Commander.</p></div></div>
-                <div className="tl-item reveal d4"><div className="tl-year">2025</div><div className="tl-dot" /><div><p className="tl-h">Europäische Holdingstruktur &amp; Raffinerie-Partnerschaft</p><p className="tl-p">Holdingstruktur in Irland, Großbritannien, Tschechien und der Slowakei. Vertragsabschluss mit einer deutschen Raffinerie (London Good Delivery). Produktarchitektur Gold Hypo &amp; Repo fertiggestellt.</p></div></div>
-                <div className="tl-item reveal d4"><div className="tl-year">2026</div><div className="tl-dot" /><div><p className="tl-h">REVESTIUM AG &amp; Gold Bank SK Pilotbetrieb</p><p className="tl-p">Gold Bank SK im Pilotbetrieb als Lizenz/Franchise an das Broker-Pool-Netzwerk verteilt. Übernahme der REVESTIUM AG und Vorbereitung auf die Tokenisierung gemäß dem Schweizer DLT-Gesetz.</p></div></div>
-              </div>
             </div>
             <div className="reveal d2">
               <p className="eyebrow">Struktur &amp; Rechtsordnungen</p>
@@ -386,6 +378,15 @@ canvas#matrixRain{position:absolute;inset:0;width:100%;height:100%;z-index:1;poi
                 </div>
               </div>
             </div>
+          </div>
+
+          <div className="timeline reveal" style={{ maxWidth: "640px", margin: "3rem auto 0" }}>
+            <div className="tl-item"><div className="tl-year">2020</div><div className="tl-dot" /><div><p className="tl-h">Gründung der Rechtsstruktur</p><p className="tl-p">Gründung der Firma JURISCONSULT LTD (London) und Beginn des Aufbaus einer Marke für den Einzelhandel mit Edelmetallen.</p></div></div>
+            <div className="tl-item"><div className="tl-year">2021</div><div className="tl-dot" /><div><p className="tl-h">Gründung der Holding</p><p className="tl-p">Moje Zlato und Moje zlatnictví werden in die Unternehmensgruppe aufgenommen. Das Czech Assay Office vergibt das Hersteller- und Haftungszeichen.</p></div></div>
+            <div className="tl-item"><div className="tl-year">2023</div><div className="tl-dot" /><div><p className="tl-h">LBMA-Clearing &amp; Marktzugang</p><p className="tl-p">Zulassung als professionelle Gegenpartei für das Clearing-Mitglied LPMCL und Zugang zur Handelsstruktur der LBMA.</p></div></div>
+            <div className="tl-item"><div className="tl-year">2024</div><div className="tl-dot" /><div><p className="tl-h">Tschechische Nationalbank &amp; AUROM live</p><p className="tl-p">Vertragsabschluss mit der Tschechischen Nationalbank über den Verkauf und Vertrieb von Edelmetallen. Start des Treasury-Managementsystems AUROM und Dealer Commander.</p></div></div>
+            <div className="tl-item"><div className="tl-year">2025</div><div className="tl-dot" /><div><p className="tl-h">Europäische Holdingstruktur &amp; Raffinerie-Partnerschaft</p><p className="tl-p">Holdingstruktur in Irland, Großbritannien, Tschechien und der Slowakei. Vertragsabschluss mit einer deutschen Raffinerie (London Good Delivery). Produktarchitektur Gold Hypo &amp; Repo fertiggestellt.</p></div></div>
+            <div className="tl-item"><div className="tl-year">2026</div><div className="tl-dot" /><div><p className="tl-h">REVESTIUM AG &amp; Gold Bank SK Pilotbetrieb</p><p className="tl-p">Gold Bank SK im Pilotbetrieb als Lizenz/Franchise an das Broker-Pool-Netzwerk verteilt. Übernahme der REVESTIUM AG und Vorbereitung auf die Tokenisierung gemäß dem Schweizer DLT-Gesetz.</p></div></div>
           </div>
         </div>
       </section>
