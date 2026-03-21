@@ -126,9 +126,6 @@ export default function LandingPage() {
   useReveal();
   useActiveNav();
 
-  const [activeMup, setActiveMup] = useState("deposit");
-
-  function showMup(id: string) { setActiveMup(id); }
 
   return (
     <>
@@ -600,78 +597,6 @@ canvas#matrixRain{position:absolute;inset:0;width:100%;height:100%;z-index:1;poi
             </div>
           </div>
 
-        </div>
-      </section>
-
-      {/* ── MEHR ÜBER PRODUKTE ── */}
-      <section id="details" className="section mup-bg">
-        <div className="section-inner">
-          <div className="reveal">
-            <p className="eyebrow">Mehr über unsere Produkte</p>
-            <h2 className="sh">Produktarchitektur &amp;<br /><em>Partnerschaft</em></h2>
-            <p className="sub">Jedes Produkt ist eigenständig funktionsfähig — und Teil eines integrierten Ökosystems.</p>
-          </div>
-          <div className="mup-tabs reveal" id="mupTabs">
-            <button className={`mup-btn${activeMup === "deposit" ? " active" : ""}`} onClick={() => showMup("deposit")}>Gold Deposit &amp; D10</button>
-            <button className={`mup-btn${activeMup === "digi" ? " active" : ""}`} onClick={() => showMup("digi")}>DIGI GOLD &amp; AUROM</button>
-            <button className={`mup-btn${activeMup === "lending" ? " active" : ""}`} onClick={() => showMup("lending")}>Gold Hypo &amp; Repo</button>
-            <button className={`mup-btn${activeMup === "wholesale" ? " active" : ""}`} onClick={() => showMup("wholesale")}>Wholesale &amp; Juwelier</button>
-            <button className={`mup-btn${activeMup === "argus" ? " active" : ""}`} onClick={() => showMup("argus")}>ARGUS Compliance</button>
-          </div>
-
-          <div id="mup-deposit" className={`mup-panel reveal${activeMup === "deposit" ? " active" : ""}`}>
-            <div className="mup-left">
-              <h3>Gold Deposit &amp; GOLD D10</h3>
-              <p>Gold Deposit ist die Grundlage unseres Ökosystems: Kunden hinterlegen physisches Gold und erhalten echten Ertrag in Gold — nicht in Fiat. GOLD D10 erweitert dieses Modell für anspruchsvolle Investoren mit strukturierten Ertragsstrategien über 10 diversifizierte Positionen.</p>
-              <p className="mup-pull">Für den Bankpartner: Custody-Fee 0,3 % AuM p.a. + Paying Agent Fee. Kein eigener Betriebsaufwand — vollständig ausgelagert an Swiss Gold Deposit Group.</p>
-            </div>
-            <div className="mup-cards">
-              <div className="mup-card"><h4>Für den Kunden</h4><p>Gold bleibt im Tresor, wertet sich weiter auf. Kein Verkauf, kein Katastereintrag, kein Credit Scoring. Onboarding in 2–5 Tagen. LTV bis 80 %.</p></div>
-              <div className="mup-card"><h4>Für die Bank</h4><p>Die Bank stellt nur den Kredit aus und hält den Warrant. Kein Kontakt mit physischem Gold. T+2 Realisierung. RWA unter Basel: Finanzielle Sicherheit 0–20 % vs. Immobilien 35–50 %. Clean P&amp;L: Zinsmarge minus CoF minus Risikokosten ≈ 3 % netto auf Portfolio.</p></div>
-              <div className="mup-card"><h4>Trigger-System</h4><p>LTV ≥ 88 %: Margin Call an Kunden. LTV ≥ 92 %: Benachrichtigung der Bank. LTV ≥ 95 %: Forced Sale autorisiert. T+2 Settlement über StoneX — Erlös an Bank, Überschuss an Kunden.</p></div>
-              <div className="mup-card"><h4>Vs. Immobilienpfand</h4><p>Klassische Hypothek: Onboarding 3–6 Monate, Realisierung 6–24 Monate, Verwertungsquote 50–70 %. Gold via Swiss Arrows: Onboarding 2–5 Tage, Realisierung T+2, Verwertungsquote 99,5 % LBMA. Kein Gutachteraufwand, kein Grundbucheintrag.</p></div>
-            </div>
-          </div>
-
-          <div id="mup-digi" className={`mup-panel reveal${activeMup === "digi" ? " active" : ""}`}>
-            <div className="mup-left">
-              <h3>DIGI GOLD Savings &amp; AUROM</h3>
-              <p>DIGI GOLD ist unser digitales Aufbauprogramm für physisches Gold — vollständig digital, 100 % physisch durch LBMA gedeckt, mit automatischer DCA-Optimierung. AUROM als proprietäres Forschungssystem optimiert alle Portfolios in Echtzeit.</p>
-            </div>
-            <div className="mup-cards">
-              <div className="mup-card"><h4>AUROM — proprietäres System</h4><p>Tägliche SARIMA/Prophet-Prognose, Smart Hedging, Yield-Hunter-Strategie, Stresstests. Kein vergleichbares Produkt auf dem Markt mit dieser Verknüpfung von physischer Verwaltung, Lagerverwaltung und reguliertem Segment.</p></div>
-              <div className="mup-card"><h4>Dealer Commander</h4><p>Echtzeit-Treasury-Managementsystem für präzises Pricing und Hedging-Execution. CME-Integration für institutionelles Gold-Hedging. Proprietär entwickelt — nicht replizierbar.</p></div>
-            </div>
-          </div>
-
-          <div id="mup-lending" className={`mup-panel reveal${activeMup === "lending" ? " active" : ""}`}>
-            <div className="mup-left">
-              <h3>Gold Hypo &amp; Gold Repo</h3>
-              <p>Zwei komplementäre Kreditprodukte — Gold Hypo für langfristige Finanzierung (5–20 Jahre), Gold Repo für kurzfristige Liquidität (1–12 Monate). Beide nutzen dieselbe Collateral-Agent-Infrastruktur.</p>
-            </div>
-            <div className="mup-cards">
-              <div className="mup-card"><h4>Für die kreditgebende Bank</h4><p>Kein Kontakt mit physischem Gold, kein operatives Risiko. Bank stellt Kredit aus, hält Warrant. T+2 Realisierung im Ausfallfall. RWA-Vorteil gegenüber Immobilienpfand.</p></div>
-              <div className="mup-card"><h4>Trigger-System</h4><p>LTV ≥ 88 %: Margin Call. LTV ≥ 92 %: Bankbenachrichtigung. LTV ≥ 95 %: Forced Sale autorisiert. SA Reserve Fund (2 % AUM) deckt Extremszenarien.</p></div>
-            </div>
-          </div>
-
-          <div id="mup-wholesale" className={`mup-panel reveal${activeMup === "wholesale" ? " active" : ""}`}>
-            <div className="mup-cards">
-              <div className="mup-card"><h4></h4><p>Direkter Vertrag mit einer der führenden deutschen LBMA-Raffinerien (London Good Delivery). Sicherste Lieferkette, höchste Qualitätsstandards.</p></div>
-              <div className="mup-card"><h4></h4><p>CME Prime Broker und Clearing-Partner. Institutionelle Settlement-Infrastruktur für T+2 Abwicklung bei Ausfällen und regulärem Handel.</p></div>
-            </div>
-          </div>
-
-          <div id="mup-argus" className={`mup-panel reveal${activeMup === "argus" ? " active" : ""}`}>
-            <div className="mup-left">
-              <h3>ARGUS &amp; ARGUS PRO</h3>
-              <p>ARGUS ist unsere proprietäre AML/KYC-Plattform für den Edelmetallhandel — vollständig konform mit FATF, AMLD5, DSGVO, LBMA Responsible Sourcing, ISO 27001 und SOC 2 Typ II.</p>
-            </div>
-            <div className="mup-cards">
-              <div className="mup-card"><h4>Ab 1.7.2027 verpflichtend</h4><p>Edelmetallhändler benötigen ab dem 1.7.2027 ein effektives Tool zur Erfüllung ihrer AMLA-Pflichten. ARGUS PRO ist bereit. Wir sind bestens auf die Änderungen im Jahr 2027 vorbereitet.</p></div>
-              <div className="mup-card"><h4>Für Finanzinstitute</h4><p>EDD- und CDD-Prozesse zur Überprüfung von Geschäftspartnern. Strukturiertes Fallmanagement statt Excel. Dashboard mit Kennzahlen und Exportfunktion.</p></div>
-            </div>
-          </div>
         </div>
       </section>
 
