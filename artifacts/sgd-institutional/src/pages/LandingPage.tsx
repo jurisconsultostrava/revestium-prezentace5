@@ -396,8 +396,8 @@ canvas#matrixRain{position:absolute;inset:0;width:100%;height:100%;z-index:1;poi
         <div className="section-inner">
           <div className="reveal">
             <p className="eyebrow">Produkte &amp; Dienstleistungen</p>
-            <h2 className="sh">Umfassende Dienstleistungen rund um Gold —<br /><em>beide Seiten der Bilanz</em></h2>
-            <p className="sub">Umfassende Lösungen für die physische Lagerung von Gold, Kreditprodukte und eine proprietäre Treasury-Verwaltung auf einer gemeinsamen Infrastruktur für vier Rechtsordnungen. Eine einzige Integration für ein breites Produktspektrum.</p>
+            <h2 className="sh">Umfassende Dienstleistungen im Bereich Digitalisierung —<br /><em>Vom Kapital bis zur institutionellen Infrastruktur.</em></h2>
+            <p className="sub">Umfassende Lösungen für Infrastruktur und Digitalisierung, angefangen bei der physischen Lagerung über Kreditprodukte und die eigene Kassenverwaltung bis hin zu institutionellen Dienstleistungen für vier verschiedene Rechtsordnungen. Eine einzige Integration für ein breites Produktspektrum.</p>
           </div>
 
           <div className="cat-strip reveal"><p className="cat-strip-title">Digitale Plattformen</p></div>
