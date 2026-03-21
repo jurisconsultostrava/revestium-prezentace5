@@ -1015,8 +1015,7 @@ canvas#matrixRain{position:absolute;inset:0;width:100%;height:100%;z-index:1;poi
               <h4>REVESTIUM AG</h4>
               <address>Baarerstrasse 25<br />6300 Zug<br />Schweiz<br /><br />
                 UID: <strong>CHE-383.245.411</strong><br />
-                Tel.: +41 215 120 554<br /><br /><br />
-                Verwaltungsratspräsidentin:<br />Mag. iur. Augustina F. Schiller,LLM.<br /><br />
+                Tel.: +41 215 120 554<br /><br />
                 Director:<br /> Dr. iur. Marcus Altenburg
               </address>
             </div>
@@ -1045,6 +1044,11 @@ canvas#matrixRain{position:absolute;inset:0;width:100%;height:100%;z-index:1;poi
                 Tel: +420 800 300 555
               </address>
             </div>
+          </div>
+
+          <div className="reveal" style={{ textAlign: "center", margin: "2rem 0 0" }}>
+            <p style={{ fontFamily: "var(--sc)", fontSize: ".72rem", letterSpacing: ".14em", color: "var(--gold3)", textTransform: "uppercase", marginBottom: ".35rem" }}>Global Verwaltungsratspräsidentin</p>
+            <p style={{ fontFamily: "var(--sans)", fontSize: ".95rem", color: "var(--cream2)", letterSpacing: ".03em" }}>Mag. iur. Augustina F. Schiller MSc., LLM.</p>
           </div>
 
           <div className="reveal" style={{ marginTop: "2.5rem", paddingTop: "2rem", borderTop: "1px solid var(--border2)" }}>
