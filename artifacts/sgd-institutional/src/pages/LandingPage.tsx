@@ -268,6 +268,10 @@ canvas#matrixRain{position:absolute;inset:0;width:100%;height:100%;z-index:1;poi
 .imp-legal strong{color:var(--cream3);font-weight:500;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
 @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes barGrow{from{transform:scaleX(0);}to{transform:scaleX(1);}}
+@keyframes dnbPulse{0%,100%{box-shadow:0 0 0 2px rgba(76,175,131,0.2);}50%{box-shadow:0 0 0 5px rgba(76,175,131,0.08);}}
+.dnb-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#4caf83;box-shadow:0 0 0 2px rgba(76,175,131,0.2);animation:dnbPulse 2.5s ease-in-out infinite;margin-right:5px;}
+.dnb-bar-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--gold3),var(--gold2));transform-origin:left;animation:barGrow 1s ease both;}
 .reveal{opacity:0;transform:translateY(22px);transition:opacity .75s var(--ease),transform .75s var(--ease);}
 .reveal.visible{opacity:1;transform:none;}
 .d1{transition-delay:.08s}.d2{transition-delay:.18s}.d3{transition-delay:.28s}.d4{transition-delay:.38s}
@@ -989,62 +993,84 @@ canvas#matrixRain{position:absolute;inset:0;width:100%;height:100%;z-index:1;poi
         <div className="section-inner">
           <div className="reveal">
             <p className="eyebrow">Bonität &amp; Vertrauen</p>
-            <h2 className="sh">Dun &amp; Bradstreet<br /><em>Rating H1</em></h2>
-            <p className="sub">JURISCONSULT LTD. o.z. wird durch Dun &amp; Bradstreet — den weltweit führenden Anbieter für Unternehmensbonitätsbeurteilung — mit dem Rating <strong style={{ color: "var(--gold2)" }}>H1</strong> und einem Gesamtrisiko <strong style={{ color: "var(--gold2)" }}>„niedrig"</strong> bewertet. Das D&amp;B Rating ist für institutionelle Partner ein anerkannter Standard der Bonitätsprüfung in über 200 Ländern.</p>
+            <h2 className="sh">Dun &amp; Bradstreet<br /><em>Independent Credit Assessment</em></h2>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "220px 1fr", gap: "3.5rem", alignItems: "start", marginBottom: "3rem" }} className="reveal d1">
-            <div style={{ textAlign: "center", padding: "2.5rem 2rem", background: "var(--dark)", border: "1px solid var(--border)", flexShrink: 0 }}>
-              <p style={{ fontFamily: "var(--sc)", fontSize: ".6rem", letterSpacing: ".22em", color: "#a8a090", marginBottom: ".7rem" }}>D&amp;B RATING</p>
-              <p style={{ fontFamily: "var(--serif)", fontSize: "5.5rem", fontWeight: 300, lineHeight: 1, color: "var(--gold2)", letterSpacing: "-.02em" }}>H1</p>
-              <div style={{ width: "32px", height: "1px", background: "var(--gold3)", margin: ".9rem auto" }}></div>
-              <p style={{ fontFamily: "var(--sc)", fontSize: ".6rem", letterSpacing: ".16em", color: "#a8a090", marginBottom: ".25rem" }}>RISIKO</p>
-              <p style={{ fontFamily: "var(--serif)", fontSize: "1rem", fontWeight: 400, color: "#e0d8c8" }}>Niedrig</p>
-            </div>
-            <div>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "1px", background: "var(--border2)" }}>
-                <div style={{ background: "var(--dark)", padding: "1.25rem 1.1rem" }}>
-                  <p style={{ fontFamily: "var(--sc)", fontSize: ".58rem", letterSpacing: ".14em", color: "#a8a090", marginBottom: ".4rem" }}>Finanzielle Stärke</p>
-                  <p style={{ fontFamily: "var(--serif)", fontSize: "1.6rem", fontWeight: 300, color: "var(--gold2)", marginBottom: ".2rem" }}>H</p>
-                </div>
-                <div style={{ background: "var(--dark)", padding: "1.25rem 1.1rem" }}>
-                  <p style={{ fontFamily: "var(--sc)", fontSize: ".58rem", letterSpacing: ".14em", color: "#a8a090", marginBottom: ".4rem" }}>Risiko-Indikator</p>
-                  <p style={{ fontFamily: "var(--serif)", fontSize: "1.6rem", fontWeight: 300, color: "var(--gold2)", marginBottom: ".2rem" }}>1</p>
-                </div>
-                <div style={{ background: "var(--dark)", padding: "1.25rem 1.1rem" }}>
-                  <p style={{ fontFamily: "var(--sc)", fontSize: ".58rem", letterSpacing: ".14em", color: "#a8a090", marginBottom: ".4rem" }}>Failure Score</p>
-                  <p style={{ fontFamily: "var(--serif)", fontSize: "1.6rem", fontWeight: 300, color: "var(--gold2)", marginBottom: ".2rem" }}>95</p>
-                </div>
-                <div style={{ background: "var(--dark)", padding: "1.25rem 1.1rem" }}>
-                  <p style={{ fontFamily: "var(--sc)", fontSize: ".58rem", letterSpacing: ".14em", color: "#a8a090", marginBottom: ".4rem" }}>Delinquency Prob.</p>
-                  <p style={{ fontFamily: "var(--serif)", fontSize: "1.6rem", fontWeight: 300, color: "var(--gold2)", marginBottom: ".2rem" }}>3 %</p>
-                </div>
-                <div style={{ background: "var(--dark)", padding: "1.25rem 1.1rem" }}>
-                  <p style={{ fontFamily: "var(--sc)", fontSize: ".58rem", letterSpacing: ".14em", color: "#a8a090", marginBottom: ".4rem" }}>Gesamtrisiko (12M)</p>
-                  <p style={{ fontFamily: "var(--serif)", fontSize: "1.6rem", fontWeight: 300, color: "var(--gold2)", marginBottom: ".2rem" }}>Niedrig</p>
-                </div>
-              </div>
-              <div style={{ marginTop: "1rem", padding: ".9rem 1.1rem", background: "var(--dark)", border: "1px solid var(--border2)" }}>
-                <p style={{ fontSize: ".76rem", color: "#b8b0a0", lineHeight: 1.7 }}>Bewertet durch <strong style={{ color: "#e0d8c8" }}>Dun &amp; Bradstreet</strong> — weltweit führender Anbieter mit über 500 Millionen Unternehmenseinträgen. Beurteilte Entität: <strong style={{ color: "#e0d8c8" }}>JURISCONSULT LTD. o.z.</strong> (IČ: 09913840, Prag) — tschechische Niederlassung von JURISCONSULT LTD, London (Companies House 12729220). Operativ ab: 16.02.2021.</p>
-              </div>
-            </div>
-          </div>
+          {/* Trust card */}
+          <div className="reveal d1" style={{ border: "1px solid var(--border2)", position: "relative", overflow: "hidden" }}>
 
-          <div className="reveal d2" style={{ border: "1px solid var(--border2)", padding: "1.4rem 1.8rem", display: "flex", gap: "2.5rem", alignItems: "center", flexWrap: "wrap" }}>
-            <div>
-              <p style={{ fontFamily: "var(--sc)", fontSize: ".58rem", letterSpacing: ".18em", color: "#a8a090", marginBottom: ".25rem" }}>D&amp;B VIABILITY RATING</p>
-              <p style={{ fontFamily: "var(--serif)", fontSize: "1.6rem", fontWeight: 300, color: "var(--gold2)", lineHeight: 1 }}>Niedrig <em style={{ fontSize: ".95rem", color: "#c8bfa8" }}>Risiko</em></p>
-            </div>
-            <div style={{ width: "1px", height: "36px", background: "var(--border2)", flexShrink: 0 }}></div>
-            <div>
-              <p style={{ fontFamily: "var(--sc)", fontSize: ".58rem", letterSpacing: ".18em", color: "#a8a090", marginBottom: ".25rem" }}>VIABILITY SCORE</p>
-              <p style={{ fontFamily: "var(--serif)", fontSize: "1.6rem", fontWeight: 300, color: "var(--gold2)", lineHeight: 1 }}>Stabil</p>
-            </div>
-            <div style={{ width: "1px", height: "36px", background: "var(--border2)", flexShrink: 0 }}></div>
-            <div></div>
-            <div style={{ width: "1px", height: "36px", background: "var(--border2)", flexShrink: 0 }}></div>
-            <div style={{ flex: 1, minWidth: "220px" }}>
-              <p style={{ fontSize: ".82rem", color: "#c8bfa8", lineHeight: 1.7 }}>Das D&amp;B Viability Rating bewertet die Überlebensfähigkeit im Branchenvergleich. JURISCONSULT LTD. o.z. wird über alle Vergleichszeiträume konsistent mit <strong style={{ color: "#e0d8c8" }}>niedrigem Risiko</strong> eingestuft.</p>
+            {/* left gold accent bar */}
+            <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: "3px", background: "linear-gradient(180deg,var(--gold2),var(--gold3))" }} />
+
+            {/* bottom gold rule */}
+            <div style={{ position: "absolute", bottom: 0, left: "3.5rem", right: "3.5rem", height: "1px", background: "linear-gradient(90deg,transparent,var(--gold3),transparent)" }} />
+
+            <div style={{ padding: "3rem 3.5rem 3.5rem" }}>
+
+              {/* Header */}
+              <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: "2.5rem", paddingBottom: "2rem", borderBottom: "1px solid var(--border2)" }}>
+                <div>
+                  <h3 style={{ fontFamily: "var(--serif)", fontSize: "1.55rem", fontWeight: 400, color: "#e8e0d0", letterSpacing: ".02em", lineHeight: 1.2, marginBottom: ".5rem" }}>Independent Credit Assessment</h3>
+                  <p style={{ fontSize: ".75rem", color: "#8a8278", letterSpacing: ".06em", lineHeight: 1.7, maxWidth: "360px" }}>REVESTIUM AG is independently rated by Dun &amp; Bradstreet — the global standard in commercial credit intelligence, trusted by over 90% of Fortune 500 companies.</p>
+                </div>
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "3px", flexShrink: 0, marginLeft: "2rem" }}>
+                  <span style={{ fontFamily: "var(--serif)", fontSize: "1.5rem", fontWeight: 600, color: "#cc2200", letterSpacing: ".05em" }}>D&amp;B</span>
+                  <span style={{ fontSize: ".6rem", letterSpacing: ".2em", textTransform: "uppercase" as const, color: "#6a6260" }}>Dun &amp; Bradstreet</span>
+                </div>
+              </div>
+
+              {/* KPI grid */}
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "1px", background: "var(--border2)", border: "1px solid var(--border2)", marginBottom: "2.5rem" }}>
+                <div style={{ background: "var(--dark)", padding: "1.6rem 1.4rem", display: "flex", flexDirection: "column", gap: "8px" }}>
+                  <span style={{ fontFamily: "var(--sc)", fontSize: ".58rem", letterSpacing: ".2em", color: "var(--gold3)", fontWeight: 600 }}>D&amp;B Composite Rating</span>
+                  <span style={{ fontFamily: "var(--serif)", fontSize: "2.8rem", fontWeight: 500, color: "var(--gold2)", lineHeight: 1, letterSpacing: ".02em" }}>O1</span>
+                  <span style={{ fontSize: ".72rem", color: "#7a7268", lineHeight: 1.5, letterSpacing: ".03em" }}>Highest composite appraisal — reflects superior creditworthiness within the assessed class.</span>
+                </div>
+                <div style={{ background: "var(--dark)", padding: "1.6rem 1.4rem", display: "flex", flexDirection: "column", gap: "8px" }}>
+                  <span style={{ fontFamily: "var(--sc)", fontSize: ".58rem", letterSpacing: ".2em", color: "var(--gold3)", fontWeight: 600 }}>Business Risk</span>
+                  <span style={{ fontFamily: "var(--serif)", fontSize: "2.8rem", fontWeight: 500, color: "#2e7d5e", lineHeight: 1, letterSpacing: ".02em" }}>Low</span>
+                  <span style={{ fontSize: ".72rem", color: "#7a7268", lineHeight: 1.5, letterSpacing: ".03em" }}>Consistently rated low risk across all monitored risk categories.</span>
+                </div>
+                <div style={{ background: "var(--dark)", padding: "1.6rem 1.4rem", display: "flex", flexDirection: "column", gap: "8px" }}>
+                  <span style={{ fontFamily: "var(--sc)", fontSize: ".58rem", letterSpacing: ".2em", color: "var(--gold3)", fontWeight: 600 }}>Failure Score</span>
+                  <span style={{ fontFamily: "var(--serif)", fontSize: "2.8rem", fontWeight: 500, color: "#2e7d5e", lineHeight: 1, letterSpacing: ".02em" }}>98<span style={{ fontSize: "1.2rem", color: "#5a5450" }}>/100</span></span>
+                  <span style={{ fontSize: ".72rem", color: "#7a7268", lineHeight: 1.5, letterSpacing: ".03em" }}>98th percentile — near-lowest probability of business discontinuation in the D&amp;B global database.</span>
+                </div>
+              </div>
+
+              {/* Trend bars */}
+              <div style={{ marginBottom: "2.5rem" }}>
+                <p style={{ fontFamily: "var(--sc)", fontSize: ".58rem", letterSpacing: ".2em", color: "var(--gold3)", fontWeight: 600, marginBottom: "1rem" }}>Risk Trajectory — 12-Month History</p>
+                {[
+                  { label: "12 months ago", width: "63%", score: "63", delay: ".1s" },
+                  { label: "6 months ago",  width: "70%", score: "70", delay: ".2s" },
+                  { label: "Current",        width: "98%", score: "98", delay: ".3s" },
+                ].map(({ label, width, score, delay }) => (
+                  <div key={label} style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: ".6rem" }}>
+                    <span style={{ fontSize: ".68rem", color: "#6a6260", width: "90px", textAlign: "right", letterSpacing: ".04em", flexShrink: 0 }}>{label}</span>
+                    <div style={{ flex: 1, height: "4px", background: "rgba(255,255,255,0.07)", borderRadius: "2px", overflow: "hidden" }}>
+                      <div className="dnb-bar-fill" style={{ width, animationDelay: delay }} />
+                    </div>
+                    <span style={{ fontSize: ".75rem", fontWeight: 600, color: "#c8bfa8", width: "26px", letterSpacing: ".04em" }}>{score}</span>
+                  </div>
+                ))}
+                <p style={{ fontSize: ".68rem", color: "#4caf83", letterSpacing: ".08em", marginTop: ".9rem", display: "flex", alignItems: "center", gap: "5px" }}>
+                  <span style={{ fontSize: ".9rem" }}>↑</span> Sustained improvement in D&amp;B Failure Score over 12 months
+                </p>
+              </div>
+
+              {/* Footer */}
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", paddingTop: "1.75rem", borderTop: "1px solid var(--border2)" }}>
+                <p style={{ fontSize: ".68rem", color: "#5a5450", letterSpacing: ".06em", lineHeight: 1.7 }}>
+                  Rating issued by Dun &amp; Bradstreet · DUNS® registered entity<br />
+                  Assessment based on independent commercial intelligence data
+                </p>
+                <div style={{ display: "flex", alignItems: "center", gap: "8px", flexShrink: 0, marginLeft: "2rem", border: "1px solid rgba(76,175,131,0.3)", padding: "5px 14px" }}>
+                  <span className="dnb-dot" />
+                  <span style={{ fontSize: ".68rem", letterSpacing: ".15em", textTransform: "uppercase" as const, color: "#4caf83", fontWeight: 600 }}>Verified · Active</span>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
