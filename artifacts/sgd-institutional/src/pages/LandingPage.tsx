@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import createGlobe from "cobe";
 import logoGb from "@assets/loga_gb_1774113861751.png";
+import vizitkaHQ from "@assets/Vizitka_evropská_8.5x5.5_cm_-_Vlastní_rozměry_1774136558135.png";
 
 /* ── cobe WebGL Globe ── */
 function useCobeGlobe(canvasRef: React.RefObject<HTMLCanvasElement | null>) {
@@ -345,7 +346,7 @@ canvas#matrixRain{position:absolute;inset:0;width:100%;height:100%;z-index:1;poi
                 <p>Diese Erfahrung wurde zur Grundlage unserer Unternehmensphilosophie: <strong>Das Wort „unmöglich" gibt es für uns nicht.</strong> Was andere als unüberwindbare Hürde sehen, ist für uns die Ausgangsbasis — der Punkt, von dem aus wir anfangen zu denken.</p>
               </div>
               <div className="story-vizitka reveal d1">
-                <img src="https://goldspot.cz/osobnivizitka.png" alt="REVESTIUM vizitka" />
+                <img src={vizitkaHQ} alt="REVESTIUM vizitka" />
               </div>
             </div>
             <div className="reveal d2">
