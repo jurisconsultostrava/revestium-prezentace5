@@ -479,11 +479,93 @@ canvas#matrixRain{position:absolute;inset:0;width:100%;height:100%;z-index:1;poi
       <section id="collateral" className="section" style={{ background: "var(--dark2)" }}>
         <div className="section-inner">
           <div className="reveal">
-            <p className="eyebrow">World Gold Council · Linklaters LLP · 2025</p>
-            <h2 className="sh">Gold as Collateral —<br /><em>institutionelle Infrastruktur</em></h2>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2.5rem", marginTop: "1.2rem" }}>
-              <p className="sub" style={{ marginTop: 0 }}>Das World Gold Council / Linklaters Whitepaper (2025) beschreibt eine strukturelle Marktlücke: Unallocated Gold trägt Gegenparteirisiko, Allocated Gold ist als Sicherheit operativ aufwändig.</p>
-              <p className="sub" style={{ marginTop: 0 }}>Pooled Gold Interests (PGI) adressieren beides durch direkte, bruchteilhafte Eigentumsrechte an segregiertem physischen Gold — CCP-tauglich, elektronisch übertragbar, ohne physische Bewegung der Barren. Die Gruppe positioniert sich als Collateral Agent und Liquiditätsgeber in diesem entstehenden Markt.</p>
+            <p className="eyebrow">Gold as Collateral — institutionelle Infrastruktur</p>
+            <h2 className="sh">Das Sicherheiten-Dilemma —<br /><em>PGI als dritter Weg</em></h2>
+
+            {/* ── Vergleichstabelle ── */}
+            <div style={{ overflowX: "auto", marginTop: "2.5rem", marginBottom: "2.8rem" }}>
+              <table style={{ width: "100%", borderCollapse: "collapse", fontSize: ".82rem", fontFamily: "var(--sans)" }}>
+                <thead>
+                  <tr style={{ borderBottom: "1px solid var(--gold-line)" }}>
+                    {["Kriterium", "Unallocated Gold", "Allocated Gold"].map((h, i) => (
+                      <th key={i} style={{ textAlign: "left", padding: ".75rem 1.2rem", color: i === 0 ? "var(--gold)" : "var(--cream3)", fontFamily: "var(--sc)", letterSpacing: ".1em", fontWeight: 600, fontSize: ".7rem", textTransform: "uppercase", background: "var(--dark4)", whiteSpace: "nowrap" }}>{h}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ["Rechtliche Stellung", "neg", "Unbesicherter Gläubigeranspruch", "pos", "Direktes Eigentum"],
+                    ["Gegenparteirisiko", "neg", "Hoch (Insolvenzrisiko Custodian)", "pos", "Keines (segregierte Barren)"],
+                    ["Basel III Klassifizierung", "neg", "Tier 3 (85 % RWA)", "pos", "Tier 1-fähig"],
+                    ["Operative Kosten", "pos", "Gering (Buchungsverkehr)", "neg", "Hoch (physische Logistik)"],
+                    ["CCP-Tauglichkeit", "neg", "Nein", "neu", "Bedingt (Lieferverpflichtung)"],
+                    ["Settlement-Geschwindigkeit", "pos", "T+0 (elektronisch)", "neg", "T+2 bis T+5 (Tresorlogistik)"],
+                  ].map(([crit, t2, v2, t3, v3], i) => (
+                    <tr key={i} style={{ borderBottom: "1px solid var(--border2)", background: i % 2 === 0 ? "var(--dark3)" : "var(--dark2)" }}>
+                      <td style={{ padding: ".7rem 1.2rem", color: "var(--cream2)", fontWeight: 500 }}>{crit}</td>
+                      <td style={{ padding: ".7rem 1.2rem", color: t2 === "neg" ? "#c07060" : t2 === "pos" ? "#7aab7a" : "var(--cream3)" }}>{v2}</td>
+                      <td style={{ padding: ".7rem 1.2rem", color: t3 === "neg" ? "#c07060" : t3 === "pos" ? "#7aab7a" : "var(--cream3)" }}>{v3}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* ── Drei Säulen der PGI-Struktur ── */}
+            <p style={{ fontFamily: "var(--sc)", fontSize: ".7rem", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--gold)", fontWeight: 600, marginBottom: "1.2rem" }}>Drei Säulen der PGI-Struktur</p>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "1.4rem", marginBottom: "2.8rem" }}>
+              {[
+                { icon: "⚖", label: "Rechtliche Fundierung", items: ["Eigentumsrecht (kein Verwahrungsvertrag)", "Insolvenzfestigkeit: Gold außerhalb der Insolvenzmasse", "Fractional Ownership nach Schweizer ZGB Art. 646 ff.", "Zuordnung zu LBMA-Barren mit Seriennummern"] },
+                { icon: "⚡", label: "Operative Umsetzung", items: ["Book-Entry-System: Elektronische Übertragung", "Kein physischer Transfer der Barren", "Instant Settlement: T+0 für Ownership Transfer", "Exaktes Collateral-Sizing ohne Bar-Breaking"] },
+                { icon: "✓", label: "Regulatorische Konformität", items: ["CCP Initial Margin-fähig (EMIR / UMR)", "Basel III Tier 1: 0 % RWA auf Goldwert", "HQLA-Status: Potenzial für LCR-Anerkennung", "MiFID II transparent: Direkte Asset Ownership"] },
+              ].map(({ icon, label, items }, i) => (
+                <div key={i} style={{ background: "var(--dark4)", border: "1px solid var(--border)", borderTop: "2px solid var(--gold3)", padding: "1.6rem 1.3rem" }}>
+                  <div style={{ fontSize: "1.3rem", color: "var(--gold)", marginBottom: ".6rem" }}>{icon}</div>
+                  <p style={{ fontFamily: "var(--sc)", fontSize: ".7rem", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--gold2)", fontWeight: 600, marginBottom: ".9rem" }}>{label}</p>
+                  <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+                    {items.map((item, j) => (
+                      <li key={j} style={{ fontSize: ".78rem", color: "var(--cream3)", lineHeight: 1.65, paddingLeft: ".9rem", position: "relative", marginBottom: ".45rem" }}>
+                        <span style={{ position: "absolute", left: 0, color: "var(--gold3)" }}>·</span>{item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+
+            {/* ── Settlement-Vergleich ── */}
+            <div style={{ background: "var(--dark3)", border: "1px solid var(--border)", padding: "2rem 2rem", marginBottom: "2.5rem" }}>
+              <p style={{ fontFamily: "var(--sc)", fontSize: ".7rem", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--gold)", fontWeight: 600, textAlign: "center", marginBottom: "1.8rem" }}>Settlement-Vergleich: PGI vs. Traditional Allocated</p>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2rem" }}>
+                <div>
+                  <p style={{ fontFamily: "var(--sc)", fontSize: ".68rem", letterSpacing: ".1em", textTransform: "uppercase", color: "#7aab7a", fontWeight: 600, marginBottom: ".9rem", paddingBottom: ".5rem", borderBottom: "1px solid rgba(122,171,122,0.22)" }}>PGI: T+0 Electronic Settlement</p>
+                  {["Collateral Call empfangen", "PGI-Register aktualisiert (elektronisch)", "Ownership Transfer bestätigt", "CCP Margin-Anforderung erfüllt"].map((step, i) => (
+                    <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: ".7rem", marginBottom: ".65rem" }}>
+                      <span style={{ minWidth: "1.3rem", height: "1.3rem", borderRadius: "50%", background: "rgba(122,171,122,0.12)", border: "1px solid rgba(122,171,122,0.35)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: ".6rem", color: "#7aab7a", fontWeight: 700, flexShrink: 0 }}>{i + 1}</span>
+                      <span style={{ fontSize: ".8rem", color: "var(--cream3)", lineHeight: 1.5 }}>{step}</span>
+                    </div>
+                  ))}
+                  <div style={{ marginTop: ".9rem", background: "rgba(122,171,122,0.08)", border: "1px solid rgba(122,171,122,0.18)", padding: ".55rem 1rem", textAlign: "center", fontSize: ".76rem", color: "#7aab7a", fontWeight: 600 }}>Gesamt: wenige Minuten</div>
+                </div>
+                <div>
+                  <p style={{ fontFamily: "var(--sc)", fontSize: ".68rem", letterSpacing: ".1em", textTransform: "uppercase", color: "#c07060", fontWeight: 600, marginBottom: ".9rem", paddingBottom: ".5rem", borderBottom: "1px solid rgba(192,112,96,0.22)" }}>Allocated: T+2 bis T+5 Physical</p>
+                  {["Collateral Call empfangen", "Vault-Zugang organisieren", "Physical Barren identifizieren", "Transport / Versicherung arrangieren", "Chain-of-Custody Dokumentation", "Delivery & Confirmation"].map((step, i) => (
+                    <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: ".7rem", marginBottom: ".65rem" }}>
+                      <span style={{ minWidth: "1.3rem", height: "1.3rem", borderRadius: "50%", background: "rgba(192,112,96,0.1)", border: "1px solid rgba(192,112,96,0.3)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: ".6rem", color: "#c07060", fontWeight: 700, flexShrink: 0 }}>{i + 1}</span>
+                      <span style={{ fontSize: ".8rem", color: "var(--cream3)", lineHeight: 1.5 }}>{step}</span>
+                    </div>
+                  ))}
+                  <div style={{ marginTop: ".9rem", background: "rgba(192,112,96,0.08)", border: "1px solid rgba(192,112,96,0.18)", padding: ".55rem 1rem", textAlign: "center", fontSize: ".76rem", color: "#c07060", fontWeight: 600 }}>Gesamt: 2–5 Geschäftstage</div>
+                </div>
+              </div>
+            </div>
+
+            {/* ── Quellennachweis ── */}
+            <div style={{ borderLeft: "3px solid var(--gold3)", background: "var(--dark3)", padding: "1.3rem 1.6rem" }}>
+              <p style={{ fontFamily: "var(--sc)", fontSize: ".68rem", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--gold)", fontWeight: 600, marginBottom: ".5rem" }}>Quellennachweis</p>
+              <p style={{ fontSize: ".8rem", color: "var(--cream3)", lineHeight: 1.75 }}>
+                <strong style={{ color: "var(--cream2)" }}>World Gold Council / Linklaters (Januar 2025):</strong> <em>„Gold as High-Quality Liquid Assets – Legal and Operational Frameworks for Institutional Markets"</em> — Das Whitepaper dokumentiert erste Pilotprojekte bei CCPs (CME, Eurex) und identifiziert PGI-Strukturen als regulatorisch bevorzugten Standard für Gold Collateral.
+              </p>
             </div>
           </div>
 

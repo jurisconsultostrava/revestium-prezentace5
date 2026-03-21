@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REVESTIUM - Gold Collateral Services</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #1f2937;
+            background: #ffffff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            padding: 80px 0;
+            background: linear-gradient(to bottom, #f9fafb, #ffffff);
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .hero-title {
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 24px;
+            color: #111827;
+        }
+
+        .hero-lead {
+            font-size: 20px;
+            line-height: 1.7;
+            color: #4b5563;
+            margin-bottom: 32px;
+            max-width: 900px;
+        }
+
+        .positioning-box {
+            background: #f3f4f6;
+            border-left: 4px solid #6b7280;
+            padding: 24px;
+            margin-top: 32px;
+        }
+
+        .positioning-box strong {
+            font-size: 18px;
+            color: #111827;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        .positioning-box p {
+            color: #4b5563;
+            line-height: 1.7;
+        }
+
+        /* Section Styles */
+        .content-section {
+            padding: 80px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .section-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #111827;
+        }
+
+        .section-lead {
+            font-size: 18px;
+            color: #4b5563;
+            margin-bottom: 48px;
+            max-width: 800px;
+        }
+
+        .subsection-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin: 48px 0 24px 0;
+            color: #111827;
+        }
+
+        .text-content {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #374151;
+            margin-bottom: 24px;
+        }
+
+        /* Comparison Table */
+        .comparison-table {
+            width: 100%;
+            margin: 48px 0;
+            border-collapse: separate;
+            border-spacing: 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .comparison-table thead {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+        }
+
+        .comparison-table th {
+            padding: 20px 24px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 15px;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .comparison-table tbody tr {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .comparison-table tbody tr:last-child {
+            border-bottom: none;
+        }
+
+        .comparison-table tbody tr:hover {
+            background: #f9fafb;
+        }
+
+        .comparison-table td {
+            padding: 20px 24px;
+            font-size: 15px;
+            color: #374151;
+            vertical-align: top;
+        }
+
+        .comparison-table td:first-child {
+            font-weight: 600;
+            color: #111827;
+            background: #f9fafb;
+        }
+
+        .comparison-table .negative {
+            color: #dc2626;
+        }
+
+        .comparison-table .positive {
+            color: #059669;
+        }
+
+        /* Capital Binding Chart */
+        .chart-container {
+            margin: 48px 0;
+            padding: 32px;
+            background: #f9fafb;
+            border-radius: 8px;
+        }
+
+        .chart-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: #111827;
+        }
+
+        .bar-chart {
+            display: flex;
+            gap: 24px;
+            align-items: flex-end;
+            height: 300px;
+        }
+
+        .bar-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .bar {
+            background: linear-gradient(to top, #ef4444, #dc2626);
+            border-radius: 4px 4px 0 0;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .bar-item:hover .bar {
+            transform: scaleY(1.02);
+        }
+
+        .bar-item:nth-child(2) .bar {
+            background: linear-gradient(to top, #10b981, #059669);
+        }
+
+        .bar-label {
+            text-align: center;
+            margin-top: 12px;
+            font-size: 14px;
+            color: #111827;
+            font-weight: 600;
+        }
+
+        .bar-value {
+            position: absolute;
+            top: -32px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 18px;
+            font-weight: 700;
+            color: #111827;
+            white-space: nowrap;
+        }
+
+        .bar-sublabel {
+            text-align: center;
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 4px;
+        }
+
+        /* Three Pillars Diagram */
+        .pillars-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin: 48px 0;
+        }
+
+        .pillar {
+            background: #ffffff;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 32px 24px;
+            transition: all 0.3s ease;
+        }
+
+        .pillar:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 8px 16px rgba(59, 130, 246, 0.1);
+            transform: translateY(-4px);
+        }
+
+        .pillar-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            border-radius: 50%;
+        }
+
+        .pillar:nth-child(1) .pillar-icon {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #ffffff;
+        }
+
+        .pillar:nth-child(2) .pillar-icon {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: #ffffff;
+        }
+
+        .pillar:nth-child(3) .pillar-icon {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            color: #ffffff;
+        }
+
+        .pillar-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            text-align: center;
+            color: #111827;
+        }
+
+        .pillar-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .pillar-list li {
+            padding: 8px 0;
+            font-size: 14px;
+            color: #4b5563;
+            line-height: 1.6;
+            position: relative;
+            padding-left: 24px;
+        }
+
+        .pillar-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        /* Settlement Flow */
+        .flow-diagram {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-radius: 8px;
+            padding: 48px 32px;
+            margin: 48px 0;
+        }
+
+        .flow-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            margin-top: 32px;
+        }
+
+        .flow-item {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .flow-header {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 3px solid;
+        }
+
+        .flow-item:nth-child(1) .flow-header {
+            border-color: #10b981;
+            color: #059669;
+        }
+
+        .flow-item:nth-child(2) .flow-header {
+            border-color: #ef4444;
+            color: #dc2626;
+        }
+
+        .flow-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .flow-step {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .flow-step-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .flow-item:nth-child(1) .flow-step-number {
+            background: #d1fae5;
+            color: #059669;
+        }
+
+        .flow-item:nth-child(2) .flow-step-number {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .flow-step-text {
+            font-size: 14px;
+            color: #374151;
+            line-height: 1.5;
+        }
+
+        .flow-result {
+            margin-top: 24px;
+            padding: 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .flow-item:nth-child(1) .flow-result {
+            background: #d1fae5;
+            color: #059669;
+        }
+
+        .flow-item:nth-child(2) .flow-result {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        /* Ecosystem Diagram */
+        .ecosystem-diagram {
+            margin: 48px 0;
+            padding: 48px 32px;
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-radius: 8px;
+        }
+
+        .ecosystem-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-top: 32px;
+        }
+
+        .ecosystem-node {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        .ecosystem-node-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #111827;
+        }
+
+        .ecosystem-node-desc {
+            font-size: 14px;
+            color: #4b5563;
+            line-height: 1.6;
+        }
+
+        .ecosystem-node:nth-child(1) {
+            border-top: 4px solid #3b82f6;
+        }
+
+        .ecosystem-node:nth-child(2) {
+            border-top: 4px solid #10b981;
+        }
+
+        .ecosystem-node:nth-child(3) {
+            border-top: 4px solid #f59e0b;
+        }
+
+        .ecosystem-node:nth-child(4) {
+            border-top: 4px solid #8b5cf6;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            border-left: 4px solid #3b82f6;
+            padding: 24px;
+            margin: 32px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .highlight-box strong {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 12px;
+            color: #1e40af;
+        }
+
+        .highlight-box p {
+            color: #1e3a8a;
+            line-height: 1.7;
+        }
+
+        /* Regulatory Framework */
+        .regulatory-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+            margin: 48px 0;
+        }
+
+        .regulatory-section {
+            background: #f9fafb;
+            border-radius: 8px;
+            padding: 24px;
+            border-left: 4px solid;
+        }
+
+        .regulatory-section:nth-child(1) {
+            border-color: #dc2626;
+        }
+
+        .regulatory-section:nth-child(2) {
+            border-color: #2563eb;
+        }
+
+        .regulatory-section h4 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #111827;
+        }
+
+        .regulatory-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .regulatory-section li {
+            padding: 8px 0;
+            font-size: 14px;
+            color: #374151;
+            line-height: 1.6;
+            position: relative;
+            padding-left: 24px;
+        }
+
+        .regulatory-section li:before {
+            content: "•";
+            position: absolute;
+            left: 8px;
+            font-weight: 700;
+            color: #6b7280;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 32px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .pillars-container,
+            .flow-comparison,
+            .ecosystem-grid,
+            .regulatory-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .bar-chart {
+                height: 250px;
+            }
+
+            .comparison-table {
+                font-size: 13px;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 12px 16px;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .content-section {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HERO SECTION -->
+<section class="hero-section">
+    <div class="container">
+        <h1 class="hero-title">Gold Collateral Services – Institutionelle Infrastruktur für Gold as a Service</h1>
+        
+        <p class="hero-lead">
+            World Gold Council und Linklaters (2025) identifizieren eine strukturelle Marktlücke im €2,5 Billionen Markt für unallocated Gold. REVESTIUM AG baut eine operative Infrastruktur auf, die mit der Vision des World Gold Council kompatibel ist: <strong>Shared Infrastructure for Digital Gold</strong> und das <strong>Pooled Gold Interests (PGI) Ökosystem</strong>.
+        </p>
+
+        <div class="positioning-box">
+            <strong>Unser Ziel: Gold as a Service</strong>
+            <p>
+                Ein systemisches Lösung für institutionelles Settlement und Kollateralisierung von Gold bereitstellen. Die Richtung, die wir seit mehreren Jahren verfolgen, wurde nun unabhängig vom World Gold Council im Konzept „Wholesale Digital Gold" mit der Rechtsstruktur Pooled Gold Interests und einem Multi-Custody-Ökosystem bestätigt. In diesem entstehenden Segment positionieren wir uns als <strong>Collateral Agent</strong>.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- PROBLEM SECTION -->
+<section class="content-section">
+    <div class="container">
+        <h2 class="section-title">Das Sicherheiten-Dilemma: Effizienz vs. Rechtssicherheit</h2>
+        
+        <p class="section-lead">
+            Das eigentliche Problem: <strong>85% Haircut</strong> – Basel III behandelt unallocated Gold als Tier-3-Asset, was traditionelle Strukturen für institutionelle Besicherung im Bankensektor völlig unwirtschaftlich macht.
+        </p>
+
+        <p class="text-content">
+            Institutionelle Marktteilnehmer stehen vor einem fundamentalen Trade-off bei der Verwendung von Gold als Sicherheit:
+        </p>
+
+        <!-- Comparison Table -->
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>Kriterium</th>
+                    <th>Unallocated Gold</th>
+                    <th>Allocated Gold</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Rechtliche Stellung</td>
+                    <td class="negative">Unbesicherter Gläubigeranspruch</td>
+                    <td class="positive">Direktes Eigentum</td>
+                </tr>
+                <tr>
+                    <td>Gegenparteirisiko</td>
+                    <td class="negative">Hoch (Insolvenzrisiko Custodian)</td>
+                    <td class="positive">Keines (segregierte Barren)</td>
+                </tr>
+                <tr>
+                    <td>Basel III Klassifizierung</td>
+                    <td class="negative">Tier 3 (85% RWA)</td>
+                    <td class="positive">Tier 1-fähig</td>
+                </tr>
+                <tr>
+                    <td>Operative Kosten</td>
+                    <td class="positive">Gering (Buchungsverkehr)</td>
+                    <td class="negative">Hoch (physische Logistik)</td>
+                </tr>
+                <tr>
+                    <td>CCP-Tauglichkeit</td>
+                    <td class="negative">Nein</td>
+                    <td>Bedingt (Lieferverpflichtung)</td>
+                </tr>
+                <tr>
+                    <td>Settlement-Geschwindigkeit</td>
+                    <td class="positive">T+0 (elektronisch)</td>
+                    <td class="negative">T+2 bis T+5 (Tresorlogistik)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3 class="subsection-title">Keine der beiden Strukturen erfüllt moderne Collateral Management-Anforderungen:</h3>
+        
+        <ul style="list-style: none; padding: 0; margin: 24px 0;">
+            <li style="padding: 12px 0; border-bottom: 1px solid #e5e7eb;">
+                <strong style="color: #111827;">Unallocated:</strong> 
+                <span style="color: #4b5563;">Operativ effizient, aber regulatorisch benachteiligt und kreditrisikobehaftet</span>
+            </li>
+            <li style="padding: 12px 0;">
+                <strong style="color: #111827;">Allocated:</strong> 
+                <span style="color: #4b5563;">Rechtlich sauber, aber durch Vault-Logistik und Chain-of-Custody-Dokumentation praktisch unbrauchbar für tägliche Margin Calls oder Repo-Geschäfte</span>
+            </li>
+        </ul>
+
+        <!-- Capital Binding Chart -->
+        <div class="chart-container">
+            <div class="chart-title">Quantifizierung: Bank mit €100 Mio. Gold-Exposure</div>
+            <div class="bar-chart">
+                <div class="bar-item">
+                    <div class="bar" style="height: 85%;">
+                        <div class="bar-value">€6,8 Mio.</div>
+                    </div>
+                    <div class="bar-label">Unallocated</div>
+                    <div class="bar-sublabel">Gebundenes Eigenkapital<br>(85% RWA → 8% CET1)</div>
+                </div>
+                <div class="bar-item">
+                    <div class="bar" style="height: 25%;">
+                        <div class="bar-value">€200k p.a.</div>
+                    </div>
+                    <div class="bar-label">Allocated</div>
+                    <div class="bar-sublabel">Operative Kosten<br>(Vault, Reconciliation, Audits)</div>
+                </div>
+            </div>
+        </div>
+
+        <p class="text-content" style="font-weight: 600; color: #111827; margin-top: 32px;">
+            Schlussfolgerung: Keine der beiden Varianten ist wirtschaftlich optimal.
+        </p>
+    </div>
+</section>
+
+<!-- SOLUTION SECTION -->
+<section class="content-section" style="background: #fafafa;">
+    <div class="container">
+        <h2 class="section-title">Pooled Gold Interests (PGI) – Der dritte Weg</h2>
+        
+        <p class="section-lead">
+            Pooled Gold Interests kombinieren rechtliche Sicherheit mit operativer Effizienz durch eine innovative Eigentumsstruktur.
+        </p>
+
+        <div class="highlight-box">
+            <strong>Was sind PGI?</strong>
+            <p>
+                Bruchteilhafte direkte Eigentumsrechte an identifizierten, physisch segregierten Goldbarren – übertragbar durch elektronischen Book-Entry-Transfer <strong>ohne physische Bewegung der Barren</strong>.
+            </p>
+        </div>
+
+        <h3 class="subsection-title">Drei Säulen der PGI-Struktur</h3>
+
+        <!-- Three Pillars Diagram -->
+        <div class="pillars-container">
+            <div class="pillar">
+                <div class="pillar-icon">⚖️</div>
+                <h4 class="pillar-title">Rechtliche Fundierung</h4>
+                <ul class="pillar-list">
+                    <li>Eigentumsrecht (kein Verwahrungs-/Einlagenvertrag)</li>
+                    <li>Insolvenzfestigkeit: Gold nicht Teil der Insolvenzmasse</li>
+                    <li>Fractional Ownership nach Schweizer ZGB Art. 646 ff.</li>
+                    <li>Identifizierbarkeit: Zuordnung zu LBMA-Barren mit Seriennummern</li>
+                </ul>
+            </div>
+
+            <div class="pillar">
+                <div class="pillar-icon">⚡</div>
+                <h4 class="pillar-title">Operative Umsetzung</h4>
+                <ul class="pillar-list">
+                    <li>Book-Entry-System: Elektronische Übertragung (analog OR Art. 973c)</li>
+                    <li>Kein physischer Transfer: Barren bleiben im LBMA-Tresor</li>
+                    <li>Instant Settlement: T+0 für Ownership Transfer</li>
+                    <li>Präzise Skalierung: Exaktes Collateral-Sizing ohne Bar-Breaking</li>
+                </ul>
+            </div>
+
+            <div class="pillar">
+                <div class="pillar-icon">✓</div>
+                <h4 class="pillar-title">Regulatorische Konformität</h4>
+                <ul class="pillar-list">
+                    <li>CCP Initial Margin-fähig: EMIR / Uncleared Margin Rules</li>
+                    <li>Basel III Tier 1: 0% RWA auf Goldwert</li>
+                    <li>HQLA-Status: Potenzial für LCR-Anerkennung</li>
+                    <li>MiFID II transparent: Direkte Asset Ownership</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Settlement Flow Comparison -->
+        <div class="flow-diagram">
+            <div class="chart-title" style="text-align: center; margin-bottom: 16px;">Settlement-Vergleich: PGI vs. Traditional Allocated</div>
+            <div class="flow-comparison">
+                <div class="flow-item">
+                    <div class="flow-header">PGI: T+0 Electronic Settlement</div>
+                    <div class="flow-steps">
+                        <div class="flow-step">
+                            <div class="flow-step-number">1</div>
+                            <div class="flow-step-text">Collateral Call empfangen</div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="flow-step-number">2</div>
+                            <div class="flow-step-text">PGI-Register aktualisiert (elektronisch)</div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="flow-step-number">3</div>
+                            <div class="flow-step-text">Ownership Transfer bestätigt</div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="flow-step-number">4</div>
+                            <div class="flow-step-text">CCP Margin-Anforderung erfüllt</div>
+                        </div>
+                    </div>
+                    <div class="flow-result">Gesamt: Wenige Minuten</div>
+                </div>
+
+                <div class="flow-item">
+                    <div class="flow-header">Allocated: T+2 bis T+5 Physical</div>
+                    <div class="flow-steps">
+                        <div class="flow-step">
+                            <div class="flow-step-number">1</div>
+                            <div class="flow-step-text">Collateral Call empfangen</div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="flow-step-number">2</div>
+                            <div class="flow-step-text">Vault-Zugang organisieren</div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="flow-step-number">3</div>
+                            <div class="flow-step-text">Physical Barren identifizieren</div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="flow-step-number">4</div>
+                            <div class="flow-step-text">Transport/Versicherung arrangieren</div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="flow-step-number">5</div>
+                            <div class="flow-step-text">Chain-of-Custody Dokumentation</div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="flow-step-number">6</div>
+                            <div class="flow-step-text">Delivery & Confirmation</div>
+                        </div>
+                    </div>
+                    <div class="flow-result">Gesamt: 2-5 Geschäftstage</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Credibility Anchor -->
+        <div class="highlight-box" style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border-color: #10b981;">
+            <strong style="color: #065f46;">Glaubwürdigkeit der Lösung</strong>
+            <p style="color: #064e3b;">
+                <strong>Quelle:</strong> World Gold Council / Linklaters (Januar 2025): <em>"Gold as High-Quality Liquid Assets – Legal and Operational Frameworks for Institutional Markets"</em>
+            </p>
+            <p style="color: #064e3b; margin-top: 12px;">
+                Das Whitepaper dokumentiert erste Pilotprojekte bei CCPs (CME, Eurex) und identifiziert PGI-Strukturen als regulatorisch bevorzugten Standard für Gold Collateral.
+            </p>
+        </div>
+    </div>
+</html>
