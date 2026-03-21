@@ -1060,7 +1060,9 @@ canvas#matrixRain{position:absolute;inset:0;width:100%;height:100%;z-index:1;poi
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2.5rem", marginTop: "2rem" }}>
               <div>
                 <p style={{ fontSize: ".9rem", color: "#e0d8c8", lineHeight: 1.82, textAlign: "justify", hyphens: "auto" }}>Langfristig werden regulatorische Entwicklungen, sich wandelnde ESG-Standards, Transparenz in der Lieferkette sowie die Digitalisierung von Handels- und Verwahrungsprozessen eine entscheidende Rolle spielen.</p>
-                <p style={{ fontSize: ".9rem", color: "#e0d8c8", lineHeight: 1.82, marginTop: "1rem", textAlign: "justify", hyphens: "auto" }}>Dank unserer Mitgliedschaft im <strong style={{ color: "#fff" }}>International Precious Metal Institute</strong> und unserem Engagement bei der <strong style={{ color: "#fff" }}>LBMA</strong> sind wir Teil eines globalen Netzwerks, das aktiv Standards, den Dialog und langfristige Stabilität innerhalb des Edelmetall-Ökosystems gestaltet.</p>
+              </div>
+              <div>
+                <p style={{ fontSize: ".9rem", color: "#e0d8c8", lineHeight: 1.82, textAlign: "justify", hyphens: "auto" }}>Dank unserer Mitgliedschaft im <strong style={{ color: "#fff" }}>International Precious Metal Institute</strong> und unserem Engagement bei der <strong style={{ color: "#fff" }}>LBMA</strong> sind wir Teil eines globalen Netzwerks, das aktiv Standards, den Dialog und langfristige Stabilität innerhalb des Edelmetall-Ökosystems gestaltet.</p>
               </div>
             </div>
             <div style={{ marginTop: "2.5rem", display: "flex", flexDirection: "row", justifyContent: "flex-start", alignItems: "center", gap: "3rem", flexWrap: "nowrap" }}>
