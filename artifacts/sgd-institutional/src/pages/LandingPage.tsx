@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import createGlobe from "cobe";
+import logoGb from "@assets/loga_gb_1774113861751.png";
 
 /* ── cobe WebGL Globe ── */
 function useCobeGlobe(canvasRef: React.RefObject<HTMLCanvasElement | null>) {
@@ -407,6 +408,7 @@ canvas#matrixRain{position:absolute;inset:0;width:100%;height:100%;z-index:1;poi
               <p className="pc-tag">Gold Bank CZ · SK · EU</p>
               <p className="pc-name">Gold Bank</p>
               <p className="pc-desc">Die erste europäische Plattform, die physisches Gold mit der vollständigen Digitalisierung des gesamten Lebenszyklus verbindet. Kunden kaufen, verwalten und lagern Gold — direkt vom Smartphone oder Computer aus. Kreditkonto in CZK und EUR, automatisches Sparprogramm in Gold, Rückkauf zu Marktpreisen, Umwandlung in physische Barren mit Kurierlieferung. Vollständige AML/KYC-Konformität mit eigenem KYC-Portal. Web + iOS + Android.</p>
+              <img src={logoGb} alt="Gold Bank CZ · SK · EU" style={{ width: "100%", maxWidth: "100%", marginTop: "1.4rem", display: "block", borderRadius: "4px" }} />
             </div>
             <div className="prod-card featured">
               <div className="prod-card-accent" />
