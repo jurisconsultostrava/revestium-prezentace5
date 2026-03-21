@@ -481,7 +481,10 @@ canvas#matrixRain{position:absolute;inset:0;width:100%;height:100%;z-index:1;poi
           <div className="reveal">
             <p className="eyebrow">World Gold Council · Linklaters LLP · 2025</p>
             <h2 className="sh">Gold as Collateral —<br /><em>institutionelle Infrastruktur</em></h2>
-            <p className="sub">Das World Gold Council / Linklaters Whitepaper (2025) beschreibt eine strukturelle Marktlücke: Unallocated Gold trägt Gegenparteirisiko, Allocated Gold ist als Sicherheit operativ aufwändig. Pooled Gold Interests (PGI) adressieren beides durch direkte, bruchteilhafte Eigentumsrechte an segregiertem physischen Gold — CCP-tauglich, elektronisch übertragbar, ohne physische Bewegung der Barren. Die Gruppe positioniert sich als Collateral Agent und Liquiditätsgeber in diesem entstehenden Markt.</p>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2.5rem", marginTop: "1.2rem" }}>
+              <p className="sub" style={{ marginTop: 0 }}>Das World Gold Council / Linklaters Whitepaper (2025) beschreibt eine strukturelle Marktlücke: Unallocated Gold trägt Gegenparteirisiko, Allocated Gold ist als Sicherheit operativ aufwändig.</p>
+              <p className="sub" style={{ marginTop: 0 }}>Pooled Gold Interests (PGI) adressieren beides durch direkte, bruchteilhafte Eigentumsrechte an segregiertem physischen Gold — CCP-tauglich, elektronisch übertragbar, ohne physische Bewegung der Barren. Die Gruppe positioniert sich als Collateral Agent und Liquiditätsgeber in diesem entstehenden Markt.</p>
+            </div>
           </div>
 
           <div className="gold-rule reveal" style={{ margin: "2rem 0 3rem" }} />
