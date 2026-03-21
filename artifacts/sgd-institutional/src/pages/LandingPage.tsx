@@ -409,13 +409,6 @@ canvas#matrixRain{position:absolute;inset:0;width:100%;height:100%;z-index:1;poi
               <p className="pc-tag">Gold Bank CZ · SK · EU</p>
               <p className="pc-name">Gold Bank</p>
               <p className="pc-desc">Die erste europäische Plattform, die physisches Gold mit der vollständigen Digitalisierung des gesamten Lebenszyklus verbindet. Kunden kaufen, verwalten und lagern Gold — direkt vom Smartphone oder Computer aus. Kreditkonto in CZK und EUR, automatisches Sparprogramm in Gold, Rückkauf zu Marktpreisen, Umwandlung in physische Barren mit Kurierlieferung. Vollständige AML/KYC-Konformität mit eigenem KYC-Portal. Web + iOS + Android.</p>
-              <div className="pc-params">
-                <div className="pc-row"><span>Jahresertrag</span><span className="acc">+10 % p.a. in Au (vertraglich)</span></div>
-                <div className="pc-row"><span>Unterlegung</span><span>LBMA Good Delivery</span></div>
-                <div className="pc-row"><span>Kreditkonto</span><span>CZK &amp; EUR</span></div>
-                <div className="pc-row"><span>App</span><span>iOS · Android · Web</span></div>
-                <div className="pc-row"><span>Märkte</span><span>gold-bank.cz · .sk · .eu</span></div>
-              </div>
             </div>
             <div className="prod-card featured">
               <div className="prod-card-accent" />
@@ -423,11 +416,6 @@ canvas#matrixRain{position:absolute;inset:0;width:100%;height:100%;z-index:1;poi
               <p className="pc-tag">KI-Treasury &amp; Research</p>
               <p className="pc-name">AUROM &amp;<br /><em>AUROM PRO Dealer Commander</em></p>
               <p className="pc-desc">Eigenentwickeltes Forschungs- und Analysesystem für die Verwaltung und Neugewichtung von Portfolios mithilfe von KI: tägliche SARIMA/Prophet-Prognose, Smart Hedging CME + OTC, Yield-Hunter-Strategie, Stresstests. Auf dem Markt existiert kein vergleichbares Produkt mit einer so umfangreichen Wissensbasis und Verknüpfung von Aktivitäten zwischen physischer Verwaltung, Lagerverwaltung und dem Informationsaustausch zwischen nicht-bankgebundenem und reguliertem Segment.</p>
-              <div className="pc-params">
-                <div className="pc-row"><span>Hedging</span><span>CME + OTC</span></div>
-                <div className="pc-row"><span>B2B SaaS Potenzial</span><span>0,1–0,2 % AuM p.a.</span></div>
-                <div className="pc-row"><span>Status</span><span className="acc">Live · proprietär</span></div>
-              </div>
             </div>
           </div>
 
@@ -437,20 +425,12 @@ canvas#matrixRain{position:absolute;inset:0;width:100%;height:100%;z-index:1;poi
               <p className="pc-tag">Strukturiertes Beteiligungsprogramm</p>
               <p className="pc-name">GOLD D10</p>
               <p className="pc-desc">Ein einzigartiges partizipatives Renditeprogramm mit einem bedeutenden Anteil an aktiven Handelsaktivitäten, das nicht als kollektives Anlageprogramm oder AIF-Fondsstruktur eingestuft ist. 10 diversifizierte Positionen zur Absicherung in physischem Gold, optimiert durch AUROM Research und Dealer Commander Execution. Zielgruppe: HNWI und qualifizierte Anleger.</p>
-              <div className="pc-params">
-                <div className="pc-row"><span>Struktur</span><span>10 diversifizierte Positionen</span></div>
-                <div className="pc-row"><span>Klassifizierung</span><span>Kein AIF · kein kollektives Programm</span></div>
-              </div>
             </div>
             <div className="prod-card">
               <span className="pc-badge">Digitales Sparprogramm</span>
               <p className="pc-tag">Aufbauprogramm</p>
               <p className="pc-name">DIGI GOLD<br />Savings</p>
               <p className="pc-desc">Digitales Programm für die physische Verwahrung von Edelmetallen. Schrittweiser Aufbau eines physischen Goldbestands — vollständig digital, 100 % physisch durch LBMA gedeckt, mit automatischer DCA-Optimierung.</p>
-              <div className="pc-params">
-                <div className="pc-row"><span>Einstieg</span><span>ab 50 EUR/Monat</span></div>
-                <div className="pc-row"><span>Unterlegung</span><span>100 % physisch LBMA-gedeckt</span></div>
-              </div>
             </div>
             <div className="prod-card featured">
               <div className="prod-card-accent" />
@@ -458,11 +438,6 @@ canvas#matrixRain{position:absolute;inset:0;width:100%;height:100%;z-index:1;poi
               <p className="pc-tag">Zahlungsmittel · Täglich</p>
               <p className="pc-name">Gold Card</p>
               <p className="pc-desc">Verbindung des Goldkontos bei der Gold Bank mit einer Mastercard — weltweit mit Gold zahlen. Transaktionen werden automatisch vom Goldguthaben abgezogen. Gold wird zu einer lebendigen Währung. Dieses Konzept bietet in Europa praktisch kein anderer Anbieter.</p>
-              <div className="pc-params">
-                <div className="pc-row"><span>Karte</span><span>Mastercard</span></div>
-                <div className="pc-row"><span>Abbuchung</span><span>Automatisch vom Goldkonto</span></div>
-                <div className="pc-row"><span>Verfügbarkeit</span><span>Weltweit · täglich</span></div>
-              </div>
             </div>
             <div className="prod-card"></div>
           </div>
@@ -475,25 +450,12 @@ canvas#matrixRain{position:absolute;inset:0;width:100%;height:100%;z-index:1;poi
               <p className="pc-tag">Compliance · Due Diligence · FATF</p>
               <p className="pc-name">ARGUS</p>
               <p className="pc-desc">Fortschrittliche Plattform für die Einhaltung von AML/KYC-Vorschriften, entwickelt für AML-Analysten, Compliance-Mitarbeiter und Risikomanager im Edelmetallhandel. Strukturierte Untersuchungen mit eindeutiger Fallnummer, automatisch generierte Checklisten, AI-OSINT-Analyse, Netzwerkbeziehungsdiagramm, interaktive Zeitleiste und automatische Risikobewertung. Konform mit §253/2008 Sb., 40 FATF-Empfehlungen, AMLD5, DSGVO, LBMA Responsible Sourcing, ISO 27001 und SOC 2 Typ II.</p>
-              <div className="pc-params">
-                <div className="pc-row"><span>Primärmarkt</span><span>Edelmetallhändler · Finanzinstitute</span></div>
-                <div className="pc-row"><span>Standards</span><span>FATF · AMLD5 · DSGVO · ISO 27001</span></div>
-                <div className="pc-row"><span>LBMA Sourcing</span><span className="acc">5-stufige Lieferkettenkartierung</span></div>
-                <div className="pc-row"><span>Risikobewertung</span><span>NIEDRIG / MITTEL / HOCH / KRITISCH</span></div>
-                <div className="pc-row"><span>Bereitstellung</span><span>Privates SaaS · Datenspeicher EU</span></div>
-              </div>
             </div>
             <div className="prod-card">
               <span className="pc-badge">Regulatory Intelligence</span>
               <p className="pc-tag">Regulatory Intelligence</p>
               <p className="pc-name">ARGUS PRO</p>
               <p className="pc-desc">Edelmetallhändler benötigen ab dem 1.7.2027 ein effektives Tool zur Erfüllung ihrer Pflichten beim Onboarding und bei der laufenden Überwachung gemäß der neuen europäischen AML-Gesetzgebung. ARGUS PRO adressiert EDD- und CDD-Prozesse, strukturiertes Fallmanagement, KPI-Dashboards und LBMA-konforme Compliance-Programme.</p>
-              <div className="pc-params">
-                <div className="pc-row"><span>Edelmetallhändler</span><span>gemäß AMLA ab 1.7.2027</span></div>
-                <div className="pc-row"><span>Finanzinstitute</span><span>EDD · CDD · PEP-Screening</span></div>
-                <div className="pc-row"><span>Compliance-Teams</span><span>Fallmanagement · Audit-Trail</span></div>
-                <div className="pc-row"><span>Management</span><span>Dashboard · KPI · Export</span></div>
-              </div>
             </div>
           </div>
 
@@ -505,13 +467,6 @@ canvas#matrixRain{position:absolute;inset:0;width:100%;height:100%;z-index:1;poi
               <p className="pc-tag">Langfristiger Goldkredit</p>
               <p className="pc-name">Gold Hypo</p>
               <p className="pc-desc">Das erste und einzige Produkt für goldbesicherte Langzeitkredite in der EU. Der Kunde hinterlegt physisches Gold als Sicherheit — unser Unternehmen sorgt als Sicherheitenagent für die Verwahrung, die tägliche Bewertung (LBMA PM Fix), die Ausgabe von Warrants und das Ausfallmanagement (T+2 über einen Clearing-Partner im CME/LPMCL-System). Die Bank gewährt den Kredit, hält den Warrant und trägt kein operatives Risiko im Zusammenhang mit dem Gold.</p>
-              <div className="pc-params">
-                <div className="pc-row"><span>Laufzeit</span><span>5–20 Jahre</span></div>
-                <div className="pc-row"><span>LTV</span><span className="acc">bis zu 80 %</span></div>
-                <div className="pc-row"><span>Margin Call</span><span>LTV ≥ 88 %</span></div>
-                <div className="pc-row"><span>Onboarding</span><span>2–5 Tage</span></div>
-                <div className="pc-row"><span>EU-Wettbewerber</span><span className="acc">keine bekannten</span></div>
-              </div>
             </div>
             <div className="prod-card featured">
               <div className="prod-card-accent" />
@@ -519,13 +474,6 @@ canvas#matrixRain{position:absolute;inset:0;width:100%;height:100%;z-index:1;poi
               <p className="pc-tag">Kurzfristiger Goldkredit</p>
               <p className="pc-name">Gold Repo</p>
               <p className="pc-desc">Kurzfristige Liquidität aus Gold ohne Verkauf. Der Kunde hinterlegt physisches Gold als Sicherheit — unser Unternehmen sorgt als Sicherheitenverwalter für die Verwahrung, die tägliche Bewertung (LBMA PM Fix) und das Ausfallmanagement (T+2). Keine Bonitätsprüfung. Im Vergleich zum Pfandhaus: 99,5 % Realisierung vs. 50–70 %, Abwicklung T+2 vs. Monate.</p>
-              <div className="pc-params">
-                <div className="pc-row"><span>Laufzeit</span><span>1–12 Monate</span></div>
-                <div className="pc-row"><span>LTV</span><span className="acc">bis zu 80 %</span></div>
-                <div className="pc-row"><span>Bewertung</span><span>LBMA AM/PM täglich</span></div>
-                <div className="pc-row"><span>Verwertung bei Ausfall</span><span>99,5 % LBMA, T+2</span></div>
-                <div className="pc-row"><span>Versicherung</span><span>Kooperativa – Vienna Insurance Group</span></div>
-              </div>
             </div>
           </div>
         </div>
@@ -609,23 +557,12 @@ canvas#matrixRain{position:absolute;inset:0;width:100%;height:100%;z-index:1;poi
               <p className="pc-tag">Gold Margining · OTC Counterparties</p>
               <p className="pc-name">Gold OTC<br />Margining</p>
               <p className="pc-desc">Gold-Margining für ausgewählte bilaterale Gegenparteien: physisches LBMA-Gold als Sicherheit für OTC-Derivate-Positionen ohne physische Segregation oder Tresortransfer. Kompatibel mit EU/UK EMIR Uncleared Margin Rules. Basis: PGI-Struktur als „Thing in Action" — elektronisch übertragbar, insolvenzfern vom Verwahrer.</p>
-              <div className="pc-params">
-                <div className="pc-row"><span>Zielgruppe</span><span>HNWI · Family Offices · Institutionelle</span></div>
-                <div className="pc-row"><span>Instrument</span><span>PGI / Warrant / Zastavní CP</span></div>
-                <div className="pc-row"><span>Settlement</span><span className="acc">Atomic · T+0 / T+2</span></div>
-                <div className="pc-row"><span>Rechtsrahmen</span><span>EMIR · OZ · English Law</span></div>
-              </div>
             </div>
             <div className="prod-card">
               <span className="pc-badge">Optimierung</span>
               <p className="pc-tag">Cheapest-to-Deliver Collateral</p>
               <p className="pc-name">Collateral<br />Optimization Engine</p>
               <p className="pc-desc">Intelligente Substitution zwischen Barmitteln, US-Staatsanleihen und physischem Gold — automatische Auswahl der kostengünstigsten verfügbaren Sicherheit für jede Margin-Obligation. Integration mit Dealer Commander für Echtzeit-Bewertung und Portfolio-Optimierung.</p>
-              <div className="pc-params">
-                <div className="pc-row"><span>Assets</span><span>Gold · Cash · UST · Repo</span></div>
-                <div className="pc-row"><span>Engine</span><span>Dealer Commander Integration</span></div>
-                <div className="pc-row"><span>Bewertung</span><span>LBMA PM Fix · Echtzeit</span></div>
-              </div>
             </div>
           </div>
 
@@ -637,24 +574,12 @@ canvas#matrixRain{position:absolute;inset:0;width:100%;height:100%;z-index:1;poi
               <p className="pc-tag">Triparty Custody · CCP &amp; FMI</p>
               <p className="pc-name">Triparty Gold<br />Custody</p>
               <p className="pc-desc">Custody-Bedingungen, die ein Sicherheiteninteresse an physischem Gold ohne physische Bewegung der Barren ermöglichen. Das Gold bleibt im Tresor — das Sicherheiteninteresse wird über ein Warrant-Instrument oder PGI-Struktur übertragen. Kompatibel mit CCP-Clearing (Initial Margin, Default Fund) und FMI-Anforderungen.</p>
-              <div className="pc-params">
-                <div className="pc-row"><span>Struktur</span><span>PGI / Warrant · CDCP / eigenes Register</span></div>
-                <div className="pc-row"><span>CCP-Tauglichkeit</span><span className="acc">EU/UK EMIR · Initial Margin</span></div>
-                <div className="pc-row"><span>Insolvenzschutz</span><span>Segregiert · insolvenzfern</span></div>
-                <div className="pc-row"><span>Physisch</span><span>Kein Tresortransfer erforderlich</span></div>
-              </div>
             </div>
             <div className="prod-card">
               <span className="pc-badge">Legal Pack</span>
               <p className="pc-tag">Treasury &amp; Risk Teams</p>
               <p className="pc-name">Collateral<br />Legal &amp; Reporting Pack</p>
               <p className="pc-desc">Vollständiges juristisches und operatives Paket für Treasury- und Risk-Teams: tägliche Bewertungsreporte nach LBMA PM Fix, Margin-Call-Dokumentation, Trigger-Protokoll (LTV-Schwellen), Legal Opinion zu anwendbarem Recht (CZ/SK/UK/CH), Auditpfad für Regulatoren, ISDA-kompatible Sicherheitenvereinbarungen.</p>
-              <div className="pc-params">
-                <div className="pc-row"><span>Reporting</span><span>Täglich · LBMA PM Fix</span></div>
-                <div className="pc-row"><span>Legal</span><span>CZ · SK · UK · CH Jurisdiktionen</span></div>
-                <div className="pc-row"><span>ISDA</span><span>Credit Support Annex kompatibel</span></div>
-                <div className="pc-row"><span>Audit Trail</span><span>Vollständig · regulatorenfest</span></div>
-              </div>
             </div>
           </div>
 
@@ -666,71 +591,15 @@ canvas#matrixRain{position:absolute;inset:0;width:100%;height:100%;z-index:1;poi
               <p className="pc-tag">Lombard · Credit Lines</p>
               <p className="pc-name">Gold Credit<br />Lines</p>
               <p className="pc-desc">Lombard- und Kreditlinien gegen transparent evidiertes physisches Gold: digitale Evidenz im eigenen Register oder via CDCP, tägliche Bewertung, automatisches Margin Management. Zielgruppe: Institutionelle Goldhalter, die kurzfristige Liquidität ohne Verkauf benötigen.</p>
-              <div className="pc-params">
-                <div className="pc-row"><span>Struktur</span><span>Revolving · Lombard · Kreditlinie</span></div>
-                <div className="pc-row"><span>Evidenz</span><span>Digitales Register · CDCP</span></div>
-                <div className="pc-row"><span>Bewertung</span><span className="acc">LBMA PM Fix · tägliches MTM</span></div>
-                <div className="pc-row"><span>Buyback</span><span>Garantiert · Fair Value</span></div>
-              </div>
             </div>
             <div className="prod-card">
               <span className="pc-badge">Intraday</span>
               <p className="pc-tag">Digital Metal Collateral</p>
               <p className="pc-name">Intraday Gold<br />Liquidity Lines</p>
               <p className="pc-desc">Intraday-Liquiditätslinien gegen digital evidiertes Metall-Kollateral — atomare Aktivierung und Rückgabe innerhalb des Handelstages. Adressiert den im WGC/Linklaters-Whitepaper identifizierten Use Case: frictionless gold, instant collateralisation, atomic settlement.</p>
-              <div className="pc-params">
-                <div className="pc-row"><span>Aktivierung</span><span className="acc">Atomic · T+0 intraday</span></div>
-                <div className="pc-row"><span>Rückgabe</span><span>End of Day automatisch</span></div>
-                <div className="pc-row"><span>Zielgruppe</span><span>OTC Clearing Members · Banken</span></div>
-                <div className="pc-row"><span>Basis</span><span>WGC PGI-Ökosystem 2025</span></div>
-              </div>
             </div>
           </div>
 
-          <p className="cat-divider reveal">Positionierung im entstehenden PGI-Ökosystem</p>
-          <div className="prod-grid reveal" style={{ gridTemplateColumns: "repeat(3, 1fr)" }}>
-            <div className="prod-card featured">
-              <div className="prod-card-accent" />
-              <span className="pc-badge unique">Strategisch</span>
-              <p className="pc-tag">Role 1 — mit institutionellem Partner</p>
-              <p className="pc-name">Core<br />Participant</p>
-              <p className="pc-desc">Bei Gewinnung eines Bank- oder Fondspartners mit ausreichender Governance: gemeinsames Halten des Rechtstitels am Gold-Bar-Pool, Management von Loading-In/Out, Audit, Versicherung und Custody-Beziehungen — und Emission von PGI.</p>
-              <div className="pc-params">
-                <div className="pc-row"><span>Voraussetzung</span><span>Institutioneller Bankpartner</span></div>
-                <div className="pc-row"><span>Funktion</span><span>Rechtstitel · PGI-Emittent · Custody</span></div>
-                <div className="pc-row"><span>Upside</span><span className="acc">Maximale Kontrolle &amp; Fee-Capture</span></div>
-              </div>
-            </div>
-            <div className="prod-card">
-              <span className="pc-badge">Distribution</span>
-              <p className="pc-tag">Role 2 — über Gold Bank</p>
-              <p className="pc-name">Participant /<br />Distributor</p>
-              <p className="pc-desc">Gold Bank bietet eine der stärksten Kundendistributionen für physisches Gold im CEE-Raum. Als Participant werden PGI für Kunden gehalten und Trading-Flow generiert — unter Nutzung der bestehenden AML/KYC-Infrastruktur (ARGUS).</p>
-              <div className="pc-params">
-                <div className="pc-row"><span>Stärke</span><span>Gold Bank CZ · SK · EU Distribution</span></div>
-                <div className="pc-row"><span>Funktion</span><span>PGI-Holding · Client Onboarding</span></div>
-                <div className="pc-row"><span>Infrastruktur</span><span>ARGUS AML/KYC · Gold Bank API</span></div>
-              </div>
-            </div>
-            <div className="prod-card featured">
-              <div className="prod-card-accent" />
-              <span className="pc-badge unique">Bevorzugte Einstiegsrolle</span>
-              <p className="pc-tag">Role 3 — Kernstärke</p>
-              <p className="pc-name">Liquidity Provider /<br />Market Maker</p>
-              <p className="pc-desc">Die attraktivste Variante — direkt auf bestehenden Stärken aufbauend: präzises Pricing via AUROM/Dealer Commander, CME-Hedging, Flow-Management und Cross-Form-Arbitrage zwischen allocated, unallocated und PGI. Keine Banklizenz erforderlich.</p>
-              <div className="pc-params">
-                <div className="pc-row"><span>Kernstärke</span><span>AUROM Pricing · CME Hedging</span></div>
-                <div className="pc-row"><span>Funktion</span><span>Allocated ↔ Unallocated ↔ PGI</span></div>
-                <div className="pc-row"><span>Ertrag</span><span className="acc">Bid-Ask · Conversion Fees · Arbitrage</span></div>
-                <div className="pc-row"><span>Vorteil</span><span>Keine Banklizenz erforderlich</span></div>
-              </div>
-            </div>
-          </div>
-
-          <div className="reveal" style={{ marginTop: "3rem", padding: "2rem", background: "rgba(196,149,74,0.05)", border: "1px solid rgba(196,149,74,0.2)", borderLeft: "3px solid var(--gold)" }}>
-            <p className="eyebrow" style={{ marginBottom: ".8rem" }}>Strategische Begründung</p>
-            <p style={{ fontSize: ".88rem", color: "var(--cream3)", lineHeight: 1.8, maxWidth: "80ch" }}>Das Linklaters/WGC-Whitepaper (2025) identifiziert eine fundamentale Marktlücke: Unallocated Gold trägt Kontrahentenrisiko und ist nicht EMIR-konform. Allocated Gold ist operativ unpraktisch als Sicherheit. <strong style={{ color: "var(--cream)" }}>PGI lösen beides — und schaffen einen dritten Grundpfeiler des Goldmarkts.</strong> Die Gruppe positioniert sich als Collateral Agent und Custody-Infrastruktur für diesen entstehenden Markt. Frictionless Gold, Instant Collateralisation und Atomic Settlement sind laut dem Whitepaper die attraktivsten zukünftigen Use Cases des institutionellen Goldmarkts.</p>
-          </div>
         </div>
       </section>
 
@@ -755,12 +624,6 @@ canvas#matrixRain{position:absolute;inset:0;width:100%;height:100%;z-index:1;poi
               <h3>Gold Deposit &amp; GOLD D10</h3>
               <p>Gold Deposit ist die Grundlage unseres Ökosystems: Kunden hinterlegen physisches Gold und erhalten echten Ertrag in Gold — nicht in Fiat. GOLD D10 erweitert dieses Modell für anspruchsvolle Investoren mit strukturierten Ertragsstrategien über 10 diversifizierte Positionen.</p>
               <p className="mup-pull">Für den Bankpartner: Custody-Fee 0,3 % AuM p.a. + Paying Agent Fee. Kein eigener Betriebsaufwand — vollständig ausgelagert an Swiss Gold Deposit Group.</p>
-              <div className="mup-params">
-                <div className="mup-row"><span>Gold Deposit Ertrag (vertraglich)</span><span className="acc">+10 % p.a. in Au</span></div>
-                <div className="mup-row"><span>D10 Zielertrag</span><span className="acc">Überdurchschnittlich in Au</span></div>
-                <div className="mup-row"><span>Custody-Fee Partner</span><span>0,3 % AuM p.a.</span></div>
-                <div className="mup-row"><span>CEE Potenzial</span><span>EUR 20B+</span></div>
-              </div>
             </div>
             <div className="mup-cards">
               <div className="mup-card"><h4>Für den Kunden</h4><p>Gold bleibt im Tresor, wertet sich weiter auf. Kein Verkauf, kein Katastereintrag, kein Credit Scoring. Onboarding in 2–5 Tagen. LTV bis 80 %.</p></div>
@@ -774,12 +637,6 @@ canvas#matrixRain{position:absolute;inset:0;width:100%;height:100%;z-index:1;poi
             <div className="mup-left">
               <h3>DIGI GOLD Savings &amp; AUROM</h3>
               <p>DIGI GOLD ist unser digitales Aufbauprogramm für physisches Gold — vollständig digital, 100 % physisch durch LBMA gedeckt, mit automatischer DCA-Optimierung. AUROM als proprietäres Forschungssystem optimiert alle Portfolios in Echtzeit.</p>
-              <div className="mup-params">
-                <div className="mup-row"><span>Einstieg</span><span>ab 50 EUR/Monat</span></div>
-                <div className="mup-row"><span>Unterlegung</span><span>100 % physisch LBMA-gedeckt</span></div>
-                <div className="mup-row"><span>AUROM Hedging</span><span>CME + OTC</span></div>
-                <div className="mup-row"><span>B2B SaaS Potenzial</span><span>0,1–0,2 % AuM p.a.</span></div>
-              </div>
             </div>
             <div className="mup-cards">
               <div className="mup-card"><h4>AUROM — proprietäres System</h4><p>Tägliche SARIMA/Prophet-Prognose, Smart Hedging, Yield-Hunter-Strategie, Stresstests. Kein vergleichbares Produkt auf dem Markt mit dieser Verknüpfung von physischer Verwaltung, Lagerverwaltung und reguliertem Segment.</p></div>
@@ -791,13 +648,6 @@ canvas#matrixRain{position:absolute;inset:0;width:100%;height:100%;z-index:1;poi
             <div className="mup-left">
               <h3>Gold Hypo &amp; Gold Repo</h3>
               <p>Zwei komplementäre Kreditprodukte — Gold Hypo für langfristige Finanzierung (5–20 Jahre), Gold Repo für kurzfristige Liquidität (1–12 Monate). Beide nutzen dieselbe Collateral-Agent-Infrastruktur.</p>
-              <div className="mup-params">
-                <div className="mup-row"><span>Gold Hypo LTV</span><span className="acc">bis 80 %</span></div>
-                <div className="mup-row"><span>Gold Repo LTV</span><span className="acc">bis 80 %</span></div>
-                <div className="mup-row"><span>Bewertung</span><span>LBMA PM Fix täglich</span></div>
-                <div className="mup-row"><span>Verwertung bei Ausfall</span><span>99,5 % LBMA, T+2</span></div>
-                <div className="mup-row"><span>Versicherung</span><span>Kooperativa – Vienna Insurance Group</span></div>
-              </div>
             </div>
             <div className="mup-cards">
               <div className="mup-card"><h4>Für die kreditgebende Bank</h4><p>Kein Kontakt mit physischem Gold, kein operatives Risiko. Bank stellt Kredit aus, hält Warrant. T+2 Realisierung im Ausfallfall. RWA-Vorteil gegenüber Immobilienpfand.</p></div>
@@ -816,13 +666,6 @@ canvas#matrixRain{position:absolute;inset:0;width:100%;height:100%;z-index:1;poi
             <div className="mup-left">
               <h3>ARGUS &amp; ARGUS PRO</h3>
               <p>ARGUS ist unsere proprietäre AML/KYC-Plattform für den Edelmetallhandel — vollständig konform mit FATF, AMLD5, DSGVO, LBMA Responsible Sourcing, ISO 27001 und SOC 2 Typ II.</p>
-              <div className="mup-params">
-                <div className="mup-row"><span>Standards</span><span>FATF · AMLD5 · §253/2008 Sb.</span></div>
-                <div className="mup-row"><span>LBMA Sourcing</span><span className="acc">5-stufige Lieferkettenkartierung</span></div>
-                <div className="mup-row"><span>AI OSINT</span><span>Intelligence-Bericht mit einem Klick</span></div>
-                <div className="mup-row"><span>Risikobewertung</span><span>NIEDRIG / MITTEL / HOCH / KRITISCH</span></div>
-                <div className="mup-row"><span>Bereitstellung</span><span>Privates SaaS · Datenspeicher EU</span></div>
-              </div>
             </div>
             <div className="mup-cards">
               <div className="mup-card"><h4>Ab 1.7.2027 verpflichtend</h4><p>Edelmetallhändler benötigen ab dem 1.7.2027 ein effektives Tool zur Erfüllung ihrer AMLA-Pflichten. ARGUS PRO ist bereit. Wir sind bestens auf die Änderungen im Jahr 2027 vorbereitet.</p></div>
