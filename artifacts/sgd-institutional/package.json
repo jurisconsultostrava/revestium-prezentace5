@@ -75,6 +75,6 @@
     "zod": "catalog:"
   },
   "dependencies": {
-    "cobe": "^2.0.1"
+    "cobe": "^0.6.5"
   }
 }

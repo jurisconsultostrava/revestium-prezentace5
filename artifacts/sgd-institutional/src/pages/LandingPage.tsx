@@ -7,7 +7,6 @@ function useCobeGlobe(canvasRef: React.RefObject<HTMLCanvasElement | null>) {
     const canvas = canvasRef.current;
     if (!canvas) return;
     let phi = 0;
-    let animId: number;
     const globe = createGlobe(canvas, {
       devicePixelRatio: 2,
       width: 1360,
@@ -28,17 +27,12 @@ function useCobeGlobe(canvasRef: React.RefObject<HTMLCanvasElement | null>) {
         { location: [53.3498, -6.2603], size: 0.05 },
         { location: [50.0755, 14.4378], size: 0.05 },
       ],
+      onRender: (state: Record<string, number>) => {
+        state.phi = phi;
+        phi += 0.003;
+      },
     });
-    function animate() {
-      phi += 0.003;
-      globe.update({ phi });
-      animId = requestAnimationFrame(animate);
-    }
-    animate();
-    return () => {
-      cancelAnimationFrame(animId);
-      globe.destroy();
-    };
+    return () => globe.destroy();
   }, [canvasRef]);
 }
 
