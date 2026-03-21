@@ -436,7 +436,6 @@ canvas#matrixRain{position:absolute;inset:0;width:100%;height:100%;z-index:1;poi
               <p className="pc-name">Gold Card</p>
               <p className="pc-desc">Verbindung des Goldkontos bei der Gold Bank mit einer Mastercard — weltweit mit Gold zahlen. Transaktionen werden automatisch vom Goldguthaben abgezogen. Gold wird zu einer lebendigen Währung. Dieses Konzept bietet in Europa praktisch kein anderer Anbieter.</p>
             </div>
-            <div className="prod-card"></div>
           </div>
 
           <div className="cat-strip reveal" style={{ marginTop: "4rem" }}><p className="cat-strip-title">Compliance &amp; Intelligence</p></div>
