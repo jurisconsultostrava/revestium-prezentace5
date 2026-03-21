@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swiss Arrows Ecosystem - Restructured</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 40px;
+            background: #0a0a0a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Inter', -apple-system, sans-serif;
+        }
+        
+        .container {
+            max-width: 1400px;
+            width: 100%;
+        }
+        
+        svg {
+            width: 100%;
+            height: auto;
+        }
+        
+        /* Animation for connections */
+        @keyframes flowPulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+        }
+        
+        .connection-line {
+            animation: flowPulse 3s ease-in-out infinite;
+        }
+        
+        .product-box:hover {
+            filter: brightness(1.1);
+            cursor: pointer;
+        }
+        
+        .product-box {
+            transition: all 0.3s ease;
+        }
+        
+        @media print {
+            body {
+                background: white;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <svg viewBox="0 0 1400 900" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <!-- Gradients -->
+                <linearGradient id="retailGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:1" />
+                </linearGradient>
+                
+                <linearGradient id="coreGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#d97706;stop-opacity:1" />
+                </linearGradient>
+                
+                <linearGradient id="institutionalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
+                </linearGradient>
+                
+                <linearGradient id="revestiumGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:1" />
+                </linearGradient>
+                
+                <linearGradient id="infraGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#374151;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#1f2937;stop-opacity:1" />
+                </linearGradient>
+            </defs>
+            
+            <!-- Background -->
+            <rect width="1400" height="900" fill="#0a0a0a"/>
+            
+            <!-- Grid -->
+            <g opacity="0.05">
+                <line x1="0" y1="150" x2="1400" y2="150" stroke="#ffffff" stroke-width="1"/>
+                <line x1="0" y1="300" x2="1400" y2="300" stroke="#ffffff" stroke-width="1"/>
+                <line x1="0" y1="600" x2="1400" y2="600" stroke="#ffffff" stroke-width="1"/>
+            </g>
+            
+            <!-- Title -->
+            <text x="700" y="50" font-size="28" font-weight="700" fill="#ffffff" text-anchor="middle">
+                REVESTIUM GOLD GROUP ECOSYSTEM
+            </text>
+            <text x="700" y="75" font-size="14" font-weight="400" fill="#9ca3af" text-anchor="middle">
+                Retail · Infrastructure · Institutional
+            </text>
+            
+            <!-- Tier Labels -->
+            <text x="233" y="130" font-size="12" font-weight="600" fill="#3b82f6" text-anchor="middle" letter-spacing="1">
+                RETAIL
+            </text>
+            <text x="700" y="130" font-size="12" font-weight="600" fill="#f59e0b" text-anchor="middle" letter-spacing="1">
+                CORE INFRASTRUCTURE
+            </text>
+            <text x="1167" y="130" font-size="12" font-weight="600" fill="#10b981" text-anchor="middle" letter-spacing="1">
+                INSTITUTIONAL
+            </text>
+            
+            <!-- ============================================ -->
+            <!-- LEFT: RETAIL PRODUCTS -->
+            <!-- ============================================ -->
+            
+            <!-- Gold Bank -->
+            <g class="product-box">
+                <rect x="80" y="170" width="306" height="110" rx="8" fill="url(#retailGrad)" stroke="#60a5fa" stroke-width="2"/>
+                <text x="233" y="200" font-size="18" font-weight="700" fill="#ffffff" text-anchor="middle">
+                    Gold Bank
+                </text>
+                <text x="233" y="218" font-size="11" fill="#dbeafe" text-anchor="middle">
+                    CZ · SK · EU
+                </text>
+                <text x="100" y="240" font-size="10" fill="#bfdbfe" text-anchor="start">
+                    • 3,5 Bonus p.a. in physischem Gold
+                </text>
+                <text x="100" y="255" font-size="10" fill="#bfdbfe" text-anchor="start">
+                    • IOS · Android · Web
+                </text>
+                <text x="100" y="270" font-size="10" fill="#bfdbfe" text-anchor="start">
+                    ● Live
+                </text>
+            </g>
+            
+            <!-- DIGI GOLD -->
+            <g class="product-box">
+                <rect x="80" y="300" width="140" height="100" rx="8" fill="url(#retailGrad)" stroke="#60a5fa" stroke-width="2"/>
+                <text x="150" y="330" font-size="16" font-weight="700" fill="#ffffff" text-anchor="middle">
+                    DIGI GOLD
+                </text>
+                <text x="150" y="346" font-size="10" fill="#dbeafe" text-anchor="middle">
+                    Savings
+                </text>
+                <text x="100" y="365" font-size="9" fill="#bfdbfe" text-anchor="start">
+                    • Ab 50 EUR/Monat
+                </text>
+                <text x="100" y="378" font-size="9" fill="#bfdbfe" text-anchor="start">
+                    • 100% physisch LBMA
+                </text>
+                <text x="100" y="391" font-size="9" fill="#bfdbfe" text-anchor="start">
+                    • DCA-Dynamisierung
+                </text>
+            </g>
+            
+            <!-- Gold Card -->
+            <g class="product-box">
+                <rect x="246" y="300" width="140" height="100" rx="8" fill="url(#retailGrad)" stroke="#60a5fa" stroke-width="2"/>
+                <text x="316" y="330" font-size="16" font-weight="700" fill="#ffffff" text-anchor="middle">
+                    Gold Card
+                </text>
+                <text x="316" y="346" font-size="10" fill="#dbeafe" text-anchor="middle">
+                    Mastercard · täglich
+                </text>
+                <text x="266" y="365" font-size="9" fill="#bfdbfe" text-anchor="start">
+                    • Gold als Währung
+                </text>
+                <text x="266" y="378" font-size="9" fill="#bfdbfe" text-anchor="start">
+                    • 0 EU-Konkurrenten
+                </text>
+                <text x="266" y="391" font-size="9" fill="#bfdbfe" text-anchor="start">
+                    • ◉ Rollout
+                </text>
+            </g>
+            
+            <!-- Edelmetalle -->
+            <g class="product-box">
+                <rect x="80" y="420" width="306" height="100" rx="8" fill="url(#retailGrad)" stroke="#60a5fa" stroke-width="2"/>
+                <text x="233" y="450" font-size="16" font-weight="700" fill="#ffffff" text-anchor="middle">
+                    Edelmetalle
+                </text>
+                <text x="233" y="466" font-size="10" fill="#dbeafe" text-anchor="middle">
+                    Retail & Wholesale
+                </text>
+                <text x="100" y="485" font-size="9" fill="#bfdbfe" text-anchor="start">
+                    • 150+ Produkte · LBMA Good Delivery
+                </text>
+                <text x="100" y="498" font-size="9" fill="#bfdbfe" text-anchor="start">
+                    • Kunstbarren · Bespoke ● Live
+                </text>
+            </g>
+            
+            <!-- ============================================ -->
+            <!-- CENTER: CORE INFRASTRUCTURE -->
+            <!-- ============================================ -->
+            
+            <!-- AUROM - Central Hub -->
+            <g class="product-box">
+                <rect x="547" y="250" width="306" height="150" rx="8" fill="url(#coreGrad)" stroke="#fbbf24" stroke-width="3"/>
+                <text x="700" y="285" font-size="22" font-weight="700" fill="#ffffff" text-anchor="middle">
+                    AUROM
+                </text>
+                <text x="700" y="305" font-size="12" fill="#fef3c7" text-anchor="middle">
+                    Dealer Commander
+                </text>
+                <text x="567" y="330" font-size="10" fill="#fde68a" text-anchor="start">
+                    • AI Treasury · SARIMA
+                </text>
+                <text x="567" y="345" font-size="10" fill="#fde68a" text-anchor="start">
+                    • CME Hedging · OTC
+                </text>
+                <text x="567" y="360" font-size="10" fill="#fde68a" text-anchor="start">
+                    • Net ROI +23 %
+                </text>
+                <text x="567" y="380" font-size="11" font-weight="600" fill="#ffffff" text-anchor="start">
+                    ◉ Live · proprietary
+                </text>
+            </g>
+            
+            <!-- REVESTIUM wrapper around PGI -->
+            <g class="product-box">
+                <rect x="1014" y="165" width="306" height="140" rx="8" fill="url(#revestiumGrad)" stroke="#a78bfa" stroke-width="3" stroke-dasharray="5,5"/>
+                <text x="1167" y="195" font-size="20" font-weight="700" fill="#ffffff" text-anchor="middle">
+                    REVESTIUM AG
+                </text>
+                <text x="1167" y="213" font-size="11" fill="#ede9fe" text-anchor="middle">
+                    Collateral Agent
+                </text>
+                
+                <!-- PGI nested inside -->
+                <rect x="1034" y="225" width="266" height="65" rx="6" fill="url(#institutionalGrad)" stroke="#34d399" stroke-width="2"/>
+                <text x="1167" y="248" font-size="16" font-weight="700" fill="#ffffff" text-anchor="middle">
+                    Gold as Collateral · PGI
+                </text>
+                <text x="1054" y="266" font-size="9" fill="#d1fae5" text-anchor="start">
+                    • OTC Margining · Intraday · Wholesale Digital Gold
+                </text>
+                <text x="1054" y="279" font-size="9" fill="#d1fae5" text-anchor="start">
+                    • WGC · Linklaters Framework ● Infrastructure Ready 2025
+                </text>
+            </g>
+            
+            <!-- ============================================ -->
+            <!-- RIGHT: INSTITUTIONAL PRODUCTS -->
+            <!-- ============================================ -->
+            
+            <!-- Gold Repo -->
+            <g class="product-box">
+                <rect x="1014" y="325" width="145" height="95" rx="8" fill="url(#institutionalGrad)" stroke="#34d399" stroke-width="2"/>
+                <text x="1086" y="355" font-size="16" font-weight="700" fill="#ffffff" text-anchor="middle">
+                    Gold Repo
+                </text>
+                <text x="1086" y="371" font-size="10" fill="#d1fae5" text-anchor="middle">
+                    Kurzfristiger Goldkredit
+                </text>
+                <text x="1034" y="388" font-size="9" fill="#a7f3d0" text-anchor="start">
+                    • 1-12 Monate · LTV 80%
+                </text>
+                <text x="1034" y="401" font-size="9" fill="#a7f3d0" text-anchor="start">
+                    • T+2  99,5% LBMA
+                </text>
+                <text x="1034" y="414" font-size="9" fill="#a7f3d0" text-anchor="start">
+                    ◉ Ready to launch
+                </text>
+            </g>
+            
+            <!-- Gold Hypo -->
+            <g class="product-box">
+                <rect x="1175" y="325" width="145" height="95" rx="8" fill="url(#institutionalGrad)" stroke="#34d399" stroke-width="2"/>
+                <text x="1247" y="355" font-size="16" font-weight="700" fill="#ffffff" text-anchor="middle">
+                    Gold Hypo
+                </text>
+                <text x="1247" y="371" font-size="10" fill="#d1fae5" text-anchor="middle">
+                    Goldbesicherte Langzeitkredite
+                </text>
+                <text x="1195" y="388" font-size="9" fill="#a7f3d0" text-anchor="start">
+                    • 5-20 Jahre
+                </text>
+                <text x="1195" y="401" font-size="9" fill="#a7f3d0" text-anchor="start">
+                    • Collateral Agent Modell
+                </text>
+                <text x="1195" y="414" font-size="9" fill="#a7f3d0" text-anchor="start">
+                    ◉ Ready to launch
+                </text>
+            </g>
+            
+            <!-- GOLD D10 -->
+            <g class="product-box">
+                <rect x="547" y="420" width="145" height="100" rx="8" fill="url(#coreGrad)" stroke="#fbbf24" stroke-width="2"/>
+                <text x="619" y="450" font-size="16" font-weight="700" fill="#ffffff" text-anchor="middle">
+                    GOLD D10
+                </text>
+                <text x="619" y="466" font-size="10" fill="#fef3c7" text-anchor="middle">
+                    Partizipativer Modell
+                </text>
+                <text x="567" y="483" font-size="9" fill="#fde68a" text-anchor="start">
+                    • Secured Gold Bonds Emission
+                </text>
+                <text x="567" y="496" font-size="9" fill="#fde68a" text-anchor="start">
+                    • 10 diversifizierte Positionen
+                </text>
+                <text x="567" y="509" font-size="9" fill="#fde68a" text-anchor="start">
+                    • HNWI · Qual. Anleger ◉ Rollout
+                </text>
+            </g>
+            
+            <!-- ARGUS -->
+            <g class="product-box">
+                <rect x="708" y="420" width="145" height="100" rx="8" fill="url(#institutionalGrad)" stroke="#34d399" stroke-width="2"/>
+                <text x="780" y="450" font-size="16" font-weight="700" fill="#ffffff" text-anchor="middle">
+                    ARGUS
+                </text>
+                <text x="780" y="466" font-size="10" fill="#d1fae5" text-anchor="middle">
+                    AML/KYC Platform
+                </text>
+                <text x="728" y="483" font-size="9" fill="#a7f3d0" text-anchor="start">
+                    • FATF · AML-DS · DSGVO
+                </text>
+                <text x="728" y="496" font-size="9" fill="#a7f3d0" text-anchor="start">
+                    • LBMA Responsible Sourcing
+                </text>
+                <text x="728" y="509" font-size="9" fill="#a7f3d0" text-anchor="start">
+                    • AI OSINT · Risk Scoring ◉ Rollout
+                </text>
+            </g>
+            
+            <!-- ============================================ -->
+            <!-- INFRASTRUCTURE LAYER (Bottom) -->
+            <!-- ============================================ -->
+            
+            <g class="product-box">
+                <rect x="450" y="750" width="500" height="120" rx="8" fill="url(#infraGrad)" stroke="#6b7280" stroke-width="2"/>
+                <text x="700" y="780" font-size="18" font-weight="700" fill="#ffffff" text-anchor="middle">
+                    INFRASTRUCTURE
+                </text>
+                <line x1="470" y1="790" x2="930" y2="790" stroke="#4b5563" stroke-width="1"/>
+                
+                <text x="520" y="815" font-size="13" fill="#d1d5db" text-anchor="start">
+                    • LBMA Good Delivery Refinery
+                </text>
+                <text x="520" y="835" font-size="13" fill="#d1d5db" text-anchor="start">
+                    • CME Clearing Member (Prime Broker)
+                </text>
+                <text x="520" y="855" font-size="13" fill="#d1d5db" text-anchor="start">
+                    • WGC/Linklaters Framework
+                </text>
+            </g>
+            
+            <!-- ============================================ -->
+            <!-- CONNECTION LINES -->
+            <!-- ============================================ -->
+            
+            <!-- Retail → AUROM -->
+            <path class="connection-line" d="M 386 350 L 547 325" 
+                  stroke="#f59e0b" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
+            
+            <!-- AUROM → REVESTIUM/PGI -->
+            <path class="connection-line" d="M 853 325 L 1014 257" 
+                  stroke="#8b5cf6" stroke-width="3" fill="none"/>
+            
+            <!-- AUROM → Infrastructure -->
+            <path class="connection-line" d="M 700 400 L 700 750" 
+                  stroke="#6b7280" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
+            
+            <!-- PGI → Gold Repo -->
+            <path class="connection-line" d="M 1167 305 L 1086 325" 
+                  stroke="#10b981" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
+            
+            <!-- PGI → Gold Hypo -->
+            <path class="connection-line" d="M 1167 305 L 1247 325" 
+                  stroke="#10b981" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
+            
+            <!-- AUROM → D10 -->
+            <path class="connection-line" d="M 700 400 L 619 420" 
+                  stroke="#f59e0b" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
+            
+            <!-- AUROM → ARGUS -->
+            <path class="connection-line" d="M 700 400 L 780 420" 
+                  stroke="#10b981" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
+            
+            <!-- Flow Indicators -->
+            <text x="460" y="335" font-size="9" fill="#9ca3af" transform="rotate(-10 460 335)">
+                Pricing · Hedging
+            </text>
+            <text x="920" y="290" font-size="9" fill="#9ca3af">
+                PGI · Collateral
+            </text>
+            <text x="670" y="580" font-size="9" fill="#9ca3af">
+                Settlement
+            </text>
+            
+        </svg>
+    </div>
+</body>
+</html>

@@ -694,128 +694,179 @@ canvas#matrixRain{position:absolute;inset:0;width:100%;height:100%;z-index:1;poi
           </div>
 
           <div className="reveal" style={{ overflowX: "auto", WebkitOverflowScrolling: "touch", margin: "2rem 0" }}>
-            <svg viewBox="0 0 860 520" xmlns="http://www.w3.org/2000/svg"
-              style={{ width: "100%", maxWidth: "860px", display: "block", margin: "0 auto" }}
+            <svg viewBox="0 0 1400 900" xmlns="http://www.w3.org/2000/svg"
+              style={{ width: "100%", maxWidth: "1200px", display: "block", margin: "0 auto" }}
               fontFamily="'Commissioner',system-ui,sans-serif">
               <defs>
-                <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stopColor="#c4954a" stopOpacity=".18" />
-                  <stop offset="100%" stopColor="#c4954a" stopOpacity="0" />
-                </radialGradient>
-                <marker id="a1" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3z" fill="#c4954a" opacity=".6" /></marker>
-                <marker id="a2" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3z" fill="#7aad7a" opacity=".5" /></marker>
-                <marker id="a3" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3z" fill="#c8bfa8" opacity=".35" /></marker>
-                <filter id="glow3">
-                  <feGaussianBlur stdDeviation="4" result="b" />
-                  <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
-                </filter>
+                <marker id="ec-arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                  <path d="M0,0 L0,6 L8,3z" fill="#c4954a" opacity=".6" />
+                </marker>
+                <marker id="ec-arr-g" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                  <path d="M0,0 L0,6 L8,3z" fill="#7aab7a" opacity=".6" />
+                </marker>
               </defs>
-              <rect width="860" height="520" fill="#080806" rx="8" />
-              <rect x="1" y="1" width="858" height="518" fill="none" stroke="#c4954a" strokeWidth=".5" rx="8" opacity=".15" />
-              <text x="30" y="95" fill="#8a8278" fontSize="8" letterSpacing=".14em" transform="rotate(-90,30,95)" textAnchor="middle" opacity=".6">KUNDEN</text>
-              <text x="30" y="265" fill="#8a8278" fontSize="8" letterSpacing=".14em" transform="rotate(-90,30,265)" textAnchor="middle" opacity=".6">CORE ENGINE</text>
-              <text x="30" y="430" fill="#8a8278" fontSize="8" letterSpacing=".14em" transform="rotate(-90,30,430)" textAnchor="middle" opacity=".6">INSTITUTIONELL</text>
-              <line x1="60" y1="155" x2="820" y2="155" stroke="#c4954a" strokeWidth=".4" strokeDasharray="4,4" opacity=".18" />
-              <line x1="60" y1="345" x2="820" y2="345" stroke="#c4954a" strokeWidth=".4" strokeDasharray="4,4" opacity=".18" />
-              <rect x="80" y="30" width="130" height="108" rx="6" fill="#141310" stroke="#c4954a" strokeWidth="1.2" />
-              <rect x="80" y="30" width="130" height="4" rx="3" fill="#c4954a" />
-              <text x="145" y="52" textAnchor="middle" fill="#c4954a" fontSize="9.5" fontWeight="600" letterSpacing=".08em">Gold Bank</text>
-              <text x="145" y="68" textAnchor="middle" fill="#ede8dc" fontSize="8.5" opacity=".8">CZ · SK · EU</text>
-              <text x="145" y="84" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">38 Depots · EUR 9,1M AuM</text>
-              <text x="145" y="99" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">+10 % p.a. in physischem Gold</text>
-              <text x="145" y="114" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">iOS · Android · Web</text>
-              <text x="145" y="129" textAnchor="middle" fill="#7aad7a" fontSize="7.5" opacity=".85">● Live</text>
-              <rect x="230" y="30" width="130" height="108" rx="6" fill="#141310" stroke="#c4954a" strokeWidth=".8" opacity=".85" />
-              <rect x="230" y="30" width="130" height="4" rx="3" fill="#c4954a" opacity=".6" />
-              <text x="295" y="52" textAnchor="middle" fill="#c4954a" fontSize="9.5" fontWeight="600" letterSpacing=".08em">DIGI GOLD</text>
-              <text x="295" y="68" textAnchor="middle" fill="#ede8dc" fontSize="8.5" opacity=".8">Savings</text>
-              <text x="295" y="84" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">Ab 50 EUR/Monat</text>
-              <text x="295" y="99" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">100 % physisch LBMA</text>
-              <text x="295" y="114" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">DCA-Optimierung</text>
-              <text x="295" y="129" textAnchor="middle" fill="#7aad7a" fontSize="7.5" opacity=".85">● Live</text>
-              <rect x="380" y="30" width="130" height="108" rx="6" fill="#141310" stroke="#c4954a" strokeWidth=".8" opacity=".85" />
-              <rect x="380" y="30" width="130" height="4" rx="3" fill="#c4954a" opacity=".6" />
-              <text x="445" y="52" textAnchor="middle" fill="#c4954a" fontSize="9.5" fontWeight="600" letterSpacing=".08em">Gold Card</text>
-              <text x="445" y="68" textAnchor="middle" fill="#ede8dc" fontSize="8.5" opacity=".8">Mastercard · täglich</text>
-              <text x="445" y="84" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">Gold als lebendige Währung</text>
-              <text x="445" y="99" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">Weltweit · 0 EU-Konkurrenten</text>
-              <text x="445" y="114" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">Direkt vom Goldkonto</text>
-              <text x="445" y="129" textAnchor="middle" fill="#c4954a" fontSize="7.5" opacity=".8">◉ Rollout</text>
-              <rect x="530" y="30" width="130" height="108" rx="6" fill="#141310" stroke="#c4954a" strokeWidth=".8" opacity=".85" />
-              <rect x="530" y="30" width="130" height="4" rx="3" fill="#c4954a" opacity=".6" />
-              <text x="595" y="52" textAnchor="middle" fill="#c4954a" fontSize="9.5" fontWeight="600" letterSpacing=".08em">Edelmetalle</text>
-              <text x="595" y="68" textAnchor="middle" fill="#ede8dc" fontSize="8.5" opacity=".8">Retail &amp; Wholesale</text>
-              <text x="595" y="84" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">150+ Produkte</text>
-              <text x="595" y="99" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">LBMA Good Delivery</text>
-              <text x="595" y="114" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">Kunstjuwelier · Bespoke</text>
-              <text x="595" y="129" textAnchor="middle" fill="#7aad7a" fontSize="7.5" opacity=".85">● Live</text>
-              <ellipse cx="430" cy="255" rx="74" ry="54" fill="url(#coreGlow)" />
-              <rect x="360" y="175" width="140" height="116" rx="8" fill="#1c1a16" stroke="#c4954a" strokeWidth="1.8" />
-              <rect x="360" y="175" width="140" height="5" rx="4" fill="#c4954a" />
-              <text x="430" y="200" textAnchor="middle" fill="#c4954a" fontSize="10" fontWeight="700" letterSpacing=".08em">AUROM</text>
-              <text x="430" y="216" textAnchor="middle" fill="#c4954a" fontSize="9" opacity=".85">Dealer Commander</text>
-              <line x1="375" y1="224" x2="485" y2="224" stroke="#c4954a" strokeWidth=".4" opacity=".3" />
-              <text x="430" y="240" textAnchor="middle" fill="#ede8dc" fontSize="8.5" opacity=".85">AI Treasury · SARIMA</text>
-              <text x="430" y="254" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".75">CME Hedging · OTC</text>
-              <text x="430" y="268" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".75">Net ROI +23 %</text>
-              <text x="430" y="280" textAnchor="middle" fill="#7aad7a" fontSize="7.5" opacity=".9">● Live · proprietär</text>
-              <rect x="80" y="175" width="130" height="108" rx="6" fill="#141310" stroke="#c4954a" strokeWidth=".8" opacity=".85" />
-              <rect x="80" y="175" width="130" height="4" rx="3" fill="#c4954a" opacity=".6" />
-              <text x="145" y="197" textAnchor="middle" fill="#c4954a" fontSize="9.5" fontWeight="600" letterSpacing=".08em">GOLD D10</text>
-              <text x="145" y="213" textAnchor="middle" fill="#ede8dc" fontSize="8.5" opacity=".8">Partizipationsprogramm</text>
-              <text x="145" y="229" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">10 diversifizierte Positionen</text>
-              <text x="145" y="244" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">Kein AIF · Kein Fonds</text>
-              <text x="145" y="259" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">HNWI · Qual. Anleger</text>
-              <text x="145" y="274" textAnchor="middle" fill="#c4954a" fontSize="7.5" opacity=".8">◉ Rollout</text>
-              <rect x="640" y="175" width="130" height="108" rx="6" fill="#141310" stroke="#c4954a" strokeWidth=".8" opacity=".85" />
-              <rect x="640" y="175" width="130" height="4" rx="3" fill="#c4954a" opacity=".6" />
-              <text x="705" y="197" textAnchor="middle" fill="#c4954a" fontSize="9.5" fontWeight="600" letterSpacing=".08em">ARGUS</text>
-              <text x="705" y="213" textAnchor="middle" fill="#ede8dc" fontSize="8.5" opacity=".8">AML/KYC Platform</text>
-              <text x="705" y="229" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">FATF · AMLD5 · DSGVO</text>
-              <text x="705" y="244" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">LBMA Responsible Sourcing</text>
-              <text x="705" y="259" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">AI OSINT · Risk Scoring</text>
-              <text x="705" y="274" textAnchor="middle" fill="#c4954a" fontSize="7.5" opacity=".8">◉ Rollout</text>
-              <rect x="80" y="365" width="190" height="120" rx="6" fill="#141310" stroke="#c4954a" strokeWidth="1.2" />
-              <rect x="80" y="365" width="190" height="4" rx="3" fill="#c4954a" />
-              <text x="175" y="388" textAnchor="middle" fill="#c4954a" fontSize="9.5" fontWeight="600" letterSpacing=".08em">Gold Hypo</text>
-              <text x="175" y="404" textAnchor="middle" fill="#ede8dc" fontSize="8.5" opacity=".8">Goldbesicherte Langzeitkredite</text>
-              <text x="175" y="420" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">5–20 Jahre · LTV 80 %</text>
-              <text x="175" y="435" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">Collateral Agent Modell</text>
-              <text x="175" y="450" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">0 EU-Konkurrenten</text>
-              <text x="175" y="470" textAnchor="middle" fill="#c4954a" fontSize="7.5" opacity=".85">◉ Ready to launch</text>
-              <rect x="290" y="365" width="190" height="120" rx="6" fill="#141310" stroke="#c4954a" strokeWidth=".8" opacity=".9" />
-              <rect x="290" y="365" width="190" height="4" rx="3" fill="#c4954a" opacity=".7" />
-              <text x="385" y="388" textAnchor="middle" fill="#c4954a" fontSize="9.5" fontWeight="600" letterSpacing=".08em">Gold Repo</text>
-              <text x="385" y="404" textAnchor="middle" fill="#ede8dc" fontSize="8.5" opacity=".8">Kurzfristiger Goldkredit</text>
-              <text x="385" y="420" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">1–12 Monate · LTV 80 %</text>
-              <text x="385" y="435" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">T+2 · 99,5 % LBMA</text>
-              <text x="385" y="450" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">Kooperativa Versicherung</text>
-              <text x="385" y="470" textAnchor="middle" fill="#c4954a" fontSize="7.5" opacity=".85">◉ Ready to launch</text>
-              <rect x="500" y="365" width="270" height="120" rx="6" fill="#1c1a16" stroke="#c4954a" strokeWidth="1" strokeDasharray="5,3" />
-              <rect x="500" y="365" width="270" height="4" rx="3" fill="#c4954a" opacity=".4" />
-              <text x="635" y="388" textAnchor="middle" fill="#c4954a" fontSize="9.5" fontWeight="600" letterSpacing=".08em" opacity=".9">Gold as Collateral · PGI</text>
-              <text x="635" y="404" textAnchor="middle" fill="#ede8dc" fontSize="8.5" opacity=".75">OTC Margining · Triparty · Intraday</text>
-              <text x="635" y="420" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".65">Wholesale Digital Gold Ecosystem</text>
-              <text x="635" y="435" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".65">WGC · Linklaters · LBMA Framework</text>
-              <text x="635" y="450" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".65">Liquidity Provider · Market Maker</text>
-              <text x="635" y="470" textAnchor="middle" fill="#c4954a" fontSize="7.5" opacity=".7">◌ Roadmap 2026–2027</text>
-              <line x1="145" y1="138" x2="390" y2="175" stroke="#c4954a" strokeWidth=".8" strokeDasharray="3,3" markerEnd="url(#a1)" opacity=".35" />
-              <line x1="295" y1="138" x2="415" y2="175" stroke="#c4954a" strokeWidth=".8" strokeDasharray="3,3" markerEnd="url(#a1)" opacity=".35" />
-              <line x1="445" y1="138" x2="440" y2="175" stroke="#c4954a" strokeWidth=".8" strokeDasharray="3,3" markerEnd="url(#a1)" opacity=".35" />
-              <line x1="595" y1="138" x2="465" y2="175" stroke="#c4954a" strokeWidth=".8" strokeDasharray="3,3" markerEnd="url(#a1)" opacity=".35" />
-              <line x1="210" y1="232" x2="358" y2="240" stroke="#c4954a" strokeWidth="1.1" markerEnd="url(#a1)" opacity=".55" />
-              <line x1="640" y1="232" x2="502" y2="240" stroke="#c4954a" strokeWidth="1.1" markerEnd="url(#a1)" opacity=".55" />
-              <line x1="400" y1="291" x2="210" y2="363" stroke="#c4954a" strokeWidth="1.2" markerEnd="url(#a1)" opacity=".5" />
-              <line x1="430" y1="291" x2="385" y2="363" stroke="#c4954a" strokeWidth="1.2" markerEnd="url(#a1)" opacity=".5" />
-              <line x1="460" y1="291" x2="590" y2="363" stroke="#c4954a" strokeWidth=".9" strokeDasharray="4,3" markerEnd="url(#a1)" opacity=".35" />
-              <text x="265" y="330" textAnchor="middle" fill="#c4954a" fontSize="7.5" opacity=".6">Pricing · Hedging</text>
-              <text x="530" y="330" textAnchor="middle" fill="#c4954a" fontSize="7.5" opacity=".5">PGI · Collateral</text>
-              <line x1="80" y1="500" x2="110" y2="500" stroke="#c4954a" strokeWidth="1" opacity=".7" />
-              <text x="116" y="504" fill="#8a8278" fontSize="8">Live / Ready to launch</text>
-              <line x1="230" y1="500" x2="260" y2="500" stroke="#c4954a" strokeWidth="1" strokeDasharray="4,3" opacity=".5" />
-              <text x="266" y="504" fill="#8a8278" fontSize="8">Roadmap 2026–2027</text>
-              <line x1="400" y1="500" x2="420" y2="500" stroke="#c4954a" strokeWidth="1.2" markerEnd="url(#a1)" opacity=".6" />
-              <text x="426" y="504" fill="#8a8278" fontSize="8">Datenfluss / Integration</text>
+
+              {/* Background */}
+              <rect width="1400" height="900" fill="#080806" rx="8" />
+              <rect x="1" y="1" width="1398" height="898" fill="none" stroke="#c4954a" strokeWidth=".5" rx="8" opacity=".15" />
+
+              {/* Grid lines */}
+              <line x1="0" y1="150" x2="1400" y2="150" stroke="#c4954a" strokeWidth=".4" strokeDasharray="4,4" opacity=".1" />
+              <line x1="0" y1="310" x2="1400" y2="310" stroke="#c4954a" strokeWidth=".4" strokeDasharray="4,4" opacity=".08" />
+              <line x1="0" y1="545" x2="1400" y2="545" stroke="#c4954a" strokeWidth=".4" strokeDasharray="4,4" opacity=".08" />
+
+              {/* Title */}
+              <text x="700" y="50" fontSize="22" fontWeight="700" fill="#ede8dc" textAnchor="middle" letterSpacing=".06em">REVESTIUM GOLD GROUP ECOSYSTEM</text>
+              <text x="700" y="74" fontSize="11" fill="#8a8278" textAnchor="middle" letterSpacing=".16em">RETAIL · INFRASTRUCTURE · INSTITUTIONAL</text>
+
+              {/* Tier column labels */}
+              <text x="233" y="122" fontSize="10" fontWeight="600" fill="#c4954a" textAnchor="middle" letterSpacing=".16em">RETAIL</text>
+              <text x="700" y="122" fontSize="10" fontWeight="600" fill="#c4954a" textAnchor="middle" letterSpacing=".16em">CORE INFRASTRUCTURE</text>
+              <text x="1167" y="122" fontSize="10" fontWeight="600" fill="#7aab7a" textAnchor="middle" letterSpacing=".16em">INSTITUTIONAL</text>
+
+              {/* ── LEFT: RETAIL ── */}
+
+              {/* Gold Bank (wide) */}
+              <rect x="80" y="158" width="306" height="118" rx="6" fill="#141310" stroke="#c4954a" strokeWidth="1.5" />
+              <rect x="80" y="158" width="306" height="4" rx="3" fill="#c4954a" />
+              <text x="233" y="183" fontSize="14" fontWeight="700" fill="#c4954a" textAnchor="middle" letterSpacing=".08em">Gold Bank</text>
+              <text x="233" y="199" fontSize="9.5" fill="#ede8dc" textAnchor="middle" opacity=".8">CZ · SK · EU</text>
+              <text x="98" y="218" fontSize="9" fill="#c8bfa8" textAnchor="start">• 3,5 Bonus p.a. in physischem Gold</text>
+              <text x="98" y="234" fontSize="9" fill="#c8bfa8" textAnchor="start">• iOS · Android · Web</text>
+              <text x="98" y="252" fontSize="9" fill="#7aab7a" textAnchor="start">● Live</text>
+
+              {/* DIGI GOLD */}
+              <rect x="80" y="296" width="140" height="108" rx="6" fill="#141310" stroke="#c4954a" strokeWidth="1" opacity=".9" />
+              <rect x="80" y="296" width="140" height="3" rx="2" fill="#c4954a" opacity=".7" />
+              <text x="150" y="319" fontSize="12" fontWeight="700" fill="#c4954a" textAnchor="middle" letterSpacing=".07em">DIGI GOLD</text>
+              <text x="150" y="333" fontSize="9" fill="#ede8dc" textAnchor="middle" opacity=".8">Savings</text>
+              <text x="95" y="351" fontSize="8.5" fill="#c8bfa8" textAnchor="start">• Ab 50 EUR/Monat</text>
+              <text x="95" y="365" fontSize="8.5" fill="#c8bfa8" textAnchor="start">• 100% physisch LBMA</text>
+              <text x="95" y="379" fontSize="8.5" fill="#c8bfa8" textAnchor="start">• DCA-Dynamisierung</text>
+
+              {/* Gold Card */}
+              <rect x="246" y="296" width="140" height="108" rx="6" fill="#141310" stroke="#c4954a" strokeWidth="1" opacity=".9" />
+              <rect x="246" y="296" width="140" height="3" rx="2" fill="#c4954a" opacity=".7" />
+              <text x="316" y="319" fontSize="12" fontWeight="700" fill="#c4954a" textAnchor="middle" letterSpacing=".07em">Gold Card</text>
+              <text x="316" y="333" fontSize="9" fill="#ede8dc" textAnchor="middle" opacity=".8">Mastercard · täglich</text>
+              <text x="261" y="351" fontSize="8.5" fill="#c8bfa8" textAnchor="start">• Gold als Währung</text>
+              <text x="261" y="365" fontSize="8.5" fill="#c8bfa8" textAnchor="start">• 0 EU-Konkurrenten</text>
+              <text x="261" y="379" fontSize="8.5" fill="#c4954a" textAnchor="start">◉ Rollout</text>
+
+              {/* Edelmetalle */}
+              <rect x="80" y="424" width="306" height="100" rx="6" fill="#141310" stroke="#c4954a" strokeWidth="1" opacity=".85" />
+              <rect x="80" y="424" width="306" height="3" rx="2" fill="#c4954a" opacity=".5" />
+              <text x="233" y="447" fontSize="12" fontWeight="700" fill="#c4954a" textAnchor="middle" letterSpacing=".07em">Edelmetalle</text>
+              <text x="233" y="461" fontSize="9" fill="#ede8dc" textAnchor="middle" opacity=".8">Retail &amp; Wholesale</text>
+              <text x="98" y="478" fontSize="8.5" fill="#c8bfa8" textAnchor="start">• 150+ Produkte · LBMA Good Delivery</text>
+              <text x="98" y="492" fontSize="8.5" fill="#c8bfa8" textAnchor="start">• Kunstbarren · Bespoke</text>
+              <text x="98" y="508" fontSize="8.5" fill="#7aab7a" textAnchor="start">● Live</text>
+
+              {/* ── CENTER: CORE INFRASTRUCTURE ── */}
+
+              {/* AUROM – Central Hub */}
+              <rect x="547" y="228" width="306" height="165" rx="8" fill="#1c1a16" stroke="#c4954a" strokeWidth="2" />
+              <rect x="547" y="228" width="306" height="5" rx="4" fill="#c4954a" />
+              <text x="700" y="258" fontSize="17" fontWeight="700" fill="#c4954a" textAnchor="middle" letterSpacing=".1em">AUROM</text>
+              <text x="700" y="276" fontSize="10.5" fill="#ede8dc" textAnchor="middle" opacity=".85">Dealer Commander</text>
+              <line x1="567" y1="286" x2="833" y2="286" stroke="#c4954a" strokeWidth=".4" opacity=".25" />
+              <text x="700" y="305" fontSize="9.5" fill="#ede8dc" textAnchor="middle" opacity=".85">AI Treasury · SARIMA</text>
+              <text x="700" y="321" fontSize="9" fill="#c8bfa8" textAnchor="middle" opacity=".75">CME Hedging · OTC</text>
+              <text x="700" y="337" fontSize="9" fill="#c8bfa8" textAnchor="middle" opacity=".75">Net ROI +23 %</text>
+              <text x="700" y="356" fontSize="9" fontWeight="600" fill="#7aab7a" textAnchor="middle" opacity=".9">● Live · proprietär</text>
+
+              {/* GOLD D10 */}
+              <rect x="547" y="420" width="145" height="108" rx="6" fill="#1c1a16" stroke="#c4954a" strokeWidth="1.2" />
+              <rect x="547" y="420" width="145" height="3" rx="2" fill="#c4954a" opacity=".8" />
+              <text x="619" y="444" fontSize="12" fontWeight="700" fill="#c4954a" textAnchor="middle" letterSpacing=".07em">GOLD D10</text>
+              <text x="619" y="458" fontSize="9" fill="#ede8dc" textAnchor="middle" opacity=".8">Partizipativer Modell</text>
+              <text x="562" y="475" fontSize="8.5" fill="#c8bfa8" textAnchor="start">• Secured Gold Bonds</text>
+              <text x="562" y="489" fontSize="8.5" fill="#c8bfa8" textAnchor="start">• 10 diversifizierte Pos.</text>
+              <text x="562" y="505" fontSize="8" fill="#c4954a" textAnchor="start">◉ Rollout</text>
+
+              {/* ARGUS */}
+              <rect x="708" y="420" width="145" height="108" rx="6" fill="#131a13" stroke="#7aab7a" strokeWidth="1.2" />
+              <rect x="708" y="420" width="145" height="3" rx="2" fill="#7aab7a" opacity=".7" />
+              <text x="780" y="444" fontSize="12" fontWeight="700" fill="#7aab7a" textAnchor="middle" letterSpacing=".07em">ARGUS</text>
+              <text x="780" y="458" fontSize="9" fill="#ede8dc" textAnchor="middle" opacity=".8">AML/KYC Platform</text>
+              <text x="723" y="475" fontSize="8.5" fill="#a7c8a7" textAnchor="start">• FATF · AML-DS · DSGVO</text>
+              <text x="723" y="489" fontSize="8.5" fill="#a7c8a7" textAnchor="start">• AI OSINT · Risk Scoring</text>
+              <text x="723" y="505" fontSize="8" fill="#7aab7a" textAnchor="start">◉ Rollout</text>
+
+              {/* ── RIGHT: INSTITUTIONAL ── */}
+
+              {/* REVESTIUM AG + PGI wrapper */}
+              <rect x="1014" y="155" width="306" height="158" rx="8" fill="#1c1a16" stroke="#c4954a" strokeWidth="1.8" strokeDasharray="6,4" />
+              <rect x="1014" y="155" width="306" height="4" rx="3" fill="#c4954a" opacity=".4" />
+              <text x="1167" y="182" fontSize="15" fontWeight="700" fill="#c4954a" textAnchor="middle" letterSpacing=".08em">REVESTIUM AG</text>
+              <text x="1167" y="198" fontSize="10" fill="#ede8dc" textAnchor="middle" opacity=".8">Collateral Agent</text>
+              {/* PGI nested */}
+              <rect x="1034" y="210" width="266" height="82" rx="5" fill="#131a13" stroke="#7aab7a" strokeWidth="1.5" />
+              <text x="1167" y="232" fontSize="12" fontWeight="700" fill="#7aab7a" textAnchor="middle" letterSpacing=".06em">Gold as Collateral · PGI</text>
+              <text x="1050" y="250" fontSize="8.5" fill="#a7c8a7" textAnchor="start">• OTC Margining · Intraday · Wholesale Digital Gold</text>
+              <text x="1050" y="266" fontSize="8.5" fill="#a7c8a7" textAnchor="start">• WGC · Linklaters Framework</text>
+              <text x="1050" y="282" fontSize="8" fill="#7aab7a" textAnchor="start" opacity=".85">◉ Infrastructure Ready 2025</text>
+
+              {/* Gold Repo */}
+              <rect x="1014" y="333" width="145" height="105" rx="6" fill="#131a13" stroke="#7aab7a" strokeWidth="1.2" />
+              <rect x="1014" y="333" width="145" height="3" rx="2" fill="#7aab7a" opacity=".7" />
+              <text x="1086" y="356" fontSize="12" fontWeight="700" fill="#7aab7a" textAnchor="middle" letterSpacing=".07em">Gold Repo</text>
+              <text x="1086" y="370" fontSize="9" fill="#ede8dc" textAnchor="middle" opacity=".75">Kurzfristiger Goldkredit</text>
+              <text x="1030" y="387" fontSize="8.5" fill="#a7c8a7" textAnchor="start">• 1–12 Monate · LTV 80%</text>
+              <text x="1030" y="401" fontSize="8.5" fill="#a7c8a7" textAnchor="start">• T+2 · 99,5% LBMA</text>
+              <text x="1030" y="418" fontSize="8" fill="#7aab7a" textAnchor="start">◉ Ready to launch</text>
+
+              {/* Gold Hypo */}
+              <rect x="1175" y="333" width="145" height="105" rx="6" fill="#131a13" stroke="#7aab7a" strokeWidth="1.2" />
+              <rect x="1175" y="333" width="145" height="3" rx="2" fill="#7aab7a" opacity=".7" />
+              <text x="1247" y="356" fontSize="12" fontWeight="700" fill="#7aab7a" textAnchor="middle" letterSpacing=".07em">Gold Hypo</text>
+              <text x="1247" y="370" fontSize="9" fill="#ede8dc" textAnchor="middle" opacity=".75">Goldbes. Langzeitkredite</text>
+              <text x="1190" y="387" fontSize="8.5" fill="#a7c8a7" textAnchor="start">• 5–20 Jahre</text>
+              <text x="1190" y="401" fontSize="8.5" fill="#a7c8a7" textAnchor="start">• Collateral Agent Modell</text>
+              <text x="1190" y="418" fontSize="8" fill="#7aab7a" textAnchor="start">◉ Ready to launch</text>
+
+              {/* ── INFRASTRUCTURE LAYER ── */}
+              <rect x="420" y="748" width="560" height="114" rx="6" fill="#111008" stroke="#c4954a" strokeWidth="1" opacity=".65" />
+              <rect x="420" y="748" width="560" height="3" rx="2" fill="#c4954a" opacity=".3" />
+              <text x="700" y="774" fontSize="13" fontWeight="700" fill="#c4954a" textAnchor="middle" letterSpacing=".14em">INFRASTRUCTURE</text>
+              <line x1="440" y1="782" x2="960" y2="782" stroke="#c4954a" strokeWidth=".4" opacity=".2" />
+              <text x="460" y="802" fontSize="10" fill="#8a8278" textAnchor="start">• LBMA Good Delivery Refinery</text>
+              <text x="460" y="820" fontSize="10" fill="#8a8278" textAnchor="start">• CME Clearing Member (Prime Broker)</text>
+              <text x="460" y="838" fontSize="10" fill="#8a8278" textAnchor="start">• WGC/Linklaters Framework</text>
+
+              {/* ── CONNECTION LINES ── */}
+
+              {/* Retail → AUROM */}
+              <path d="M 386 350 L 547 315" stroke="#c4954a" strokeWidth="1.5" fill="none" strokeDasharray="5,4" markerEnd="url(#ec-arr)" opacity=".4" />
+              <text x="448" y="322" fontSize="8.5" fill="#8a8278" transform="rotate(-13 448 322)">Pricing · Hedging</text>
+
+              {/* AUROM → REVESTIUM/PGI */}
+              <path d="M 853 313 L 1014 243" stroke="#c4954a" strokeWidth="2" fill="none" markerEnd="url(#ec-arr)" opacity=".55" />
+              <text x="930" y="272" fontSize="8.5" fill="#8a8278">PGI · Collateral</text>
+
+              {/* AUROM → Infrastructure */}
+              <path d="M 700 393 L 700 748" stroke="#c4954a" strokeWidth="1.2" fill="none" strokeDasharray="5,4" markerEnd="url(#ec-arr)" opacity=".28" />
+              <text x="712" y="590" fontSize="8.5" fill="#8a8278">Settlement</text>
+
+              {/* PGI → Gold Repo */}
+              <path d="M 1167 313 L 1086 333" stroke="#7aab7a" strokeWidth="1.5" fill="none" strokeDasharray="4,3" opacity=".5" />
+
+              {/* PGI → Gold Hypo */}
+              <path d="M 1167 313 L 1247 333" stroke="#7aab7a" strokeWidth="1.5" fill="none" strokeDasharray="4,3" opacity=".5" />
+
+              {/* AUROM → D10 */}
+              <path d="M 700 393 L 619 420" stroke="#c4954a" strokeWidth="1.2" fill="none" strokeDasharray="4,3" markerEnd="url(#ec-arr)" opacity=".4" />
+
+              {/* AUROM → ARGUS */}
+              <path d="M 700 393 L 780 420" stroke="#7aab7a" strokeWidth="1.2" fill="none" strokeDasharray="4,3" markerEnd="url(#ec-arr-g)" opacity=".4" />
+
+              {/* Legend */}
+              <line x1="440" y1="878" x2="472" y2="878" stroke="#c4954a" strokeWidth="1.2" opacity=".7" />
+              <text x="478" y="882" fontSize="9" fill="#8a8278">Live / Ready to launch</text>
+              <line x1="636" y1="878" x2="668" y2="878" stroke="#c4954a" strokeWidth="1.2" strokeDasharray="4,3" opacity=".5" />
+              <text x="674" y="882" fontSize="9" fill="#8a8278">Roadmap 2026–2027</text>
+              <line x1="830" y1="878" x2="852" y2="878" stroke="#c4954a" strokeWidth="1.5" markerEnd="url(#ec-arr)" opacity=".6" />
+              <text x="858" y="882" fontSize="9" fill="#8a8278">Datenfluss / Integration</text>
             </svg>
           </div>
 
