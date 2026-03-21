@@ -122,9 +122,7 @@ function useActiveNav() {
 
 export default function LandingPage() {
   const globeRef = useRef<HTMLCanvasElement>(null);
-  const matrixRef = useRef<HTMLCanvasElement>(null);
   useCobeGlobe(globeRef);
-  useMatrixRain(matrixRef);
   useReveal();
   useActiveNav();
 
@@ -162,7 +160,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 3.5rem;display:
 .nav-contact{font-family:var(--sans);font-size:.72rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:.6rem 1.4rem;border:1px solid rgba(196,149,74,0.5);color:var(--gold);border-radius:2px;transition:all .2s;white-space:nowrap;}
 .nav-contact:hover{background:var(--gold);color:#080806;border-color:var(--gold);}
 .hero{min-height:100vh;position:relative;overflow:hidden;background:#04060e;}
-canvas#heroGlobe{position:absolute;right:11%;top:50%;transform:translateY(-50%);width:680px;height:680px;z-index:0;pointer-events:none;opacity:0.92;}
+canvas#heroGlobe{position:absolute;right:1%;top:50%;transform:translateY(-50%);width:680px;height:680px;z-index:0;pointer-events:none;opacity:0.92;}
 canvas#matrixRain{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;opacity:0.18;}
 .hero-veil{position:absolute;inset:0;z-index:1;background:linear-gradient(to right,rgba(4,6,14,0.97) 0%,rgba(4,6,14,0.88) 40%,rgba(4,6,14,0.35) 100%),linear-gradient(to top,rgba(4,6,14,0.7) 0%,transparent 40%);}
 .hero-lines{position:absolute;inset:0;pointer-events:none;z-index:1;background-image:linear-gradient(rgba(196,149,74,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(196,149,74,0.03) 1px,transparent 1px);background-size:80px 80px;}
@@ -308,7 +306,6 @@ canvas#matrixRain{position:absolute;inset:0;width:100%;height:100%;z-index:1;poi
       {/* ── HERO ── */}
       <section className="hero" id="home">
         <canvas id="heroGlobe" ref={globeRef} />
-        <canvas id="matrixRain" ref={matrixRef} />
         <div className="hero-veil" />
         <div className="hero-lines" />
         <div className="hero-inner">
