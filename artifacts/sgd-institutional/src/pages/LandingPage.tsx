@@ -1085,14 +1085,7 @@ canvas#matrixRain{position:absolute;inset:0;width:100%;height:100%;z-index:1;poi
                 UID: <strong>CHE-383.245.411</strong><br />
                 Tel.: +41 215 120 554<br /><br /><br />
                 Verwaltungsratspräsidentin:<br />Mag. iur. Augustina F. Schiller,LLM.<br /><br />
-                Director:<br /> Dr. iur. Marcus Altenburg<br /><br />
-                <strong style={{ color: "var(--gold3)", letterSpacing: ".08em", fontSize: ".75rem" }}>Legal Notice</strong><br /><br />
-                <em style={{ color: "var(--cream3)", fontSize: ".78rem", lineHeight: 1.7 }}>Compliance and Anti-Money Laundering (AML) Policy</em><br />
-                The company enters into business relationships and conducts transactions exclusively with partners based in the European Union, Switzerland, and the United Kingdom, which are considered low-risk jurisdictions under the Swiss Anti-Money Laundering Act (AMLA / GwG) and FATF assessments, given its full membership and implementation of international AML/CFT frameworks.<br /><br />
-                The company strictly refrains from conducting business with natural or legal persons from high-risk third countries, as defined in European Commission Regulation (EU) 2016/1675 (as amended) and in the list of high-risk jurisdictions subject to a call for action issued by the FATF. In all its operations, REVESTIUM strictly adheres to these international compliance standards.<br /><br />
-                <em style={{ color: "var(--cream3)", fontSize: ".78rem", lineHeight: 1.7 }}>Richtlinie zu Compliance und Geldwäschebekämpfung (AML)</em><br />
-                Das Unternehmen geht Geschäftsbeziehungen ein und wickelt Transaktionen ausschließlich mit Partnern ab, die ihren Sitz in der Europäischen Union, der Schweiz und dem Vereinigten Königreich haben. Diese Länder gelten gemäß dem Schweizer Geldwäschereigesetz (GwG) und den Bewertungen der FATF als Länder mit geringem Risiko, da sie Vollmitglieder sind und die internationalen AML/CFT-Rahmenwerke umsetzen.<br /><br />
-                Das Unternehmen verzichtet strikt auf Geschäfte mit natürlichen oder juristischen Personen aus Hochrisikoländern, wie sie in der Verordnung (EU) 2016/1675 der Europäischen Kommission (in der jeweils gültigen Fassung) und in der FATF-Liste der Hochrisikoländer, für die ein Handlungsaufruf vorliegt, definiert sind. Bei all seinen Geschäften hält sich REVESTIUM strikt an diese internationalen Compliance-Standards.
+                Director:<br /> Dr. iur. Marcus Altenburg
               </address>
             </div>
             <div className="imp-block">
@@ -1119,6 +1112,22 @@ canvas#matrixRain{position:absolute;inset:0;width:100%;height:100%;z-index:1;poi
                 LEI: 315700343MOJGZ62NN31<br />
                 Tel: +420 800 300 555
               </address>
+            </div>
+          </div>
+
+          <div className="reveal" style={{ marginTop: "2.5rem", paddingTop: "2rem", borderTop: "1px solid var(--border2)" }}>
+            <p style={{ fontFamily: "var(--sc)", fontSize: ".65rem", letterSpacing: ".18em", color: "var(--gold3)", marginBottom: "1.2rem" }}>Legal Notice</p>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2.5rem" }}>
+              <div>
+                <p style={{ fontSize: ".82rem", color: "var(--cream3)", fontStyle: "italic", marginBottom: ".5rem" }}>Compliance and Anti-Money Laundering (AML) Policy</p>
+                <p style={{ fontSize: ".82rem", color: "#b8b0a0", lineHeight: 1.8 }}>The company enters into business relationships and conducts transactions exclusively with partners based in the European Union, Switzerland, and the United Kingdom, which are considered low-risk jurisdictions under the Swiss Anti-Money Laundering Act (AMLA / GwG) and FATF assessments, given its full membership and implementation of international AML/CFT frameworks.</p>
+                <p style={{ fontSize: ".82rem", color: "#b8b0a0", lineHeight: 1.8, marginTop: ".8rem" }}>The company strictly refrains from conducting business with natural or legal persons from high-risk third countries, as defined in European Commission Regulation (EU) 2016/1675 (as amended) and in the list of high-risk jurisdictions subject to a call for action issued by the FATF. In all its operations, REVESTIUM strictly adheres to these international compliance standards.</p>
+              </div>
+              <div>
+                <p style={{ fontSize: ".82rem", color: "var(--cream3)", fontStyle: "italic", marginBottom: ".5rem" }}>Richtlinie zu Compliance und Geldwäschebekämpfung (AML)</p>
+                <p style={{ fontSize: ".82rem", color: "#b8b0a0", lineHeight: 1.8 }}>Das Unternehmen geht Geschäftsbeziehungen ein und wickelt Transaktionen ausschließlich mit Partnern ab, die ihren Sitz in der Europäischen Union, der Schweiz und dem Vereinigten Königreich haben. Diese Länder gelten gemäß dem Schweizer Geldwäschereigesetz (GwG) und den Bewertungen der FATF als Länder mit geringem Risiko, da sie Vollmitglieder sind und die internationalen AML/CFT-Rahmenwerke umsetzen.</p>
+                <p style={{ fontSize: ".82rem", color: "#b8b0a0", lineHeight: 1.8, marginTop: ".8rem" }}>Das Unternehmen verzichtet strikt auf Geschäfte mit natürlichen oder juristischen Personen aus Hochrisikoländern, wie sie in der Verordnung (EU) 2016/1675 der Europäischen Kommission (in der jeweils gültigen Fassung) und in der FATF-Liste der Hochrisikoländer, für die ein Handlungsaufruf vorliegt, definiert sind. Bei all seinen Geschäften hält sich REVESTIUM strikt an diese internationalen Compliance-Standards.</p>
+              </div>
             </div>
           </div>
 
