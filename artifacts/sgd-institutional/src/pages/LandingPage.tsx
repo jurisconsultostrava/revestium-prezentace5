@@ -1,92 +1,99 @@
 import { useEffect, useRef, useState } from "react";
-import img0 from "../assets/img0.b64";
-import img1 from "../assets/img1.b64";
-import img2 from "../assets/img2.b64";
-import img3 from "../assets/img3.b64";
+import createGlobe from "cobe";
 
-/* ── Globe canvas animation ── */
-function useGlobe(canvasRef: React.RefObject<HTMLCanvasElement | null>) {
+/* ── cobe WebGL Globe ── */
+function useCobeGlobe(canvasRef: React.RefObject<HTMLCanvasElement | null>) {
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    let phi = 0;
+    let animId: number;
+    const globe = createGlobe(canvas, {
+      devicePixelRatio: 2,
+      width: 1360,
+      height: 1360,
+      phi: 0,
+      theta: 0.2,
+      dark: 1,
+      diffuse: 1.4,
+      scale: 1,
+      mapSamples: 16000,
+      mapBrightness: 7,
+      baseColor: [0.75, 0.56, 0.22],
+      markerColor: [1.0, 0.88, 0.35],
+      glowColor: [0.65, 0.48, 0.15],
+      markers: [
+        { location: [47.3769, 8.5417], size: 0.06 },
+        { location: [51.5074, -0.1278], size: 0.06 },
+        { location: [53.3498, -6.2603], size: 0.05 },
+        { location: [50.0755, 14.4378], size: 0.05 },
+      ],
+    });
+    function animate() {
+      phi += 0.003;
+      globe.update({ phi });
+      animId = requestAnimationFrame(animate);
+    }
+    animate();
+    return () => {
+      cancelAnimationFrame(animId);
+      globe.destroy();
+    };
+  }, [canvasRef]);
+}
+
+/* ── Matrix binary rain ── */
+function useMatrixRain(canvasRef: React.RefObject<HTMLCanvasElement | null>) {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
-    let W: number, H: number, cx: number, cy: number, R: number, angle = 0;
+    const FONT_SIZE = 16;
+    const SPEED = 0.3;
+    let W: number, H: number, cols: number, drops: number[];
     let animId: number;
 
-    function resize() {
-      W = canvas!.width = canvas!.offsetWidth;
-      H = canvas!.height = canvas!.offsetHeight;
-      cx = W * 0.72; cy = H * 0.52; R = Math.min(W, H) * 0.34;
-    }
-    resize();
-    window.addEventListener("resize", resize);
-
-    const dots: [number, number][] = [];
-    for (let lat = -80; lat <= 80; lat += 9) {
-      for (let lon = 0; lon < 360; lon += 9) {
-        dots.push([lat * Math.PI / 180, lon * Math.PI / 180]);
-      }
-    }
-
-    const continents: [number, number][][] = [
-      [[35,0],[36,5],[40,5],[43,14],[46,13],[48,17],[54,19],[58,23],[65,25],[70,28],[68,18],[62,5],[57,8],[50,2],[45,-2],[40,-8],[36,-6],[35,0]],
-      [[37,10],[32,32],[22,36],[10,41],[-4,40],[-20,35],[-35,20],[-34,17],[-30,16],[-10,13],[0,8],[5,1],[4,-8],[15,-17],[22,-16],[30,-9],[37,10]],
-      [[55,-130],[45,-80],[30,-80],[20,-87],[9,-80],[0,-75],[-10,-75],[-20,-65],[-40,-62],[-55,-65],[-55,-68],[-35,-58],[-20,-43],[-5,-35],[10,-62],[15,-87],[20,-90],[30,-85],[45,-75],[60,-90],[65,-130],[55,-130]],
-    ];
-
-    function project(lat: number, lon: number, ang: number) {
-      const x = Math.cos(lat) * Math.sin(lon + ang);
-      const y = Math.sin(lat);
-      const z = Math.cos(lat) * Math.cos(lon + ang);
-      return { x: cx + R * x, y: cy - R * y, z, visible: z > -0.1 };
+    function init() {
+      const hero = canvas!.parentElement;
+      W = canvas!.width = (hero ? hero.offsetWidth : window.innerWidth) || window.innerWidth;
+      H = canvas!.height = (hero ? hero.offsetHeight : window.innerHeight) || window.innerHeight;
+      cols = Math.floor(W / FONT_SIZE);
+      drops = Array.from({ length: cols }, () => Math.random() * -(H / FONT_SIZE));
     }
 
     function draw() {
-      ctx!.clearRect(0, 0, W, H);
-      angle += 0.003;
-      const grad = ctx!.createRadialGradient(cx, cy, R * 0.7, cx, cy, R * 1.15);
-      grad.addColorStop(0, "rgba(160,120,56,0)");
-      grad.addColorStop(0.85, "rgba(160,120,56,0.06)");
-      grad.addColorStop(1, "rgba(120,90,30,0.12)");
-      ctx!.beginPath(); ctx!.arc(cx, cy, R * 1.15, 0, Math.PI * 2);
-      ctx!.fillStyle = grad; ctx!.fill();
-      ctx!.beginPath(); ctx!.arc(cx, cy, R * 1.02, 0, Math.PI * 2);
-      ctx!.strokeStyle = "rgba(196,149,74,0.18)"; ctx!.lineWidth = 1.5; ctx!.stroke();
-      dots.forEach(([lat, lon]) => {
-        const p = project(lat, lon, angle);
-        if (!p.visible) return;
-        const depth = (p.z + 1) / 2;
-        const size = 0.8 + depth * 1.0;
-        const alpha = 0.10 + depth * 0.35;
-        ctx!.beginPath(); ctx!.arc(p.x, p.y, size, 0, Math.PI * 2);
-        ctx!.fillStyle = `rgba(196,149,74,${alpha})`; ctx!.fill();
-      });
-      continents.forEach(pts => {
-        ctx!.beginPath();
-        let started = false;
-        pts.forEach(([lat, lon]) => {
-          const p = project(lat * Math.PI / 180, lon * Math.PI / 180, angle);
-          if (!p.visible) { started = false; return; }
-          if (!started) { ctx!.moveTo(p.x, p.y); started = true; }
-          else ctx!.lineTo(p.x, p.y);
-        });
-        ctx!.strokeStyle = "rgba(212,170,106,0.40)"; ctx!.lineWidth = 1.2; ctx!.stroke();
-      });
-      const nodes: [number, number][] = [[47, 8], [51.5, -0.1], [53.3, -6.2], [50.1, 14.4]];
-      nodes.forEach(([lat, lon]) => {
-        const p = project(lat * Math.PI / 180, lon * Math.PI / 180, angle);
-        if (!p.visible) return;
-        const pulse = 0.5 + 0.5 * Math.sin(Date.now() * 0.003 + lon);
-        ctx!.beginPath(); ctx!.arc(p.x, p.y, 3 + pulse * 2, 0, Math.PI * 2);
-        ctx!.fillStyle = `rgba(212,170,106,${0.7 + pulse * 0.3})`; ctx!.fill();
-        ctx!.beginPath(); ctx!.arc(p.x, p.y, 6 + pulse * 4, 0, Math.PI * 2);
-        ctx!.strokeStyle = `rgba(196,149,74,${0.18 + pulse * 0.15})`; ctx!.lineWidth = 1; ctx!.stroke();
-      });
+      ctx!.fillStyle = "rgba(4,6,14,0.08)";
+      ctx!.fillRect(0, 0, W, H);
+      ctx!.font = `${FONT_SIZE}px monospace`;
+      for (let i = 0; i < cols; i++) {
+        const y = drops[i] * FONT_SIZE;
+        ctx!.fillStyle = "rgba(255,220,130,0.95)";
+        ctx!.fillText(Math.random() > 0.5 ? "1" : "0", i * FONT_SIZE, y);
+        ctx!.fillStyle = "rgba(196,149,74,0.55)";
+        ctx!.fillText(Math.random() > 0.5 ? "1" : "0", i * FONT_SIZE, y - FONT_SIZE * 2);
+        ctx!.fillStyle = "rgba(160,120,56,0.25)";
+        ctx!.fillText(Math.random() > 0.5 ? "1" : "0", i * FONT_SIZE, y - FONT_SIZE * 4);
+        drops[i] += SPEED;
+        if (drops[i] * FONT_SIZE > H && Math.random() > 0.985) {
+          drops[i] = Math.random() * -20;
+        }
+      }
       animId = requestAnimationFrame(draw);
     }
-    draw();
-    return () => { cancelAnimationFrame(animId); window.removeEventListener("resize", resize); };
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        init();
+        window.addEventListener("resize", init);
+        draw();
+      });
+    });
+
+    return () => {
+      cancelAnimationFrame(animId);
+      window.removeEventListener("resize", init);
+    };
   }, [canvasRef]);
 }
 
@@ -120,13 +127,16 @@ function useActiveNav() {
 }
 
 export default function LandingPage() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  useGlobe(canvasRef);
+  const globeRef = useRef<HTMLCanvasElement>(null);
+  const matrixRef = useRef<HTMLCanvasElement>(null);
+  useCobeGlobe(globeRef);
+  useMatrixRain(matrixRef);
   useReveal();
   useActiveNav();
 
   const [activeMup, setActiveMup] = useState("deposit");
-  const [menuOpen, setMenuOpen] = useState(false);
+
+  function showMup(id: string) { setActiveMup(id); }
 
   return (
     <>
@@ -148,15 +158,18 @@ html{scroll-behavior:smooth;font-size:17px;scroll-padding-top:80px;}
 body{background:var(--dark);color:var(--cream);font-family:var(--sans);font-weight:400;line-height:1.75;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
 ::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-track{background:var(--dark);}::-webkit-scrollbar-thumb{background:var(--gold3);}
 a{color:inherit;text-decoration:none;}::selection{background:rgba(196,149,74,0.2);}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.4rem 3.5rem;display:flex;justify-content:space-between;align-items:center;background:rgba(8,8,6,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
-.nav-logo img{height:34px;width:auto;object-fit:contain;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 3.5rem;display:flex;justify-content:space-between;align-items:center;background:rgba(8,8,6,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);min-height:100px;}
+.nav-logo{position:absolute;left:50%;transform:translateX(-55%);display:flex;align-items:center;gap:1.6rem;}
+.nav-logo img:first-child{height:90px;width:auto;object-fit:contain;}
+.nav-logo img:last-child{height:60px;width:auto;object-fit:contain;}
 .nav-links{display:flex;gap:2.2rem;list-style:none;}
 .nav-links a{font-family:var(--sc);font-size:.72rem;font-weight:400;letter-spacing:.12em;color:var(--cream3);transition:color .3s;}
 .nav-links a:hover,.nav-links a.active{color:var(--gold2);}
 .nav-contact{font-family:var(--sans);font-size:.72rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:.6rem 1.4rem;border:1px solid rgba(196,149,74,0.5);color:var(--gold);border-radius:2px;transition:all .2s;white-space:nowrap;}
 .nav-contact:hover{background:var(--gold);color:#080806;border-color:var(--gold);}
 .hero{min-height:100vh;position:relative;overflow:hidden;background:#04060e;}
-canvas#heroGlobe{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;}
+canvas#heroGlobe{position:absolute;right:11%;top:50%;transform:translateY(-50%);width:680px;height:680px;z-index:0;pointer-events:none;opacity:0.92;}
+canvas#matrixRain{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;opacity:0.18;}
 .hero-veil{position:absolute;inset:0;z-index:1;background:linear-gradient(to right,rgba(4,6,14,0.97) 0%,rgba(4,6,14,0.88) 40%,rgba(4,6,14,0.35) 100%),linear-gradient(to top,rgba(4,6,14,0.7) 0%,transparent 40%);}
 .hero-lines{position:absolute;inset:0;pointer-events:none;z-index:1;background-image:linear-gradient(rgba(196,149,74,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(196,149,74,0.03) 1px,transparent 1px);background-size:80px 80px;}
 .hero-inner{position:relative;z-index:2;min-height:100vh;display:flex;align-items:center;max-width:1180px;margin:0 auto;padding:9rem 3rem 6rem;padding-left:5%;}
@@ -164,9 +177,9 @@ canvas#heroGlobe{position:absolute;inset:0;width:100%;height:100%;z-index:0;poin
 .hero-left{max-width:560px;}
 .hero-accent-line{width:48px;height:2px;background:var(--gold);margin-bottom:1.8rem;opacity:0;animation:fadeUp .5s ease .05s forwards;}
 .hero-eyebrow{font-family:var(--sans);font-size:.62rem;font-weight:500;letter-spacing:.26em;color:var(--gold);text-transform:uppercase;margin-bottom:1.6rem;opacity:0;animation:fadeUp .5s ease .1s forwards;}
-.hero-h1{font-family:var(--serif);font-weight:700;font-size:clamp(2.6rem,5.5vw,4.6rem);line-height:1.06;letter-spacing:-.025em;color:#ffffff;margin-bottom:1.6rem;opacity:0;animation:fadeUp .7s ease .25s forwards;}
+.hero-h1{font-family:var(--sans);font-weight:700;font-size:clamp(1.6rem,4.5vw,3.6rem);line-height:1.06;letter-spacing:.025em;color:#E6D96A;margin-bottom:1.6rem;opacity:0;animation:fadeUp .7s ease .25s forwards;}
 .hero-h1 em{font-weight:700;color:var(--gold);font-style:normal;}
-.hero-sub{font-family:var(--sans);font-size:.92rem;font-weight:300;color:#a8a09a;line-height:1.75;max-width:46ch;margin-bottom:2.4rem;text-align:left;opacity:0;animation:fadeUp .7s ease .4s forwards;}
+.hero-sub{font-family:var(--sans);font-size:.95rem;font-weight:300;color:#989894;line-height:1.75;max-width:46ch;margin-bottom:2.4rem;text-align:left;opacity:0;animation:fadeUp .7s ease .4s forwards;}
 .hero-ctas{display:flex;gap:.9rem;flex-wrap:wrap;margin-bottom:2.8rem;opacity:0;animation:fadeUp .7s ease .55s forwards;}
 .hero-btn-primary{font-family:var(--sans);font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.85rem 2.2rem;border-radius:2px;background:var(--gold);color:#04060e;text-decoration:none;transition:background .15s;white-space:nowrap;box-shadow:0 0 28px rgba(196,149,74,0.25);}
 .hero-btn-primary:hover{background:#d4aa6a;}
@@ -231,7 +244,6 @@ canvas#heroGlobe{position:absolute;inset:0;width:100%;height:100%;z-index:0;poin
 .pc-row span:first-child{color:var(--cream3);}
 .pc-row span:last-child{font-weight:500;color:var(--cream2);}
 .pc-row span.acc{color:var(--gold2);}
-.gb-logo-img{height:20px;object-fit:contain;opacity:.75;margin-bottom:.8rem;}
 .mup-bg{background:var(--dark2);}
 .mup-tabs{display:flex;gap:0;border:1px solid var(--border2);margin-bottom:3rem;overflow-x:auto;}
 .mup-btn{flex:1;min-width:120px;padding:.8rem 1rem;background:transparent;border:none;font-family:var(--sc);font-size:.63rem;letter-spacing:.12em;color:var(--cream3);cursor:pointer;transition:all .25s;border-right:1px solid var(--border2);white-space:nowrap;}
@@ -253,32 +265,6 @@ canvas#heroGlobe{position:absolute;inset:0;width:100%;height:100%;z-index:0;poin
 .mup-card h4{font-family:var(--sc);font-size:.63rem;letter-spacing:.12em;color:var(--gold3);margin-bottom:.5rem;}
 .mup-card p{font-size:.85rem;color:#e0d8c8;line-height:1.65;}
 .mup-card p strong{color:var(--gold2);font-weight:500;}
-.team-bg{background:var(--dark2);}
-.team-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:1px;background:var(--border2);}
-.team-card{background:var(--dark2);padding:1.8rem 1.5rem;transition:background .3s;}
-.team-card:hover{background:var(--dark3);}
-.team-card-featured{grid-column:span 2;background:var(--dark3);border:1px solid rgba(196,149,74,0.22);border-top:2px solid var(--gold);}
-.team-foto-wrap{width:100%;max-width:360px;}
-.team-foto{width:100%;max-width:240px;height:240px;object-fit:cover;object-position:center 10%;border-radius:3px;display:block;}
-.team-card-foto{width:100%;max-width:240px;height:240px;object-fit:cover;object-position:center 10%;border-radius:3px;display:block;margin-bottom:1.2rem;}
-.t-monogram{font-family:var(--serif);font-size:1.4rem;font-weight:700;color:var(--gold3);margin-bottom:1.1rem;line-height:1;letter-spacing:-.01em;}
-.t-name{font-family:var(--serif);font-size:.98rem;font-weight:600;color:var(--cream);margin-bottom:.2rem;letter-spacing:-.01em;}
-.t-role{font-family:var(--sc);font-size:.62rem;letter-spacing:.12em;color:var(--gold3);margin-bottom:.8rem;}
-.t-desc{font-size:.84rem;color:#c8bfa8;line-height:1.7;margin-bottom:.9rem;text-align:justify;hyphens:auto;-webkit-hyphens:auto;}
-.t-meta{display:flex;flex-direction:column;gap:.28rem;}
-.t-row{font-size:.74rem;display:flex;gap:.5rem;}
-.t-row span:first-child{color:var(--cream3);min-width:60px;}
-.t-row span:last-child{color:var(--cream3);}
-.t-row span.accent-val{color:var(--gold2);}
-.t-tag{font-family:var(--sans);font-size:.7rem;padding:.25rem .6rem;border:1px solid rgba(196,149,74,0.25);border-radius:2px;color:var(--cream3);background:rgba(196,149,74,0.06);letter-spacing:.04em;}
-.t-tags{margin-top:1rem;display:flex;flex-wrap:wrap;gap:.4rem;}
-.office-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border2);margin-top:1px;}
-.office-card{background:var(--dark);padding:1.6rem;border-top:1px solid var(--border2);transition:background .3s;}
-.office-card:hover{background:var(--dark3);}
-.o-flag{font-size:1.3rem;margin-bottom:.7rem;}
-.o-country{font-family:var(--sc);font-size:.6rem;letter-spacing:.16em;color:var(--cream3);margin-bottom:.2rem;}
-.o-city{font-family:var(--serif);font-size:1.05rem;font-weight:600;color:var(--gold2);margin-bottom:.5rem;letter-spacing:-.01em;}
-.o-desc{font-size:.82rem;color:#c8bfa8;line-height:1.7;margin-bottom:.8rem;text-align:justify;hyphens:auto;-webkit-hyphens:auto;}
 .imp-bg{background:var(--dark3);border-top:1px solid var(--border2);}
 .imp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3rem;}
 .imp-block h4{font-family:var(--sc);font-size:.62rem;letter-spacing:.16em;color:var(--gold3);margin-bottom:.9rem;padding-bottom:.6rem;border-bottom:1px solid var(--border2);}
@@ -296,13 +282,13 @@ canvas#heroGlobe{position:absolute;inset:0;width:100%;height:100%;z-index:0;poin
 @media(max-width:1000px){
   nav{padding:1rem 2rem;}.nav-links{display:none;}.section{padding:5rem 2rem;}
   .story-grid{grid-template-columns:1fr;gap:3rem;}.prod-grid{grid-template-columns:1fr;}.prod-grid.three{grid-template-columns:1fr 1fr;}
-  .mup-panel.active{grid-template-columns:1fr;gap:2.5rem;}.team-grid{grid-template-columns:1fr 1fr;}.office-grid{grid-template-columns:1fr 1fr;}.imp-grid{grid-template-columns:1fr 1fr;}
+  .mup-panel.active{grid-template-columns:1fr;gap:2.5rem;}.imp-grid{grid-template-columns:1fr 1fr;}
 }
 @media(max-width:700px){
   .hero-inner{padding:7rem 1.5rem 4rem;}.hero-h1{font-size:clamp(2.2rem,9vw,3rem);}.hero-metrics{flex-wrap:wrap;gap:1rem;}.hm-divider{display:none;}
 }
 @media(max-width:600px){
-  .team-card-featured{grid-column:span 1;}.team-grid{grid-template-columns:1fr;}.office-grid,.imp-grid,.prod-grid.three{grid-template-columns:1fr;}.mup-tabs{flex-wrap:wrap;}
+  .imp-grid,.prod-grid.three{grid-template-columns:1fr;}.mup-tabs{flex-wrap:wrap;}
 }
       `}</style>
 
@@ -311,39 +297,41 @@ canvas#heroGlobe{position:absolute;inset:0;width:100%;height:100%;z-index:0;poin
         <a href="#" className="nav-logo">
           <img src="https://goldspot.cz/revestiumlogo.png" alt="REVESTIUM Group Switzerland"
             onError={e => { (e.currentTarget as HTMLImageElement).style.display = "none"; }} />
+          <img src="https://goldspot.cz/goldbanklogoreve.png" alt="Gold Bank"
+            onError={e => { (e.currentTarget as HTMLImageElement).style.display = "none"; }} />
         </a>
         <ul className="nav-links">
-          <li><a href="#geschichte">Geschichte</a></li>
-          <li><a href="#produkte">Produkte</a></li>
-          <li><a href="#collateral">Collateral</a></li>
-          <li><a href="#zahlen">Ökosystem</a></li>
-          <li><a href="#team">Team</a></li>
-          <li><a href="#impressum">Impressum</a></li>
+          <li><a href="#geschichte"></a></li>
+          <li><a href="#produkte"></a></li>
+          <li><a href="#collateral"></a></li>
+          <li><a href="#zahlen"></a></li>
+          <li><a href="#team"></a></li>
+          <li><a href="#impressum"></a></li>
         </ul>
-        <a href="#impressum" className="nav-contact">Gespräch vereinbaren</a>
+        <a href="#impressum"></a>
       </nav>
 
       {/* ── HERO ── */}
       <section className="hero" id="home">
-        <canvas id="heroGlobe" ref={canvasRef} />
+        <canvas id="heroGlobe" ref={globeRef} />
+        <canvas id="matrixRain" ref={matrixRef} />
         <div className="hero-veil" />
         <div className="hero-lines" />
         <div className="hero-inner">
           <div className="hero-left">
+            <h1 className="hero-h1">Comprehensive<br />
+              <span>solution for<br /></span><em>Gold as a Service</em></h1>
             <div className="hero-accent-line" />
-            <h1 className="hero-h1">Gold as a Service<br /></h1>
-            <p className="hero-sub">Umfassende Lösungen für die physische Lagerung von Gold, Kreditprodukte und eine proprietäre Treasury-Verwaltung auf einer gemeinsamen Infrastruktur für vier Rechtsordnungen. Eine einzige Integration für ein breites Produktspektrum.</p>
+            <p className="hero-sub">Von der passiven Reserve zum aktiven Kapital.<br />Genau so verstehen wir Gold in unserem Konzept „Gold as a Service". Wir betrachten es als ein einzigartiges Edelmetall, das sich in das digitalisierte Finanzsystem integrieren lässt, ohne dabei seine physische Substanz und seine Sicherungsfunktionen zu verlieren. Unsere umfassende Lösung erschließt das volle Potenzial, über das dieses einzigartige Edelmetall verfügt.</p>
             <div className="hero-ctas">
-              <a href="#impressum" className="hero-btn-primary">Gespräch vereinbaren</a>
-              <a href="#produkte" className="hero-btn-ghost">Produkte entdecken</a>
             </div>
             <div className="hero-divider" />
             <div className="hero-metrics">
               <div className="hm"><p className="hm-val">LBMA</p><p className="hm-label">Good Delivery Standard</p></div>
               <div className="hm-divider" />
-              <div className="hm"><p className="hm-val">4</p><p className="hm-label">Rechtsordnungen</p></div>
+              <div className="hm"><p className="hm-val">24/7</p><p className="hm-label">Verfügbarkeit</p></div>
               <div className="hm-divider" />
-              <div className="hm"><p className="hm-val">MiFID II</p><p className="hm-label">EU Passporting bereit</p></div>
+              <div className="hm"><p className="hm-val">AMLR/AMLA</p><p className="hm-label">Angepasst</p></div>
             </div>
           </div>
         </div>
@@ -364,23 +352,15 @@ canvas#heroGlobe{position:absolute;inset:0;width:100%;height:100%;z-index:0;poin
                 <p>Diese Erfahrung wurde zur Grundlage unserer Unternehmensphilosophie: <strong>Das Wort „unmöglich" gibt es für uns nicht.</strong> Was andere als unüberwindbare Hürde sehen, ist für uns die Ausgangsbasis — der Punkt, von dem aus wir anfangen zu denken.</p>
               </div>
               <div className="story-vizitka reveal d1">
-                <img src={img0} alt="REVESTIUM vizitka" />
+                <img src="https://goldspot.cz/osobnivizitka.png" alt="REVESTIUM vizitka" />
               </div>
               <div className="timeline" style={{ marginTop: "2.5rem" }}>
-                {[
-                  { year: "2020", h: "Gründung der Rechtsstruktur", p: "Gründung der Firma JURISCONSULT LTD (London) und Beginn des Aufbaus einer Marke für den Einzelhandel mit Edelmetallen." },
-                  { year: "2021", h: "Gründung der Holding", p: "Moje Zlato und Moje zlatnictví werden in die Unternehmensgruppe aufgenommen. Das Czech Assay Office vergibt das Hersteller- und Haftungszeichen.", d: "d2" },
-                  { year: "2023", h: "LBMA-Clearing & Marktzugang", p: "Zulassung als professionelle Gegenpartei für das Clearing-Mitglied LPMCL und Zugang zur Handelsstruktur der LBMA.", d: "d3" },
-                  { year: "2024", h: "Tschechische Nationalbank & AUROM live", p: "Vertragsabschluss mit der Tschechischen Nationalbank über den Verkauf und Vertrieb von Edelmetallen. Start des Treasury-Managementsystems AUROM und Dealer Commander.", d: "d4" },
-                  { year: "2025", h: "Europäische Holdingstruktur & Raffinerie-Partnerschaft", p: "Holdingstruktur in Irland, Großbritannien, Tschechien und der Slowakei. Vertragsabschluss mit einer deutschen Raffinerie (London Good Delivery). Produktarchitektur Gold Hypo & Repo fertiggestellt.", d: "d4" },
-                  { year: "2026", h: "REVESTIUM AG & Gold Bank SK Pilotbetrieb", p: "Gold Bank SK im Pilotbetrieb als Lizenz/Franchise an das Broker-Pool-Netzwerk verteilt. Übernahme der REVESTIUM AG und Vorbereitung auf die Tokenisierung gemäß dem Schweizer DLT-Gesetz.", d: "d4" },
-                ].map(item => (
-                  <div key={item.year} className={`tl-item reveal ${item.d || "d1"}`}>
-                    <div className="tl-year">{item.year}</div>
-                    <div className="tl-dot" />
-                    <div><p className="tl-h">{item.h}</p><p className="tl-p">{item.p}</p></div>
-                  </div>
-                ))}
+                <div className="tl-item reveal d1"><div className="tl-year">2020</div><div className="tl-dot" /><div><p className="tl-h">Gründung der Rechtsstruktur</p><p className="tl-p">Gründung der Firma JURISCONSULT LTD (London) und Beginn des Aufbaus einer Marke für den Einzelhandel mit Edelmetallen.</p></div></div>
+                <div className="tl-item reveal d2"><div className="tl-year">2021</div><div className="tl-dot" /><div><p className="tl-h">Gründung der Holding</p><p className="tl-p">Moje Zlato und Moje zlatnictví werden in die Unternehmensgruppe aufgenommen. Das Czech Assay Office vergibt das Hersteller- und Haftungszeichen.</p></div></div>
+                <div className="tl-item reveal d3"><div className="tl-year">2023</div><div className="tl-dot" /><div><p className="tl-h">LBMA-Clearing &amp; Marktzugang</p><p className="tl-p">Zulassung als professionelle Gegenpartei für das Clearing-Mitglied LPMCL und Zugang zur Handelsstruktur der LBMA.</p></div></div>
+                <div className="tl-item reveal d4"><div className="tl-year">2024</div><div className="tl-dot" /><div><p className="tl-h">Tschechische Nationalbank &amp; AUROM live</p><p className="tl-p">Vertragsabschluss mit der Tschechischen Nationalbank über den Verkauf und Vertrieb von Edelmetallen. Start des Treasury-Managementsystems AUROM und Dealer Commander.</p></div></div>
+                <div className="tl-item reveal d4"><div className="tl-year">2025</div><div className="tl-dot" /><div><p className="tl-h">Europäische Holdingstruktur &amp; Raffinerie-Partnerschaft</p><p className="tl-p">Holdingstruktur in Irland, Großbritannien, Tschechien und der Slowakei. Vertragsabschluss mit einer deutschen Raffinerie (London Good Delivery). Produktarchitektur Gold Hypo &amp; Repo fertiggestellt.</p></div></div>
+                <div className="tl-item reveal d4"><div className="tl-year">2026</div><div className="tl-dot" /><div><p className="tl-h">REVESTIUM AG &amp; Gold Bank SK Pilotbetrieb</p><p className="tl-p">Gold Bank SK im Pilotbetrieb als Lizenz/Franchise an das Broker-Pool-Netzwerk verteilt. Übernahme der REVESTIUM AG und Vorbereitung auf die Tokenisierung gemäß dem Schweizer DLT-Gesetz.</p></div></div>
               </div>
             </div>
             <div className="reveal d2">
@@ -402,11 +382,11 @@ canvas#heroGlobe{position:absolute;inset:0;width:100%;height:100%;z-index:0;poin
                 </div>
                 <div className="entity">
                   <div className="e-flag">🇮🇪</div>
-                  <div><p className="e-name">SWISS GOLD DEPOSIT Ltd — Dublin, Irland</p><p className="e-desc">Bereit für die Registrierung in 27 EU-Mitgliedstaaten · Vertrieb gemäß MiFID II</p></div>
+                  <div><p className="e-name">SWISS GOLD DEPOSIT Ltd — Dublin, Irland</p><p className="e-desc">Bereit zur Zulassung in den 27 EU-Mitgliedstaaten · Vertriebsfenster in der EU gemäß MiFID II</p></div>
                 </div>
                 <div className="entity">
                   <div className="e-flag">🇨🇿</div>
-                  <div><p className="e-name">SWISS ARROWS s.r.o. — Prag, Tschechische Republik</p><p className="e-desc">IČ: 09913840 · LEI: 315700343MOJGZ62NN31 · Trading name: moje-zlato. Aktive Lizenz des Czech Assay Office für Import und Export von Edelmetallprodukten innerhalb der EU.</p></div>
+                  <div><p className="e-name">MOJE ZLATO — Jurisconsult o.z., Tschechische Republik</p><p className="e-desc">LEI: 315700343MOJGZ62NN31 · Aktive Lizenz des Czech Assay Office für Import und Export von Edelmetallprodukten innerhalb der EU.</p></div>
                 </div>
                 <div className="entity" style={{ borderLeftColor: "var(--gold3)", background: "rgba(196,149,74,0.04)" }}>
                   <div className="e-flag" style={{ fontSize: ".9rem", paddingTop: ".15rem" }}>+</div>
@@ -431,7 +411,6 @@ canvas#heroGlobe{position:absolute;inset:0;width:100%;height:100%;z-index:0;poin
           <div className="prod-grid reveal">
             <div className="prod-card featured">
               <div className="prod-card-accent" />
-              <div className="gb-logo-wrap"><img className="gb-logo-img" src={img1} alt="Gold Bank logo" /></div>
               <p className="pc-tag">Gold Bank CZ · SK · EU</p>
               <p className="pc-name">Gold Bank</p>
               <p className="pc-desc">Die erste europäische Plattform, die physisches Gold mit der vollständigen Digitalisierung des gesamten Lebenszyklus verbindet. Kunden kaufen, verwalten und lagern Gold — direkt vom Smartphone oder Computer aus. Kreditkonto in CZK und EUR, automatisches Sparprogramm in Gold, Rückkauf zu Marktpreisen, Umwandlung in physische Barren mit Kurierlieferung. Vollständige AML/KYC-Konformität mit eigenem KYC-Portal. Web + iOS + Android.</p>
@@ -490,17 +469,7 @@ canvas#heroGlobe{position:absolute;inset:0;width:100%;height:100%;z-index:0;poin
                 <div className="pc-row"><span>Verfügbarkeit</span><span>Weltweit · täglich</span></div>
               </div>
             </div>
-            <div className="prod-card">
-              <span className="pc-badge">Retail &amp; Wholesale</span><span className="pc-badge unique">Bespoke</span>
-              <p className="pc-tag">Physische Edelmetalle</p>
-              <p className="pc-name">Edelmetalle &amp;<br /><em>Kunstjuwelier</em></p>
-              <p className="pc-desc">Direkter Kauf und Verkauf von mehr als 150 physischen Edelmetallprodukten — vom Kleinanleger bis zum institutionellen Großhandel. LBMA Good Delivery. Direkte Anbindung an die Lieferkette.</p>
-              <div className="pc-params">
-                <div className="pc-row"><span>Standard</span><span>LBMA Good Delivery</span></div>
-                <div className="pc-row"><span>Sortiment</span><span>150+ Produkte</span></div>
-                <div className="pc-row"><span>Anbindung</span><span>Direkte Lieferkette</span></div>
-              </div>
-            </div>
+            <div className="prod-card"></div>
           </div>
 
           <div className="cat-strip reveal" style={{ marginTop: "4rem" }}><p className="cat-strip-title">Compliance &amp; Intelligence</p></div>
@@ -510,7 +479,7 @@ canvas#heroGlobe{position:absolute;inset:0;width:100%;height:100%;z-index:0;poin
               <span className="pc-badge unique">Eigene AML/KYC-Plattform</span>
               <p className="pc-tag">Compliance · Due Diligence · FATF</p>
               <p className="pc-name">ARGUS</p>
-              <p className="pc-desc">Fortschrittliche Plattform für die Einhaltung von AML/KYC-Vorschriften, entwickelt für AML-Analysten, Compliance-Mitarbeiter und Risikomanager im Edelmetallhandel. Strukturierte Untersuchungen mit eindeutiger Fallnummer, automatisch generierte Checklisten, AI-OSINT-Analyse, Netzwerkbeziehungsdiagramm, interaktive Zeitleiste und automatische Risikobewertung.</p>
+              <p className="pc-desc">Fortschrittliche Plattform für die Einhaltung von AML/KYC-Vorschriften, entwickelt für AML-Analysten, Compliance-Mitarbeiter und Risikomanager im Edelmetallhandel. Strukturierte Untersuchungen mit eindeutiger Fallnummer, automatisch generierte Checklisten, AI-OSINT-Analyse, Netzwerkbeziehungsdiagramm, interaktive Zeitleiste und automatische Risikobewertung. Konform mit §253/2008 Sb., 40 FATF-Empfehlungen, AMLD5, DSGVO, LBMA Responsible Sourcing, ISO 27001 und SOC 2 Typ II.</p>
               <div className="pc-params">
                 <div className="pc-row"><span>Primärmarkt</span><span>Edelmetallhändler · Finanzinstitute</span></div>
                 <div className="pc-row"><span>Standards</span><span>FATF · AMLD5 · DSGVO · ISO 27001</span></div>
@@ -579,48 +548,51 @@ canvas#heroGlobe{position:absolute;inset:0;width:100%;height:100%;z-index:0;poin
           <div className="gold-rule reveal" style={{ margin: "2rem 0 3rem" }} />
 
           <div className="reveal" style={{ overflowX: "auto", WebkitOverflowScrolling: "touch", marginBottom: "3rem" }}>
-            <svg viewBox="0 0 860 340" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", maxWidth: "860px", display: "block", margin: "0 auto" }} fontFamily="'Commissioner',system-ui,sans-serif">
+            <svg viewBox="0 0 860 340" xmlns="http://www.w3.org/2000/svg"
+              style={{ width: "100%", maxWidth: "860px", display: "block", margin: "0 auto" }}
+              fontFamily="'Commissioner',system-ui,sans-serif">
               <defs>
-                <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#c4954a" opacity=".7" /></marker>
-                <marker id="arr2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#ede8dc" opacity=".4" /></marker>
-                <filter id="glow"><feGaussianBlur stdDeviation="2.5" result="blur" /><feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge></filter>
+                <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                  <path d="M0,0 L0,6 L8,3 z" fill="#c4954a" opacity=".7" />
+                </marker>
+                <marker id="arr2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                  <path d="M0,0 L0,6 L8,3 z" fill="#ede8dc" opacity=".4" />
+                </marker>
+                <filter id="glow">
+                  <feGaussianBlur stdDeviation="2.5" result="blur" />
+                  <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+                </filter>
               </defs>
-              <rect width="860" height="340" fill="#0e0d0a" rx="6" />
-              <rect x="1" y="1" width="858" height="338" fill="none" stroke="#c4954a" strokeWidth=".5" rx="6" opacity=".2" />
-              <rect x="20" y="100" width="148" height="140" rx="6" fill="#141310" stroke="#c4954a" strokeWidth="1" opacity=".9" />
-              <rect x="20" y="100" width="148" height="4" rx="3" fill="#c4954a" opacity=".7" />
-              <text x="94" y="122" textAnchor="middle" fill="#c4954a" fontSize="10" fontWeight="600" letterSpacing=".12em">KUNDE</text>
-              <text x="94" y="142" textAnchor="middle" fill="#ede8dc" fontSize="9.5" opacity=".85">Eigentümer von</text>
-              <text x="94" y="156" textAnchor="middle" fill="#ede8dc" fontSize="9.5" opacity=".85">physischem Gold</text>
-              <text x="94" y="175" textAnchor="middle" fill="#c8bfa8" fontSize="8.5" opacity=".7">Will nicht verkaufen</text>
-              <text x="94" y="189" textAnchor="middle" fill="#c8bfa8" fontSize="8.5" opacity=".7">Braucht Liquidität</text>
-              <text x="94" y="210" textAnchor="middle" fill="#7aad7a" fontSize="8" opacity=".8">◎ Erhält Kredit</text>
-              <text x="94" y="224" textAnchor="middle" fill="#7aad7a" fontSize="8" opacity=".8">◎ Zahlt an Bank zurück</text>
-              <text x="94" y="238" textAnchor="middle" fill="#7aad7a" fontSize="8" opacity=".8">◎ Gold zurück nach Tilgung</text>
-              <rect x="296" y="60" width="188" height="220" rx="6" fill="#1c1a16" stroke="#c4954a" strokeWidth="1.5" />
-              <rect x="296" y="60" width="188" height="5" rx="3" fill="#c4954a" />
-              <text x="390" y="86" textAnchor="middle" fill="#c4954a" fontSize="9.5" fontWeight="700" letterSpacing=".12em">REVESTIUM AG</text>
-              <text x="390" y="102" textAnchor="middle" fill="#c4954a" fontSize="9" opacity=".8">Collateral Agent</text>
-              <line x1="310" y1="112" x2="470" y2="112" stroke="#c4954a" strokeWidth=".4" opacity=".3" />
-              <text x="390" y="130" textAnchor="middle" fill="#ede8dc" fontSize="9" opacity=".9">Bewertung + Verwahrung</text>
-              <text x="390" y="145" textAnchor="middle" fill="#ede8dc" fontSize="9" opacity=".9">LBMA AM/PM Fix täglich</text>
-              <text x="390" y="165" textAnchor="middle" fill="#c8bfa8" fontSize="8.5" opacity=".75">Warrant / Wertpapieremission</text>
-              <text x="390" y="179" textAnchor="middle" fill="#c8bfa8" fontSize="8.5" opacity=".75">Ausfallmanagement T+2</text>
-              <text x="390" y="193" textAnchor="middle" fill="#c8bfa8" fontSize="8.5" opacity=".75">Versicherung Kooperativa</text>
-              <text x="390" y="207" textAnchor="middle" fill="#c8bfa8" fontSize="8.5" opacity=".75">Margin Call LTV ≥ 88 %</text>
-              <text x="390" y="221" textAnchor="middle" fill="#c8bfa8" fontSize="8.5" opacity=".75">Forced Sale LTV ≥ 95 %</text>
-              <rect x="316" y="237" width="148" height="28" rx="4" fill="rgba(196,149,74,0.12)" stroke="rgba(196,149,74,0.3)" strokeWidth=".8" />
-              <text x="390" y="254" textAnchor="middle" fill="#c4954a" fontSize="8.5" fontWeight="600">Swiss Gold Deposit Group</text>
-              <rect x="576" y="100" width="148" height="140" rx="6" fill="#141310" stroke="#c4954a" strokeWidth="1" opacity=".9" />
-              <rect x="576" y="100" width="148" height="4" rx="3" fill="#c4954a" opacity=".7" />
-              <text x="650" y="122" textAnchor="middle" fill="#c4954a" fontSize="10" fontWeight="600" letterSpacing=".12em">BANK / FONDS</text>
-              <text x="650" y="142" textAnchor="middle" fill="#ede8dc" fontSize="9.5" opacity=".85">Kreditgeber</text>
-              <text x="650" y="160" textAnchor="middle" fill="#c8bfa8" fontSize="8.5" opacity=".7">Vertrag mit Kunden</text>
-              <text x="650" y="174" textAnchor="middle" fill="#c8bfa8" fontSize="8.5" opacity=".7">Hält den Warrant</text>
-              <text x="650" y="188" textAnchor="middle" fill="#c8bfa8" fontSize="8.5" opacity=".7">Kein Gold-Operationsrisiko</text>
-              <text x="650" y="207" textAnchor="middle" fill="#7aad7a" fontSize="8" opacity=".8">◎ Sauberes P&amp;L</text>
-              <text x="650" y="221" textAnchor="middle" fill="#7aad7a" fontSize="8" opacity=".8">◎ T+2 Realisierung</text>
-              <text x="650" y="235" textAnchor="middle" fill="#7aad7a" fontSize="8" opacity=".8">◎ RWA 0–20 % (Basel)</text>
+              <rect width="860" height="340" fill="#0a0906" rx="6" />
+              <rect x="1" y="1" width="858" height="338" fill="none" stroke="#c4954a" strokeWidth=".5" rx="6" opacity=".12" />
+              <rect x="294" y="100" width="272" height="148" rx="6" fill="rgba(196,149,74,0.04)" stroke="#c4954a" strokeWidth=".6" opacity=".5" />
+              <text x="430" y="94" textAnchor="middle" fill="#c4954a" fontSize="8" letterSpacing=".14em" opacity=".55">SWISS ARROWS — COLLATERAL AGENT</text>
+              <rect x="60" y="100" width="168" height="148" rx="6" fill="#141310" stroke="#c4954a" strokeWidth="1" />
+              <rect x="60" y="100" width="168" height="3" rx="2" fill="#c4954a" />
+              <text x="144" y="122" textAnchor="middle" fill="#c4954a" fontSize="9" fontWeight="600" letterSpacing=".08em">KUNDE</text>
+              <text x="144" y="140" textAnchor="middle" fill="#ede8dc" fontSize="8.5" opacity=".8">Physisches Gold</text>
+              <text x="144" y="157" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">Depot beim Custody-Partner</text>
+              <text x="144" y="173" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">Versicherung: Kooperativa</text>
+              <text x="144" y="189" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">Vienna Insurance Group</text>
+              <text x="144" y="208" textAnchor="middle" fill="#7aad7a" fontSize="8" opacity=".85">● Onboarding 2–5 Tage</text>
+              <text x="144" y="222" textAnchor="middle" fill="#7aad7a" fontSize="8" opacity=".85">● LTV bis 80 %</text>
+              <rect x="314" y="116" width="232" height="116" rx="4" fill="#1c1a16" stroke="#c4954a" strokeWidth=".8" />
+              <text x="430" y="140" textAnchor="middle" fill="#c4954a" fontSize="9.5" fontWeight="700" letterSpacing=".08em">WARRANT / PGI</text>
+              <line x1="345" y1="150" x2="515" y2="150" stroke="#c4954a" strokeWidth=".4" opacity=".3" />
+              <text x="430" y="167" textAnchor="middle" fill="#ede8dc" fontSize="8" opacity=".8">Evidenz im eigenen Register</text>
+              <text x="430" y="183" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">oder CDCP Prag</text>
+              <text x="430" y="199" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">LBMA PM Fix · täglich bewertet</text>
+              <text x="430" y="215" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">Insolvenzfern · segregiert</text>
+              <rect x="572" y="100" width="228" height="148" rx="6" fill="#141310" stroke="#c4954a" strokeWidth="1" />
+              <rect x="572" y="100" width="228" height="3" rx="2" fill="#c4954a" />
+              <text x="686" y="122" textAnchor="middle" fill="#c4954a" fontSize="9" fontWeight="600" letterSpacing=".08em">BANK / KREDITGEBER</text>
+              <text x="686" y="140" textAnchor="middle" fill="#ede8dc" fontSize="8.5" opacity=".8">Kein Gold-Operationsrisiko</text>
+              <text x="686" y="157" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">Kein Kontakt mit physischem Gold</text>
+              <text x="686" y="173" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">Stellt Kredit aus · hält Warrant</text>
+              <text x="686" y="188" textAnchor="middle" fill="#c8bfa8" fontSize="8.5" opacity=".7">Kein Gold-Operationsrisiko</text>
+              <text x="686" y="207" textAnchor="middle" fill="#7aad7a" fontSize="8" opacity=".8">◎ Sauberes P&amp;L</text>
+              <text x="686" y="221" textAnchor="middle" fill="#7aad7a" fontSize="8" opacity=".8">◎ T+2 Realisierung</text>
+              <text x="686" y="235" textAnchor="middle" fill="#7aad7a" fontSize="8" opacity=".8">◎ RWA 0–20 % (Basel)</text>
               <rect x="296" y="310" width="188" height="22" rx="4" fill="rgba(196,149,74,0.08)" stroke="rgba(196,149,74,0.25)" strokeWidth=".8" />
               <text x="390" y="325" textAnchor="middle" fill="#c8bfa8" fontSize="8.5" opacity=".75">LBMA-Partner · CME/LPMCL · T+2 Liquidation</text>
               <path d="M168,152 L294,152" stroke="#c4954a" strokeWidth="1.2" markerEnd="url(#arr)" fill="none" opacity=".7" />
@@ -776,15 +748,11 @@ canvas#heroGlobe{position:absolute;inset:0;width:100%;height:100%;z-index:0;poin
             <p className="sub">Jedes Produkt ist eigenständig funktionsfähig — und Teil eines integrierten Ökosystems.</p>
           </div>
           <div className="mup-tabs reveal" id="mupTabs">
-            {[
-              { id: "deposit", label: "Gold Deposit & D10" },
-              { id: "digi", label: "DIGI GOLD & AUROM" },
-              { id: "lending", label: "Gold Hypo & Repo" },
-              { id: "wholesale", label: "Wholesale & Juwelier" },
-              { id: "argus", label: "ARGUS Compliance" },
-            ].map(tab => (
-              <button key={tab.id} className={`mup-btn${activeMup === tab.id ? " active" : ""}`} onClick={() => setActiveMup(tab.id)}>{tab.label}</button>
-            ))}
+            <button className={`mup-btn${activeMup === "deposit" ? " active" : ""}`} onClick={() => showMup("deposit")}>Gold Deposit &amp; D10</button>
+            <button className={`mup-btn${activeMup === "digi" ? " active" : ""}`} onClick={() => showMup("digi")}>DIGI GOLD &amp; AUROM</button>
+            <button className={`mup-btn${activeMup === "lending" ? " active" : ""}`} onClick={() => showMup("lending")}>Gold Hypo &amp; Repo</button>
+            <button className={`mup-btn${activeMup === "wholesale" ? " active" : ""}`} onClick={() => showMup("wholesale")}>Wholesale &amp; Juwelier</button>
+            <button className={`mup-btn${activeMup === "argus" ? " active" : ""}`} onClick={() => showMup("argus")}>ARGUS Compliance</button>
           </div>
 
           <div id="mup-deposit" className={`mup-panel reveal${activeMup === "deposit" ? " active" : ""}`}>
@@ -843,19 +811,9 @@ canvas#heroGlobe{position:absolute;inset:0;width:100%;height:100%;z-index:0;poin
           </div>
 
           <div id="mup-wholesale" className={`mup-panel reveal${activeMup === "wholesale" ? " active" : ""}`}>
-            <div className="mup-left">
-              <h3>Wholesale &amp; Kunstjuwelier</h3>
-              <p>Direkter Kauf und Verkauf von mehr als 150 physischen Edelmetallprodukten — vom Kleinanleger bis zum institutionellen Großhandel. LBMA Good Delivery. Direkte Anbindung an die Lieferkette über C.Hafner (LBMA-Raffinerie).</p>
-              <div className="mup-params">
-                <div className="mup-row"><span>Standard</span><span>LBMA Good Delivery</span></div>
-                <div className="mup-row"><span>Sortiment</span><span>150+ Produkte</span></div>
-                <div className="mup-row"><span>Anbindung</span><span>Direkte Lieferkette · C.Hafner</span></div>
-                <div className="mup-row"><span>Clearing</span><span>StoneX Financial (CME)</span></div>
-              </div>
-            </div>
             <div className="mup-cards">
-              <div className="mup-card"><h4>C.Hafner — Raffineriepartner</h4><p>Direkter Vertrag mit einer der führenden deutschen LBMA-Raffinerien (London Good Delivery). Sicherste Lieferkette, höchste Qualitätsstandards.</p></div>
-              <div className="mup-card"><h4>StoneX Financial</h4><p>CME Prime Broker und Clearing-Partner. Institutionelle Settlement-Infrastruktur für T+2 Abwicklung bei Ausfällen und regulärem Handel.</p></div>
+              <div className="mup-card"><h4></h4><p>Direkter Vertrag mit einer der führenden deutschen LBMA-Raffinerien (London Good Delivery). Sicherste Lieferkette, höchste Qualitätsstandards.</p></div>
+              <div className="mup-card"><h4></h4><p>CME Prime Broker und Clearing-Partner. Institutionelle Settlement-Infrastruktur für T+2 Abwicklung bei Ausfällen und regulärem Handel.</p></div>
             </div>
           </div>
 
@@ -889,7 +847,9 @@ canvas#heroGlobe{position:absolute;inset:0;width:100%;height:100%;z-index:0;poin
           </div>
 
           <div className="reveal" style={{ overflowX: "auto", WebkitOverflowScrolling: "touch", margin: "2rem 0" }}>
-            <svg viewBox="0 0 860 520" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", maxWidth: "860px", display: "block", margin: "0 auto" }} fontFamily="'Commissioner',system-ui,sans-serif">
+            <svg viewBox="0 0 860 520" xmlns="http://www.w3.org/2000/svg"
+              style={{ width: "100%", maxWidth: "860px", display: "block", margin: "0 auto" }}
+              fontFamily="'Commissioner',system-ui,sans-serif">
               <defs>
                 <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
                   <stop offset="0%" stopColor="#c4954a" stopOpacity=".18" />
@@ -898,6 +858,10 @@ canvas#heroGlobe{position:absolute;inset:0;width:100%;height:100%;z-index:0;poin
                 <marker id="a1" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3z" fill="#c4954a" opacity=".6" /></marker>
                 <marker id="a2" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3z" fill="#7aad7a" opacity=".5" /></marker>
                 <marker id="a3" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3z" fill="#c8bfa8" opacity=".35" /></marker>
+                <filter id="glow3">
+                  <feGaussianBlur stdDeviation="4" result="b" />
+                  <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+                </filter>
               </defs>
               <rect width="860" height="520" fill="#080806" rx="8" />
               <rect x="1" y="1" width="858" height="518" fill="none" stroke="#c4954a" strokeWidth=".5" rx="8" opacity=".15" />
@@ -906,7 +870,6 @@ canvas#heroGlobe{position:absolute;inset:0;width:100%;height:100%;z-index:0;poin
               <text x="30" y="430" fill="#8a8278" fontSize="8" letterSpacing=".14em" transform="rotate(-90,30,430)" textAnchor="middle" opacity=".6">INSTITUTIONELL</text>
               <line x1="60" y1="155" x2="820" y2="155" stroke="#c4954a" strokeWidth=".4" strokeDasharray="4,4" opacity=".18" />
               <line x1="60" y1="345" x2="820" y2="345" stroke="#c4954a" strokeWidth=".4" strokeDasharray="4,4" opacity=".18" />
-              {/* Gold Bank */}
               <rect x="80" y="30" width="130" height="108" rx="6" fill="#141310" stroke="#c4954a" strokeWidth="1.2" />
               <rect x="80" y="30" width="130" height="4" rx="3" fill="#c4954a" />
               <text x="145" y="52" textAnchor="middle" fill="#c4954a" fontSize="9.5" fontWeight="600" letterSpacing=".08em">Gold Bank</text>
@@ -915,7 +878,6 @@ canvas#heroGlobe{position:absolute;inset:0;width:100%;height:100%;z-index:0;poin
               <text x="145" y="99" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">+10 % p.a. in physischem Gold</text>
               <text x="145" y="114" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">iOS · Android · Web</text>
               <text x="145" y="129" textAnchor="middle" fill="#7aad7a" fontSize="7.5" opacity=".85">● Live</text>
-              {/* DIGI GOLD */}
               <rect x="230" y="30" width="130" height="108" rx="6" fill="#141310" stroke="#c4954a" strokeWidth=".8" opacity=".85" />
               <rect x="230" y="30" width="130" height="4" rx="3" fill="#c4954a" opacity=".6" />
               <text x="295" y="52" textAnchor="middle" fill="#c4954a" fontSize="9.5" fontWeight="600" letterSpacing=".08em">DIGI GOLD</text>
@@ -924,7 +886,6 @@ canvas#heroGlobe{position:absolute;inset:0;width:100%;height:100%;z-index:0;poin
               <text x="295" y="99" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">100 % physisch LBMA</text>
               <text x="295" y="114" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">DCA-Optimierung</text>
               <text x="295" y="129" textAnchor="middle" fill="#7aad7a" fontSize="7.5" opacity=".85">● Live</text>
-              {/* Gold Card */}
               <rect x="380" y="30" width="130" height="108" rx="6" fill="#141310" stroke="#c4954a" strokeWidth=".8" opacity=".85" />
               <rect x="380" y="30" width="130" height="4" rx="3" fill="#c4954a" opacity=".6" />
               <text x="445" y="52" textAnchor="middle" fill="#c4954a" fontSize="9.5" fontWeight="600" letterSpacing=".08em">Gold Card</text>
@@ -933,7 +894,6 @@ canvas#heroGlobe{position:absolute;inset:0;width:100%;height:100%;z-index:0;poin
               <text x="445" y="99" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">Weltweit · 0 EU-Konkurrenten</text>
               <text x="445" y="114" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">Direkt vom Goldkonto</text>
               <text x="445" y="129" textAnchor="middle" fill="#c4954a" fontSize="7.5" opacity=".8">◉ Rollout</text>
-              {/* Edelmetalle */}
               <rect x="530" y="30" width="130" height="108" rx="6" fill="#141310" stroke="#c4954a" strokeWidth=".8" opacity=".85" />
               <rect x="530" y="30" width="130" height="4" rx="3" fill="#c4954a" opacity=".6" />
               <text x="595" y="52" textAnchor="middle" fill="#c4954a" fontSize="9.5" fontWeight="600" letterSpacing=".08em">Edelmetalle</text>
@@ -942,7 +902,6 @@ canvas#heroGlobe{position:absolute;inset:0;width:100%;height:100%;z-index:0;poin
               <text x="595" y="99" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">LBMA Good Delivery</text>
               <text x="595" y="114" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">Kunstjuwelier · Bespoke</text>
               <text x="595" y="129" textAnchor="middle" fill="#7aad7a" fontSize="7.5" opacity=".85">● Live</text>
-              {/* AUROM nucleus */}
               <ellipse cx="430" cy="255" rx="74" ry="54" fill="url(#coreGlow)" />
               <rect x="360" y="175" width="140" height="116" rx="8" fill="#1c1a16" stroke="#c4954a" strokeWidth="1.8" />
               <rect x="360" y="175" width="140" height="5" rx="4" fill="#c4954a" />
@@ -953,7 +912,6 @@ canvas#heroGlobe{position:absolute;inset:0;width:100%;height:100%;z-index:0;poin
               <text x="430" y="254" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".75">CME Hedging · OTC</text>
               <text x="430" y="268" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".75">Net ROI +23 %</text>
               <text x="430" y="280" textAnchor="middle" fill="#7aad7a" fontSize="7.5" opacity=".9">● Live · proprietär</text>
-              {/* Gold D10 */}
               <rect x="80" y="175" width="130" height="108" rx="6" fill="#141310" stroke="#c4954a" strokeWidth=".8" opacity=".85" />
               <rect x="80" y="175" width="130" height="4" rx="3" fill="#c4954a" opacity=".6" />
               <text x="145" y="197" textAnchor="middle" fill="#c4954a" fontSize="9.5" fontWeight="600" letterSpacing=".08em">GOLD D10</text>
@@ -962,7 +920,6 @@ canvas#heroGlobe{position:absolute;inset:0;width:100%;height:100%;z-index:0;poin
               <text x="145" y="244" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">Kein AIF · Kein Fonds</text>
               <text x="145" y="259" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">HNWI · Qual. Anleger</text>
               <text x="145" y="274" textAnchor="middle" fill="#c4954a" fontSize="7.5" opacity=".8">◉ Rollout</text>
-              {/* ARGUS */}
               <rect x="640" y="175" width="130" height="108" rx="6" fill="#141310" stroke="#c4954a" strokeWidth=".8" opacity=".85" />
               <rect x="640" y="175" width="130" height="4" rx="3" fill="#c4954a" opacity=".6" />
               <text x="705" y="197" textAnchor="middle" fill="#c4954a" fontSize="9.5" fontWeight="600" letterSpacing=".08em">ARGUS</text>
@@ -971,7 +928,6 @@ canvas#heroGlobe{position:absolute;inset:0;width:100%;height:100%;z-index:0;poin
               <text x="705" y="244" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">LBMA Responsible Sourcing</text>
               <text x="705" y="259" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">AI OSINT · Risk Scoring</text>
               <text x="705" y="274" textAnchor="middle" fill="#c4954a" fontSize="7.5" opacity=".8">◉ Rollout</text>
-              {/* Gold Hypo */}
               <rect x="80" y="365" width="190" height="120" rx="6" fill="#141310" stroke="#c4954a" strokeWidth="1.2" />
               <rect x="80" y="365" width="190" height="4" rx="3" fill="#c4954a" />
               <text x="175" y="388" textAnchor="middle" fill="#c4954a" fontSize="9.5" fontWeight="600" letterSpacing=".08em">Gold Hypo</text>
@@ -980,7 +936,6 @@ canvas#heroGlobe{position:absolute;inset:0;width:100%;height:100%;z-index:0;poin
               <text x="175" y="435" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">Collateral Agent Modell</text>
               <text x="175" y="450" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">0 EU-Konkurrenten</text>
               <text x="175" y="470" textAnchor="middle" fill="#c4954a" fontSize="7.5" opacity=".85">◉ Ready to launch</text>
-              {/* Gold Repo */}
               <rect x="290" y="365" width="190" height="120" rx="6" fill="#141310" stroke="#c4954a" strokeWidth=".8" opacity=".9" />
               <rect x="290" y="365" width="190" height="4" rx="3" fill="#c4954a" opacity=".7" />
               <text x="385" y="388" textAnchor="middle" fill="#c4954a" fontSize="9.5" fontWeight="600" letterSpacing=".08em">Gold Repo</text>
@@ -989,7 +944,6 @@ canvas#heroGlobe{position:absolute;inset:0;width:100%;height:100%;z-index:0;poin
               <text x="385" y="435" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">T+2 · 99,5 % LBMA</text>
               <text x="385" y="450" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".7">Kooperativa Versicherung</text>
               <text x="385" y="470" textAnchor="middle" fill="#c4954a" fontSize="7.5" opacity=".85">◉ Ready to launch</text>
-              {/* Gold as Collateral PGI */}
               <rect x="500" y="365" width="270" height="120" rx="6" fill="#1c1a16" stroke="#c4954a" strokeWidth="1" strokeDasharray="5,3" />
               <rect x="500" y="365" width="270" height="4" rx="3" fill="#c4954a" opacity=".4" />
               <text x="635" y="388" textAnchor="middle" fill="#c4954a" fontSize="9.5" fontWeight="600" letterSpacing=".08em" opacity=".9">Gold as Collateral · PGI</text>
@@ -998,7 +952,6 @@ canvas#heroGlobe{position:absolute;inset:0;width:100%;height:100%;z-index:0;poin
               <text x="635" y="435" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".65">WGC · Linklaters · LBMA Framework</text>
               <text x="635" y="450" textAnchor="middle" fill="#c8bfa8" fontSize="8" opacity=".65">Liquidity Provider · Market Maker</text>
               <text x="635" y="470" textAnchor="middle" fill="#c4954a" fontSize="7.5" opacity=".7">◌ Roadmap 2026–2027</text>
-              {/* Connections */}
               <line x1="145" y1="138" x2="390" y2="175" stroke="#c4954a" strokeWidth=".8" strokeDasharray="3,3" markerEnd="url(#a1)" opacity=".35" />
               <line x1="295" y1="138" x2="415" y2="175" stroke="#c4954a" strokeWidth=".8" strokeDasharray="3,3" markerEnd="url(#a1)" opacity=".35" />
               <line x1="445" y1="138" x2="440" y2="175" stroke="#c4954a" strokeWidth=".8" strokeDasharray="3,3" markerEnd="url(#a1)" opacity=".35" />
@@ -1040,57 +993,6 @@ canvas#heroGlobe{position:absolute;inset:0;width:100%;height:100%;z-index:0;poin
         </div>
       </section>
 
-      {/* ── TEAM & BÜROS ── */}
-      <section id="team" className="section team-bg">
-        <div className="section-inner">
-          <div className="reveal">
-            <p className="eyebrow">Menschen &amp; Standorte</p>
-            <h2 className="sh">Führungsteam &amp;<br /><em>Standorte</em></h2>
-            <p className="sub">Rechtliche, technologische und operative Kapazität in vier Jurisdiktionen.</p>
-          </div>
-
-          <div className="team-grid reveal">
-            <div className="team-card team-card-featured">
-              <div className="team-foto-wrap" style={{ maxWidth: "240px" }}>
-                <img src={img2} alt="Mag. iur. Augustina F. Schiller" className="team-foto" />
-              </div>
-              <p className="t-name" style={{ fontSize: "1.05rem", marginTop: "1rem" }}>Mag. iur. Augustina F. Schiller, MSc., LLM.</p>
-              <p className="t-role">President &amp; CEO · Founder · Chief Legal Officer</p>
-              <p className="t-desc" style={{ marginTop: ".9rem" }}>Studium an der Comenius-Universität Bratislava und der Hochschule für angewandtes Recht in Prag, Masterabschluss an der Jagiellonen-Universität in Toruń. Spezialistin für internationales Wirtschaftsrecht und Kapitalmarktrecht mit Schwerpunkt auf der Strukturierung grenzüberschreitender Übernahmetransaktionen.</p>
-              <p className="t-desc" style={{ marginTop: ".7rem" }}>Verfahren vor dem Irish Takeover Panel, Prospektgenehmigungen bei der Financial Conduct Authority (FCA). Leitete das Rechtsteam bei der ersten erfolgreichen RTO eines tschechisch-irischen Unternehmens an der Hauptbörse der London Stock Exchange — ein in CEE einzigartiger Vorgang.</p>
-              <div className="t-tags" />
-            </div>
-            <div className="team-card">
-              <img src={img3} alt="Jana Schwarz" className="team-card-foto" />
-              <p className="t-name">Jana Schwarz</p>
-              <p className="t-role">Back Office Manager · Tschechische Niederlassung</p>
-              <p className="t-desc">Jana sorgt in der tschechischen Niederlassung für den reibungslosen Ablauf aller administrativen und betrieblichen Prozesse. Fokus auf der Organisation interner Abläufe, der Koordination unterstützender Tätigkeiten und der Einrichtung effizienter Prozesse.</p>
-              <div className="t-meta">
-                <div className="t-row"><span>Bereich</span><span>Back Office · Administration</span></div>
-                <div className="t-row"><span>Standort</span><span>Praha · Tschechische Niederlassung</span></div>
-                <div className="t-row"><span>Sprachen</span><span>CS · DE</span></div>
-              </div>
-            </div>
-          </div>
-
-          <div className="office-grid reveal" style={{ marginTop: "1px" }}>
-            {[
-              { flag: "🇨🇭", country: "Schweiz · Hauptsitz", city: "Zug", desc: "REVESTIUM AG · Baarerstrasse 25 · 6300 Zug\nUID: CHE-383.245.411" },
-              { flag: "🇬🇧", country: "United Kingdom · Kapitalmarkt", city: "London", desc: "JURISCONSULT LTD · 124 City Road · EC1V 2NX\nCompanies House: 12729220 · LEI: 315700UZ1Y9WYP99U441" },
-              { flag: "🇮🇪", country: "Irland · EU-Passporting", city: "Dublin", desc: "SWISS GOLD DEPOSIT Ltd\nEU-Passporting 27 Mitgliedstaaten · MiFID II" },
-              { flag: "🇨🇿", country: "Tschechien · Operations", city: "Prag", desc: "JURISCONSULT Ltd o.z.· Praha\nIČ: 09913840 · Technologie · Entwicklung · Backoffice" },
-            ].map(o => (
-              <div key={o.city} className="office-card">
-                <div className="o-flag">{o.flag}</div>
-                <p className="o-country">{o.country}</p>
-                <p className="o-city">{o.city}</p>
-                <p className="o-desc">{o.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ── D&B RATING ── */}
       <section id="rating" className="section" style={{ background: "var(--dark2)", borderTop: "1px solid var(--border2)" }}>
         <div className="section-inner">
@@ -1104,24 +1006,32 @@ canvas#heroGlobe{position:absolute;inset:0;width:100%;height:100%;z-index:0;poin
             <div style={{ textAlign: "center", padding: "2.5rem 2rem", background: "var(--dark)", border: "1px solid var(--border)", flexShrink: 0 }}>
               <p style={{ fontFamily: "var(--sc)", fontSize: ".6rem", letterSpacing: ".22em", color: "#a8a090", marginBottom: ".7rem" }}>D&amp;B RATING</p>
               <p style={{ fontFamily: "var(--serif)", fontSize: "5.5rem", fontWeight: 300, lineHeight: 1, color: "var(--gold2)", letterSpacing: "-.02em" }}>H1</p>
-              <div style={{ width: "32px", height: "1px", background: "var(--gold3)", margin: ".9rem auto" }} />
+              <div style={{ width: "32px", height: "1px", background: "var(--gold3)", margin: ".9rem auto" }}></div>
               <p style={{ fontFamily: "var(--sc)", fontSize: ".6rem", letterSpacing: ".16em", color: "#a8a090", marginBottom: ".25rem" }}>RISIKO</p>
               <p style={{ fontFamily: "var(--serif)", fontSize: "1rem", fontWeight: 400, color: "#e0d8c8" }}>Niedrig</p>
             </div>
             <div>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "1px", background: "var(--border2)" }}>
-                {[
-                  { label: "Finanzielle Stärke", val: "H" },
-                  { label: "Risiko-Indikator", val: "1" },
-                  { label: "Failure Score", val: "95" },
-                  { label: "Delinquency Prob.", val: "3 %" },
-                  { label: "Gesamtrisiko (12M)", val: "Niedrig" },
-                ].map(r => (
-                  <div key={r.label} style={{ background: "var(--dark)", padding: "1.25rem 1.1rem" }}>
-                    <p style={{ fontFamily: "var(--sc)", fontSize: ".58rem", letterSpacing: ".14em", color: "#a8a090", marginBottom: ".4rem" }}>{r.label}</p>
-                    <p style={{ fontFamily: "var(--serif)", fontSize: "1.6rem", fontWeight: 300, color: "var(--gold2)", marginBottom: ".2rem" }}>{r.val}</p>
-                  </div>
-                ))}
+                <div style={{ background: "var(--dark)", padding: "1.25rem 1.1rem" }}>
+                  <p style={{ fontFamily: "var(--sc)", fontSize: ".58rem", letterSpacing: ".14em", color: "#a8a090", marginBottom: ".4rem" }}>Finanzielle Stärke</p>
+                  <p style={{ fontFamily: "var(--serif)", fontSize: "1.6rem", fontWeight: 300, color: "var(--gold2)", marginBottom: ".2rem" }}>H</p>
+                </div>
+                <div style={{ background: "var(--dark)", padding: "1.25rem 1.1rem" }}>
+                  <p style={{ fontFamily: "var(--sc)", fontSize: ".58rem", letterSpacing: ".14em", color: "#a8a090", marginBottom: ".4rem" }}>Risiko-Indikator</p>
+                  <p style={{ fontFamily: "var(--serif)", fontSize: "1.6rem", fontWeight: 300, color: "var(--gold2)", marginBottom: ".2rem" }}>1</p>
+                </div>
+                <div style={{ background: "var(--dark)", padding: "1.25rem 1.1rem" }}>
+                  <p style={{ fontFamily: "var(--sc)", fontSize: ".58rem", letterSpacing: ".14em", color: "#a8a090", marginBottom: ".4rem" }}>Failure Score</p>
+                  <p style={{ fontFamily: "var(--serif)", fontSize: "1.6rem", fontWeight: 300, color: "var(--gold2)", marginBottom: ".2rem" }}>95</p>
+                </div>
+                <div style={{ background: "var(--dark)", padding: "1.25rem 1.1rem" }}>
+                  <p style={{ fontFamily: "var(--sc)", fontSize: ".58rem", letterSpacing: ".14em", color: "#a8a090", marginBottom: ".4rem" }}>Delinquency Prob.</p>
+                  <p style={{ fontFamily: "var(--serif)", fontSize: "1.6rem", fontWeight: 300, color: "var(--gold2)", marginBottom: ".2rem" }}>3 %</p>
+                </div>
+                <div style={{ background: "var(--dark)", padding: "1.25rem 1.1rem" }}>
+                  <p style={{ fontFamily: "var(--sc)", fontSize: ".58rem", letterSpacing: ".14em", color: "#a8a090", marginBottom: ".4rem" }}>Gesamtrisiko (12M)</p>
+                  <p style={{ fontFamily: "var(--serif)", fontSize: "1.6rem", fontWeight: 300, color: "var(--gold2)", marginBottom: ".2rem" }}>Niedrig</p>
+                </div>
               </div>
               <div style={{ marginTop: "1rem", padding: ".9rem 1.1rem", background: "var(--dark)", border: "1px solid var(--border2)" }}>
                 <p style={{ fontSize: ".76rem", color: "#b8b0a0", lineHeight: 1.7 }}>Bewertet durch <strong style={{ color: "#e0d8c8" }}>Dun &amp; Bradstreet</strong> — weltweit führender Anbieter mit über 500 Millionen Unternehmenseinträgen. Beurteilte Entität: <strong style={{ color: "#e0d8c8" }}>JURISCONSULT LTD. o.z.</strong> (IČ: 09913840, Prag) — tschechische Niederlassung von JURISCONSULT LTD, London (Companies House 12729220). Operativ ab: 16.02.2021.</p>
@@ -1134,12 +1044,14 @@ canvas#heroGlobe{position:absolute;inset:0;width:100%;height:100%;z-index:0;poin
               <p style={{ fontFamily: "var(--sc)", fontSize: ".58rem", letterSpacing: ".18em", color: "#a8a090", marginBottom: ".25rem" }}>D&amp;B VIABILITY RATING</p>
               <p style={{ fontFamily: "var(--serif)", fontSize: "1.6rem", fontWeight: 300, color: "var(--gold2)", lineHeight: 1 }}>Niedrig <em style={{ fontSize: ".95rem", color: "#c8bfa8" }}>Risiko</em></p>
             </div>
-            <div style={{ width: "1px", height: "36px", background: "var(--border2)", flexShrink: 0 }} />
+            <div style={{ width: "1px", height: "36px", background: "var(--border2)", flexShrink: 0 }}></div>
             <div>
               <p style={{ fontFamily: "var(--sc)", fontSize: ".58rem", letterSpacing: ".18em", color: "#a8a090", marginBottom: ".25rem" }}>VIABILITY SCORE</p>
               <p style={{ fontFamily: "var(--serif)", fontSize: "1.6rem", fontWeight: 300, color: "var(--gold2)", lineHeight: 1 }}>Stabil</p>
             </div>
-            <div style={{ width: "1px", height: "36px", background: "var(--border2)", flexShrink: 0 }} />
+            <div style={{ width: "1px", height: "36px", background: "var(--border2)", flexShrink: 0 }}></div>
+            <div></div>
+            <div style={{ width: "1px", height: "36px", background: "var(--border2)", flexShrink: 0 }}></div>
             <div style={{ flex: 1, minWidth: "220px" }}>
               <p style={{ fontSize: ".82rem", color: "#c8bfa8", lineHeight: 1.7 }}>Das D&amp;B Viability Rating bewertet die Überlebensfähigkeit im Branchenvergleich. JURISCONSULT LTD. o.z. wird über alle Vergleichszeiträume konsistent mit <strong style={{ color: "#e0d8c8" }}>niedrigem Risiko</strong> eingestuft.</p>
             </div>
@@ -1150,6 +1062,7 @@ canvas#heroGlobe{position:absolute;inset:0;width:100%;height:100%;z-index:0;poin
       {/* ── IMPRESSUM ── */}
       <footer id="impressum" className="section imp-bg">
         <div className="section-inner">
+
           <div className="reveal" style={{ marginBottom: "4rem" }}>
             <p className="eyebrow">Strategie &amp; Ausblick</p>
             <h2 className="sh" style={{ fontSize: "1.8rem", marginBottom: "1.2rem" }}>Was sind unsere<br /><em>Pläne für die Zukunft?</em></h2>
@@ -1158,11 +1071,14 @@ canvas#heroGlobe{position:absolute;inset:0;width:100%;height:100%;z-index:0;poin
                 <p style={{ fontSize: ".9rem", color: "#e0d8c8", lineHeight: 1.82, textAlign: "justify", hyphens: "auto" }}>Langfristig werden regulatorische Entwicklungen, sich wandelnde ESG-Standards, Transparenz in der Lieferkette sowie die Digitalisierung von Handels- und Verwahrungsprozessen eine entscheidende Rolle spielen.</p>
                 <p style={{ fontSize: ".9rem", color: "#e0d8c8", lineHeight: 1.82, marginTop: "1rem", textAlign: "justify", hyphens: "auto" }}>Dank unserer Mitgliedschaft im <strong style={{ color: "#fff" }}>International Precious Metal Institute</strong> und unserem Engagement bei der <strong style={{ color: "#fff" }}>LBMA</strong> sind wir Teil eines globalen Netzwerks, das aktiv Standards, den Dialog und langfristige Stabilität innerhalb des Edelmetall-Ökosystems gestaltet.</p>
               </div>
-              <div>
-                <p style={{ fontSize: ".9rem", color: "#e0d8c8", lineHeight: 1.82, textAlign: "justify", hyphens: "auto" }}>Wir stärken unsere operative Infrastruktur und die Anpassung an regulatorische Anforderungen. Gleichzeitig engagieren wir uns als vertrauenswürdiger Marktteilnehmer aktiv in Brancheninitiativen, fördern die Weiterbildung im Bereich physischer Edelmetalle und passen unsere Abläufe kontinuierlich an die LBMA-Standards an.</p>
-              </div>
+            </div>
+            <div style={{ marginTop: "2.5rem", display: "flex", flexDirection: "row", justifyContent: "flex-start", alignItems: "center", gap: "3rem", flexWrap: "nowrap" }}>
+              <img src="https://goldspot.cz/wxlpzswd_IPMI-50th-Logo-White.svg" alt="IPMI" style={{ height: "70px", width: "auto", opacity: .9, filter: "drop-shadow(0 0 8px rgba(196,149,74,0.25))" }} />
+              <img src="https://goldspot.cz/Vizitka%20evropsk%C3%A1%208.5x5.5%20%20cm%20(3).png" alt="Vizitka" style={{ height: "70px", width: "auto", opacity: .9, filter: "drop-shadow(0 0 8px rgba(196,149,74,0.25))" }} />
+              <img src="https://goldspot.cz/Primary-Logo-Gem-A-White-01-1024x468%20(1).jpg" alt="Gem-A" style={{ height: "50px", width: "auto", opacity: .9, filter: "drop-shadow(0 0 8px rgba(196,149,74,0.25))" }} />
             </div>
           </div>
+          <p style={{ fontSize: ".9rem", color: "#e0d8c8", lineHeight: 1.82, textAlign: "justify", hyphens: "auto" }}>Wir stärken unsere operative Infrastruktur und die Anpassung an regulatorische Anforderungen. Gleichzeitig engagieren wir uns als vertrauenswürdiger Marktteilnehmer aktiv in Brancheninitiativen, fördern die Weiterbildung im Bereich physischer Edelmetalle und passen unsere Abläufe kontinuierlich an die LBMA-Standards an.</p>
 
           <div className="gold-rule reveal" style={{ marginBottom: "3.5rem" }} />
 
@@ -1174,18 +1090,16 @@ canvas#heroGlobe{position:absolute;inset:0;width:100%;height:100%;z-index:0;poin
           <div className="imp-grid reveal">
             <div className="imp-block">
               <h4>REVESTIUM AG</h4>
-              <address>
-                Baarerstrasse 25<br />6300 Zug<br />Schweiz<br /><br />
+              <address>Baarerstrasse 25<br />6300 Zug<br />Schweiz<br /><br />
                 UID: <strong>CHE-383.245.411</strong><br />
-                Rechtsform: Aktiengesellschaft<br /><br />
-                Verwaltungsratspräsidentin:<br />Mag. iur. Augustina F. Schiller, MSc., LLM.<br /><br />
-                CEO: Dr. iur. Marcus Altenburg
+                Tel.: +41 215 120 554<br /><br /><br />
+                Verwaltungsratspräsidentin:<br />Mag. iur. Augustina F. Schiller,LLM.<br /><br />
+                Director:<br /> Dr. iur. Marcus Altenburg
               </address>
             </div>
             <div className="imp-block">
               <h4>JURISCONSULT LTD</h4>
-              <address>
-                124 City Road<br />London, EC1V 2NX<br />United Kingdom<br /><br />
+              <address>124 City Road<br />London, EC1V 2NX<br />United Kingdom<br /><br />
                 Companies House: 12729220<br />
                 UTR: 5076723030<br />
                 Tel: +44 7704 494 137<br />
@@ -1195,18 +1109,17 @@ canvas#heroGlobe{position:absolute;inset:0;width:100%;height:100%;z-index:0;poin
             </div>
             <div className="imp-block">
               <h4>SWISS GOLD DEPOSIT Ltd</h4>
-              <address>
-                Dublin<br />Irland<br /><br />
-                The Black Church, St. Mary's Place, Dublin 7
+              <address>Dublin<br />Irland<br /><br />
+                The Black Church, St. Mary's Place, Dublin 7, D07 P4ax<br />
+                Reg. Number 802415
               </address>
             </div>
             <div className="imp-block">
               <h4>JURISCONSULT LTD o.z.</h4>
-              <address>
-                Praha<br />Tschechische Republik<br /><br />
+              <address>Praha<br />Tschechische Republik<br /><br />
                 IČ: 09913840<br />
                 LEI: 315700343MOJGZ62NN31<br />
-                Trading name: moje-zlato
+                Tel: +420 800 300 555
               </address>
             </div>
           </div>
