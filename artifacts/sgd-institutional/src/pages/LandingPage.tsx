@@ -349,7 +349,7 @@ canvas#matrixRain{position:absolute;inset:0;width:100%;height:100%;z-index:1;poi
               <div className="story-vizitka reveal d1">
                 <img src="https://goldspot.cz/osobnivizitka.png" alt="REVESTIUM vizitka" />
               </div>
-              <div className="timeline" style={{ marginTop: "2.5rem" }}>
+              <div className="timeline" style={{ marginTop: "2.5rem", maxWidth: "640px", margin: "2.5rem auto 0" }}>
                 <div className="tl-item reveal d1"><div className="tl-year">2020</div><div className="tl-dot" /><div><p className="tl-h">Gründung der Rechtsstruktur</p><p className="tl-p">Gründung der Firma JURISCONSULT LTD (London) und Beginn des Aufbaus einer Marke für den Einzelhandel mit Edelmetallen.</p></div></div>
                 <div className="tl-item reveal d2"><div className="tl-year">2021</div><div className="tl-dot" /><div><p className="tl-h">Gründung der Holding</p><p className="tl-p">Moje Zlato und Moje zlatnictví werden in die Unternehmensgruppe aufgenommen. Das Czech Assay Office vergibt das Hersteller- und Haftungszeichen.</p></div></div>
                 <div className="tl-item reveal d3"><div className="tl-year">2023</div><div className="tl-dot" /><div><p className="tl-h">LBMA-Clearing &amp; Marktzugang</p><p className="tl-p">Zulassung als professionelle Gegenpartei für das Clearing-Mitglied LPMCL und Zugang zur Handelsstruktur der LBMA.</p></div></div>
