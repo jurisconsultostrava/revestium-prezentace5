@@ -1116,7 +1116,8 @@ canvas#matrixRain{position:absolute;inset:0;width:100%;height:100%;z-index:1;poi
           </div>
 
           <div className="imp-legal reveal">
-            <p>© 2026 REVESTIUM AG · Jurisconsult Ltd.</p>
+            <p>©2026 REVESTIUM. All rights reserved. REVESTIUM is the trade name of Swizzen AG, registration number: CHE-383.245.411. Pursuant to notarial deed No. DB 39/2026 dated March 10, 2026, the company name is being changed to REVESTIUM AG; the update to the entry in the commercial register is currently in progress.</p>
+            <p style={{ marginTop: "1rem" }}>©2026 REVESTIUM. Alle Rechte vorbehalten. REVESTIUM ist der Handelsname der Swizzen AG, Registrierungsnummer: CHE-383.245.411. Gemäß notarieller Urkunde Nr. DB 39/2026 vom 10. März 2026 wird der Firmenname in REVESTIUM AG geändert; die Aktualisierung des Eintrags im Handelsregister ist aktuell in Bearbeitung.</p>
           </div>
         </div>
       </footer>
