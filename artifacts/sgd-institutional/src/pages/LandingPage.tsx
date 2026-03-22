@@ -418,7 +418,7 @@ canvas#matrixRain{position:absolute;inset:0;width:100%;height:100%;z-index:1;poi
               <p className="pc-tag">KI-Treasury &amp; Research</p>
               <p className="pc-name">AUROM &amp;<br /><em>AUROM PRO Dealer Commander</em></p>
               <p className="pc-desc">Eigenentwickeltes Forschungs- und Analysesystem für die Verwaltung und Neugewichtung von Portfolios mithilfe von KI: tägliche SARIMA/Prophet-Prognose, Smart Hedging CME + OTC, Yield-Hunter-Strategie, Stresstests. Auf dem Markt existiert kein vergleichbares Produkt mit einer so umfangreichen Wissensbasis und Verknüpfung von Aktivitäten zwischen physischer Verwaltung, Lagerverwaltung und dem Informationsaustausch zwischen nicht-bankgebundenem und reguliertem Segment.</p>
-              <img src={auromLogo} alt="AUROM & AUROM PRO" style={{ width: "100%", maxWidth: "100%", marginTop: "1.4rem", display: "block" }} />
+              <img src={auromLogo} alt="AUROM & AUROM PRO" style={{ width: "62%", maxWidth: "62%", marginTop: "1.4rem", display: "block" }} />
             </div>
           </div>
 
