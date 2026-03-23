@@ -705,8 +705,8 @@ canvas#matrixRain{position:absolute;inset:0;width:100%;height:100%;z-index:1;poi
         <div className="section-inner">
           <div className="reveal">
             <p className="eyebrow">Das integrierte Ökosystem</p>
-            <h2 className="sh">Alle Produkte —<br /><em>eine gemeinsame Engine</em></h2>
-            <p className="sub">Alle Produkte teilen dieselbe Pricing- und Hedging-Engine. Was Gold Bank für Einlagen lernt, verbessert die Kreditbewertung. Proprietär — nicht replizierbar.</p>
+            <h2 className="sh">breites Spektrum<br /><em>gemeinsame, flexible Infrastruktur</em></h2>
+            <p className="sub">Alle Produkte nutzen eine Infrastruktur, die auf den Prinzipien von GaaS in unterschiedlicher Form und Ausprägung basiert und auf einer Eigenentwicklung beruht, die unsere Gruppe seit 2019 realisiert hat.</p>
           </div>
 
           <div className="reveal" style={{ overflowX: "auto", WebkitOverflowScrolling: "touch", margin: "2rem 0" }}>
