@@ -3,6 +3,7 @@ import createGlobe from "cobe";
 import logoGb from "@assets/loga_gb_1774113861751.png";
 import vizitkaHQ from "@assets/Vizitka_evropská_8.5x5.5_cm_-_Vlastní_rozměry_1774136558135.png";
 import auromLogo from "@assets/aurom_1774137769852.png";
+import argusproLogo from "@assets/arguspro_1774267064971.png";
 
 /* ── cobe WebGL Globe ── */
 function useCobeGlobe(canvasRef: React.RefObject<HTMLCanvasElement | null>) {
@@ -458,6 +459,7 @@ canvas#matrixRain{position:absolute;inset:0;width:100%;height:100%;z-index:1;poi
               <p className="pc-tag">Regulatory Intelligence</p>
               <p className="pc-name">ARGUS PRO</p>
               <p className="pc-desc">Edelmetallhändler benötigen ab dem 1.7.2027 ein effektives Tool zur Erfüllung ihrer Pflichten beim Onboarding und bei der laufenden Überwachung gemäß der neuen europäischen AML-Gesetzgebung. ARGUS PRO adressiert EDD- und CDD-Prozesse, strukturiertes Fallmanagement, KPI-Dashboards und LBMA-konforme Compliance-Programme.</p>
+              <img src={argusproLogo} alt="ARGUS PRO" style={{ marginTop: "1.4rem", display: "block", width: "55%", maxWidth: "55%" }} />
             </div>
           </div>
 
