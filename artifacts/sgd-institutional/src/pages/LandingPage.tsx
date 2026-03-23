@@ -10,33 +10,41 @@ function useCobeGlobe(canvasRef: React.RefObject<HTMLCanvasElement | null>) {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+    // Bail early if WebGL is unavailable (avoids crashing the whole page)
+    const testCtx = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+    if (!testCtx) return;
     let phi = 0;
-    const globe = createGlobe(canvas, {
-      devicePixelRatio: 2,
-      width: 1360,
-      height: 1360,
-      phi: 0,
-      theta: 0.2,
-      dark: 1,
-      diffuse: 1.4,
-      scale: 1,
-      mapSamples: 16000,
-      mapBrightness: 7,
-      baseColor: [0.75, 0.56, 0.22],
-      markerColor: [1.0, 0.88, 0.35],
-      glowColor: [0.65, 0.48, 0.15],
-      markers: [
-        { location: [47.3769, 8.5417], size: 0.06 },
-        { location: [51.5074, -0.1278], size: 0.06 },
-        { location: [53.3498, -6.2603], size: 0.05 },
-        { location: [50.0755, 14.4378], size: 0.05 },
-      ],
-      onRender: (state: Record<string, number>) => {
-        state.phi = phi;
-        phi += 0.003;
-      },
-    });
-    return () => globe.destroy();
+    let globe: ReturnType<typeof createGlobe> | null = null;
+    try {
+      globe = createGlobe(canvas, {
+        devicePixelRatio: 2,
+        width: 1360,
+        height: 1360,
+        phi: 0,
+        theta: 0.2,
+        dark: 1,
+        diffuse: 1.4,
+        scale: 1,
+        mapSamples: 16000,
+        mapBrightness: 7,
+        baseColor: [0.75, 0.56, 0.22],
+        markerColor: [1.0, 0.88, 0.35],
+        glowColor: [0.65, 0.48, 0.15],
+        markers: [
+          { location: [47.3769, 8.5417], size: 0.06 },
+          { location: [51.5074, -0.1278], size: 0.06 },
+          { location: [53.3498, -6.2603], size: 0.05 },
+          { location: [50.0755, 14.4378], size: 0.05 },
+        ],
+        onRender: (state: Record<string, number>) => {
+          state.phi = phi;
+          phi += 0.003;
+        },
+      });
+    } catch {
+      // WebGL init failed — globe simply won't render, page remains functional
+    }
+    return () => { globe?.destroy(); };
   }, [canvasRef]);
 }
 
