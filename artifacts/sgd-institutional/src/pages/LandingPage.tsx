@@ -888,7 +888,7 @@ canvas#matrixRain{position:absolute;inset:0;width:100%;height:100%;z-index:1;poi
             <div className="prod-card">
               <p className="pc-tag">Beide Seiten der Bilanz</p>
               <p className="pc-name">Gold Bank<br />Gold Hypo &amp; Repo</p>
-              <p className="pc-desc">Die Gold Bank ist eine Plattform, die sich auf die Digitalisierung des Kaufs und des Besitzes von Gold als realem Vermögenswert konzentriert, verbunden mit der aktiven Verwaltung der Goldreserve, die der Kunde aufbaut. Gold Hypo und Repo hingegen stellen die für eine vorteilhafte Kreditbesicherung erforderlichen Sicherheiten bereit.<br /><br />Dasselbe physische Gold fungiert gleichzeitig auf beiden Seiten. Kann diese Art von GaaS von einer anderen Institution auf europäischer Ebene umgesetzt werden?</p>
+              <p className="pc-desc">Die Gold Bank ist eine Plattform, die sich auf die Digitalisierung des Kaufs und des Besitzes von Gold als realem Vermögenswert konzentriert, verbunden mit der aktiven Verwaltung der Goldreserve, die der Kunde aufbaut. Gold Hypo und Repo hingegen stellen die für eine vorteilhafte Kreditbesicherung erforderlichen Sicherheiten bereit.</p>
             </div>
             <div className="prod-card featured">
               <div className="prod-card-accent" />
