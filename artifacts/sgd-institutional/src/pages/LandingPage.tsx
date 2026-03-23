@@ -476,16 +476,16 @@ canvas#matrixRain{position:absolute;inset:0;width:100%;height:100%;z-index:1;poi
             <div className="prod-card featured">
               <div className="prod-card-accent" />
               <span className="pc-badge zero">Zero Competition EU</span><span className="pc-badge live">Ready to launch</span>
-              <p className="pc-tag">Langfristiger Goldkredit</p>
+              <p className="pc-tag">Produkt für langfristige, mit Gold besicherte Kredite</p>
               <p className="pc-name">Gold Hypo</p>
-              <p className="pc-desc">Das erste und einzige Produkt für goldbesicherte Langzeitkredite in der EU. Der Kunde hinterlegt physisches Gold als Sicherheit — unser Unternehmen sorgt als Sicherheitenagent für die Verwahrung, die tägliche Bewertung (LBMA PM Fix), die Ausgabe von Warrants und das Ausfallmanagement (T+2 über einen Clearing-Partner im CME/LPMCL-System). Die Bank gewährt den Kredit, hält den Warrant und trägt kein operatives Risiko im Zusammenhang mit dem Gold.</p>
+              <p className="pc-desc">Der Kunde bietet physisches Gold als Sicherheit an, und unser Unternehmen sorgt als Sicherungsagent über unseren Clearing-Partner im CME/LPMCL-System für die Verwahrung, die tägliche Bewertung, die Beschaffung von Warrants und das Kreditrisikomanagement. Die Bank gewährt den Kredit, hält den Warrant und trägt kein operatives Risiko im Zusammenhang mit dem Gold.</p>
             </div>
             <div className="prod-card featured">
               <div className="prod-card-accent" />
               <span className="pc-badge unique">Premium-Alternative</span><span className="pc-badge live">Ready to launch</span>
-              <p className="pc-tag">Kurzfristiger Goldkredit</p>
+              <p className="pc-tag">Kurzfristiger, mit Gold besicherter Kredit</p>
               <p className="pc-name">Gold Repo</p>
-              <p className="pc-desc">Kurzfristige Liquidität aus Gold ohne Verkauf. Der Kunde hinterlegt physisches Gold als Sicherheit — unser Unternehmen sorgt als Sicherheitenverwalter für die Verwahrung, die tägliche Bewertung (LBMA PM Fix) und das Ausfallmanagement (T+2). Keine Bonitätsprüfung. Im Vergleich zum Pfandhaus: 99,5 % Realisierung vs. 50–70 %, Abwicklung T+2 vs. Monate.</p>
+              <p className="pc-desc">Kurzfristige Liquidität aus Gold ohne Verkaufszwang. Der Kunde hinterlegt physisches Gold als Sicherheit, und unser Unternehmen kümmert sich als Sicherheitenverwalter um alles Notwendige. Wir sorgen für die Verwahrung, die tägliche Bewertung (LBMA PM Fix) und das Ausfallmanagement (T+2). Der institutionelle Kreditgeber hält den Warrant und trägt kein operatives Risiko im Zusammenhang mit Gold.</p>
             </div>
           </div>
         </div>
