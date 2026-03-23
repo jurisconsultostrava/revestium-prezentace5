@@ -887,19 +887,19 @@ canvas#matrixRain{position:absolute;inset:0;width:100%;height:100%;z-index:1;poi
           <div className="prod-grid reveal" style={{ gridTemplateColumns: "repeat(3,1fr)", marginTop: ".5rem" }}>
             <div className="prod-card">
               <p className="pc-tag">Beide Seiten der Bilanz</p>
-              <p className="pc-name">Einlagen<br />&amp; Kredite</p>
-              <p className="pc-desc">Gold Bank nimmt Einlagen an — Gold Hypo und Repo vergeben Kredite dagegen. Dasselbe physische Gold arbeitet auf beiden Seiten gleichzeitig. Kein anderes Nicht-Bankinstitut in Europa kann das.</p>
+              <p className="pc-name">Gold Bank<br />Gold Hypo &amp; Repo</p>
+              <p className="pc-desc">Die Gold Bank ist eine Plattform, die sich auf die Digitalisierung des Kaufs und des Besitzes von Gold als realem Vermögenswert konzentriert, verbunden mit der aktiven Verwaltung der Goldreserve, die der Kunde aufbaut. Gold Hypo und Repo hingegen stellen die für eine vorteilhafte Kreditbesicherung erforderlichen Sicherheiten bereit.<br /><br />Dasselbe physische Gold fungiert gleichzeitig auf beiden Seiten. Kann diese Art von GaaS von einer anderen Institution auf europäischer Ebene umgesetzt werden?</p>
             </div>
             <div className="prod-card featured">
               <div className="prod-card-accent" />
-              <p className="pc-tag">Das Herz der Infrastruktur</p>
-              <p className="pc-name">AUROM als<br />gemeinsame Engine</p>
-              <p className="pc-desc">Alle Produkte teilen dieselbe Pricing- und Hedging-Engine. Was Gold Bank für Einlagen lernt, verbessert die Kreditbewertung. Was Dealer Commander für Repo hedgt, optimiert D10. Proprietär — nicht replizierbar.</p>
+              <p className="pc-tag">Das Herzstück der Sicherungsinfrastruktur</p>
+              <p className="pc-name">AUROM<br />gemeinsames Hedging</p>
+              <p className="pc-desc">Alle Produkte nutzen in unterschiedlichem Umfang dieselbe Engine für die Bewertung und Absicherung.<br /><br />Jedes Produkt verbessert gleichzeitig optimal die Fähigkeiten, die aurom der gemeinsamen Infrastruktur bietet.</p>
             </div>
             <div className="prod-card">
-              <p className="pc-tag">Die logische Erweiterung</p>
-              <p className="pc-name">Gold as Collateral<br />als nächster Schritt</p>
-              <p className="pc-desc">PGI, Triparty Custody, OTC Margining — das ist die institutionelle Skalierung der Infrastruktur, die wir bereits betreiben. Der Markt wartet. Die Infrastruktur ist bereit.</p>
+              <p className="pc-tag">Logische Erweiterung</p>
+              <p className="pc-name">Gold als Sicherheit</p>
+              <p className="pc-desc">PGI, dreiseitige Verwahrung, OTC-Marginierung – das ist die institutionelle Skalierung der Infrastruktur, die wir bereits in unterschiedlichem Umfang und Ausmaß betreiben. Unsere Infrastruktur ist bereit für die Umsetzung der Lösungen der Zukunft.</p>
             </div>
           </div>
         </div>
