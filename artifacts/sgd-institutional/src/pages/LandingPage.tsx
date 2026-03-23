@@ -3,7 +3,7 @@ import createGlobe from "cobe";
 import logoGb from "@assets/loga_gb_1774113861751.png";
 import vizitkaHQ from "@assets/Vizitka_evropská_8.5x5.5_cm_-_Vlastní_rozměry_1774136558135.png";
 import auromLogo from "@assets/aurom_1774137769852.png";
-import argusproLogo from "@assets/arguspro_1774267064971.png";
+import argusproLogo from "@assets/Návrh_bez_názvu_-_Vlastní_rozměry_(2)_1774267238925.png";
 
 /* ── cobe WebGL Globe ── */
 function useCobeGlobe(canvasRef: React.RefObject<HTMLCanvasElement | null>) {
