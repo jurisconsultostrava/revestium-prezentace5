@@ -21,14 +21,15 @@ pnpm workspace monorepo using TypeScript. Each package manages its own dependenc
 ```text
 artifacts-monorepo/
 ├── artifacts/              # Deployable applications
-│   └── api-server/         # Express API server
+│   ├── api-server/         # Express API server (port 8080)
+│   └── sgd-institutional/  # REVESTIUM AG landing page (React + Vite)
 ├── lib/                    # Shared libraries
 │   ├── api-spec/           # OpenAPI spec + Orval codegen config
 │   ├── api-client-react/   # Generated React Query hooks
 │   ├── api-zod/            # Generated Zod schemas from OpenAPI
 │   └── db/                 # Drizzle ORM schema + DB connection
 ├── scripts/                # Utility scripts (single workspace package)
-│   └── src/                # Individual .ts scripts, run via `pnpm --filter @workspace/scripts run <script>`
+│   └── src/                # Individual .ts scripts
 ├── pnpm-workspace.yaml     # pnpm workspace (artifacts/*, lib/*, lib/integrations/*, scripts)
 ├── tsconfig.base.json      # Shared TS options (composite, bundler resolution, es2022)
 ├── tsconfig.json           # Root TS project references
@@ -90,6 +91,40 @@ Generated Zod schemas from the OpenAPI spec (e.g. `HealthCheckResponse`). Used b
 ### `lib/api-client-react` (`@workspace/api-client-react`)
 
 Generated React Query hooks and fetch client from the OpenAPI spec (e.g. `useHealthCheck`, `healthCheck`).
+
+### `artifacts/sgd-institutional` (`@workspace/sgd-institutional`)
+
+German-language institutional landing page for REVESTIUM AG / Swiss Gold Deposit. React + Vite app with full auth integration.
+
+- Entry: `src/main.tsx` → `src/App.tsx`
+- Routing (wouter): `/` (LandingPage), `/register` (RegisterPage), `/login` (LoginPage), `/dashboard` (DashboardPage)
+- Auth context: `src/context/AuthContext.tsx` — manages JWT stored in localStorage, exposes `user`, `login`, `logout`
+- API client: `src/lib/api.ts` — typed fetch helpers pointing to `/api/*` (proxied to api-server in dev, direct in prod via `VITE_API_BASE_URL`)
+- Pages: `src/pages/` — LandingPage (marketing), RegisterPage, LoginPage, DashboardPage
+- Asset alias `@assets` → `../../attached_assets` (resolves images via Vite alias)
+- Vite dev proxy: `/api` → `http://localhost:${API_PORT}` (default 8080)
+- `pnpm --filter @workspace/sgd-institutional run dev` — dev server
+
+#### API-server auth endpoints (used by sgd-institutional)
+
+- `POST /api/auth/register` — body: `{ email, password, name? }` → returns `{ token, user }`
+- `POST /api/auth/login` — body: `{ email, password }` → returns `{ token, user }`
+- `GET /api/auth/me` — requires `Authorization: Bearer <token>` → returns `{ user }`
+- `GET /api/transactions` — auth required → list user transactions
+- `POST /api/transactions` — auth required → create transaction
+
+#### Database schema (`lib/db/src/schema/`)
+
+- `users` — id, email, passwordHash, name, role (user/admin), verified, createdAt, updatedAt
+- `transactions` — id, userId (FK), type (buy/sell/deposit/withdrawal/repo/hypo), amountGrams, priceEurPerGram, totalEur, status, notes, createdAt, updatedAt
+
+#### Required environment variables
+
+- `DATABASE_URL` (secret) — PostgreSQL connection string (Supabase)
+- `JWT_SECRET` (shared env) — secret for signing JWTs
+- `API_PORT` (shared env) — port api-server listens on (default 8080)
+- `ALLOWED_ORIGINS` (shared env) — comma-separated CORS origins or `*`
+- `VITE_API_BASE_URL` (production env) — base URL of api-server in production (e.g. `https://api.revestium.com`)
 
 ### `scripts` (`@workspace/scripts`)
 
